@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5 Star Peptides — Research Grade</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f3ef;
+    --bg2: #eceae4;
+    --ink: #0d0d0d;
+    --ink2: #3a3a3a;
+    --ink3: #7a7a7a;
+    --accent: #1a3fff;
+    --accent2: #0029cc;
+    --white: #ffffff;
+    --border: #d4d2cb;
+    --star: #c8a84b;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+    --code: 'Space Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.5;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background: rgba(244, 243, 239, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 64px;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .star-badge {
+    display: flex;
+    gap: 2px;
+  }
+
+  .star-badge span {
+    color: var(--star);
+    font-size: 11px;
+  }
+
+  .logo-text {
+    font-family: var(--code);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .nav-cart {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-transform: uppercase;
+  }
+
+  .nav-cart:hover { background: var(--accent2); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 64px;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 64px 80px 48px;
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+
+  .hero-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--ink3);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-label::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--ink3);
+  }
+
+  .hero-h1 {
+    font-family: var(--code);
+    font-size: clamp(40px, 5vw, 68px);
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+    color: var(--ink);
+  }
+
+  .hero-h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink2);
+    max-width: 420px;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .btn-primary {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--white);
+    border: none;
+    padding: 14px 32px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+
+  .btn-ghost {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--ink2);
+    border: 1px solid var(--border);
+    padding: 14px 32px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-ghost:hover { border-color: var(--ink); color: var(--ink); }
+
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 48px;
+    position: relative;
+    background: var(--bg2);
+    overflow: hidden;
+  }
+
+  /* Molecule diagram SVG */
+  .molecule-wrap {
+    position: relative;
+    width: 320px;
+    height: 320px;
+  }
+
+  .molecule-wrap svg {
+    width: 100%;
+    height: 100%;
+    animation: rotateMol 40s linear infinite;
+  }
+
+  @keyframes rotateMol {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .mol-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: rotateMol 40s linear infinite reverse;
+  }
+
+  .mol-label {
+    font-family: var(--code);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--ink);
+    text-align: center;
+  }
+
+  .mol-sublabel {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink3);
+    letter-spacing: 0.12em;
+    margin-top: 4px;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    margin-top: 48px;
+    width: 100%;
+    max-width: 380px;
+    border: 1px solid var(--border);
+  }
+
+  .stat-cell {
+    background: var(--bg);
+    padding: 20px 24px;
+  }
+
+  .stat-num {
+    font-family: var(--code);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+  }
+
+  .stat-desc {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--ink3);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ── TICKER ── */
+  .ticker {
+    background: var(--ink);
+    color: var(--white);
+    overflow: hidden;
+    height: 36px;
+    display: flex;
+    align-items: center;
+  }
+
+  .ticker-inner {
+    display: flex;
+    gap: 0;
+    animation: tickerScroll 28s linear infinite;
+    white-space: nowrap;
+  }
+
+  .ticker-item {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0 40px;
+    color: rgba(255,255,255,0.7);
+    flex-shrink: 0;
+  }
+
+  .ticker-item .dot {
+    color: var(--accent);
+    margin-right: 8px;
+  }
+
+  @keyframes tickerScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── SECTION HEADERS ── */
+  .section {
+    padding: 100px 48px;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: var(--code);
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+
+  .section-sub {
+    font-size: 15px;
+    color: var(--ink2);
+    max-width: 500px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ── PRODUCTS ── */
+  #products { background: var(--white); }
+
+  .products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 64px;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .product-card {
+    background: var(--white);
+    padding: 0;
+    transition: transform 0.2s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-card:hover { transform: translateY(-2px); z-index: 2; box-shadow: 0 8px 40px rgba(0,0,0,0.08); }
+
+  .product-img {
+    height: 220px;
+    background: var(--bg2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-img svg { opacity: 0.6; transition: opacity 0.3s; }
+  .product-card:hover .product-img svg { opacity: 1; }
+
+  .purity-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    background: var(--accent);
+    color: var(--white);
+    padding: 4px 10px;
+    text-transform: uppercase;
+  }
+
+  .product-body {
+    padding: 24px;
+  }
+
+  .product-seq {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: var(--ink3);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .product-name {
+    font-family: var(--code);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .product-desc {
+    font-size: 13px;
+    color: var(--ink3);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+
+  .product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .product-price {
+    font-family: var(--code);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .product-price span {
+    font-size: 12px;
+    font-family: var(--mono);
+    color: var(--ink3);
+    font-weight: 400;
+  }
+
+  .add-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--white);
+    border: none;
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .add-btn:hover { background: var(--accent); }
+
+  .product-tags {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    color: var(--ink3);
+    padding: 3px 8px;
+  }
+
+  /* ── WHY US ── */
+  #why { background: var(--bg); }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 64px;
+  }
+
+  .why-card {
+    background: var(--bg);
+    padding: 40px 32px;
+  }
+
+  .why-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 24px;
+    color: var(--accent);
+  }
+
+  .why-title {
+    font-family: var(--code);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  .why-desc {
+    font-size: 13px;
+    color: var(--ink3);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ── COA SECTION ── */
+  #coa {
+    background: var(--ink);
+    color: var(--white);
+  }
+
+  #coa .section-label { color: var(--star); }
+  #coa .section-title { color: var(--white); }
+  #coa .section-sub { color: rgba(255,255,255,0.6); }
+
+  .coa-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    margin-top: 64px;
+  }
+
+  .coa-terminal {
+    background: #0a0a0a;
+    border: 1px solid #2a2a2a;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .terminal-bar {
+    background: #1a1a1a;
+    border-bottom: 1px solid #2a2a2a;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .t-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .t-dot.r { background: #ff5f57; }
+  .t-dot.y { background: #ffbd2e; }
+  .t-dot.g { background: #28c840; }
+
+  .terminal-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #5a5a5a;
+    margin-left: 8px;
+    letter-spacing: 0.08em;
+  }
+
+  .terminal-body {
+    padding: 24px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.9;
+  }
+
+  .t-key { color: #7a7a7a; }
+  .t-val { color: #4fc3f7; }
+  .t-pass { color: #66bb6a; }
+  .t-warn { color: #ffca28; }
+  .t-sep { color: #2a2a2a; display: block; margin: 8px 0; }
+
+  .coa-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .coa-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .coa-num {
+    font-family: var(--code);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 48px;
+  }
+
+  .coa-item-title {
+    font-family: var(--code);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .coa-item-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* ── DISCLAIMER ── */
+  .disclaimer {
+    background: #fff8e6;
+    border: 1px solid #e8d5a0;
+    padding: 20px 32px;
+    margin: 0 48px 0;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .disclaimer-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .disclaimer p {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: #7a5f00;
+    line-height: 1.7;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.5);
+    padding: 60px 48px 40px;
+    margin-top: 100px;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid #2a2a2a;
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .footer-logo {
+    font-family: var(--code);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.08em;
+  }
+
+  .footer-tagline {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.6;
+    letter-spacing: 0.05em;
+    max-width: 220px;
+  }
+
+  .footer-col h4 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 16px;
+  }
+
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul a {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-col ul a:hover { color: var(--white); }
+
+  .footer-bottom {
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-copy {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.25);
+  }
+
+  .star-row {
+    display: flex;
+    gap: 3px;
+  }
+
+  .star-row span { color: var(--star); font-size: 14px; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-left > * {
+    opacity: 0;
+    animation: fadeInUp 0.7s forwards;
+  }
+
+  .hero-left .hero-label { animation-delay: 0.1s; }
+  .hero-left .hero-h1 { animation-delay: 0.25s; }
+  .hero-left .hero-sub { animation-delay: 0.4s; }
+  .hero-left .hero-cta-row { animation-delay: 0.55s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+
+    .hero {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-right { display: none; }
+
+    .hero-left {
+      padding: 60px 24px;
+      border-right: none;
+    }
+
+    .section { padding: 64px 24px; }
+
+    .coa-layout { grid-template-columns: 1fr; gap: 48px; }
+
+    .footer-top {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .disclaimer { margin: 0 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="star-badge">
+      <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+    </div>
+    <span class="logo-text">5 Star Peptides</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#products">Catalog</a></li>
+    <li><a href="#coa">Quality</a></li>
+    <li><a href="#why">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="nav-cart">Cart (0)</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-label">Research-Grade Peptides</p>
+    <h1 class="hero-h1">Purity<br>You Can<br><em>Verify.</em></h1>
+    <p class="hero-sub">Every batch third-party tested. Every compound documented. 5 Star Peptides supplies the research community with the highest-purity peptides available — no compromises.</p>
+    <div class="hero-cta-row">
+      <a href="#products" class="btn-primary">Browse Catalog</a>
+      <a href="#coa" class="btn-ghost">View COAs</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="molecule-wrap">
+      <!-- Simplified amino acid chain SVG -->
+      <svg viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="160" cy="160" r="130" stroke="#d4d2cb" stroke-width="1" stroke-dasharray="4 8"/>
+        <circle cx="160" cy="160" r="95" stroke="#d4d2cb" stroke-width="1" stroke-dasharray="2 6"/>
+
+        <!-- Nodes -->
+        <circle cx="160" cy="30" r="8" fill="#1a3fff" opacity="0.8"/>
+        <circle cx="258" cy="85" r="6" fill="#0d0d0d" opacity="0.6"/>
+        <circle cx="290" cy="160" r="10" fill="#1a3fff" opacity="0.9"/>
+        <circle cx="258" cy="235" r="6" fill="#0d0d0d" opacity="0.6"/>
+        <circle cx="160" cy="290" r="8" fill="#1a3fff" opacity="0.8"/>
+        <circle cx="62" cy="235" r="6" fill="#0d0d0d" opacity="0.6"/>
+        <circle cx="30" cy="160" r="10" fill="#1a3fff" opacity="0.9"/>
+        <circle cx="62" cy="85" r="6" fill="#0d0d0d" opacity="0.6"/>
+
+        <!-- Inner nodes -->
+        <circle cx="160" cy="65" r="5" fill="#c8a84b" opacity="0.7"/>
+        <circle cx="232" cy="112" r="4" fill="#c8a84b" opacity="0.7"/>
+        <circle cx="255" cy="160" r="5" fill="#c8a84b" opacity="0.7"/>
+        <circle cx="232" cy="208" r="4" fill="#c8a84b" opacity="0.7"/>
+        <circle cx="160" cy="255" r="5" fill="#c8a84b" opacity="0.7"/>
+        <circle cx="88" cy="208" r="4" fill="#c8a84b" opacity="0.7"/>
+        <circle cx="65" cy="160" r="5" fill="#c8a84b" opacity="0.7"/>
+        <circle cx="88" cy="112" r="4" fill="#c8a84b" opacity="0.7"/>
+
+        <!-- Connections outer -->
+        <line x1="160" y1="30" x2="258" y2="85" stroke="#d4d2cb" stroke-width="1"/>
+        <line x1="258" y1="85" x2="290" y2="160" stroke="#d4d2cb" stroke-width="1"/>
+        <line x1="290" y1="160" x2="258" y2="235" stroke="#d4d2cb" stroke-width="1"/>
+        <line x1="258" y1="235" x2="160" y2="290" stroke="#d4d2cb" stroke-width="1"/>
+        <line x1="160" y1="290" x2="62" y2="235" stroke="#d4d2cb" stroke-width="1"/>
+        <line x1="62" y1="235" x2="30" y2="160" stroke="#d4d2cb" stroke-width="1"/>
+        <line x1="30" y1="160" x2="62" y2="85" stroke="#d4d2cb" stroke-width="1"/>
+        <line x1="62" y1="85" x2="160" y2="30" stroke="#d4d2cb" stroke-width="1"/>
+
+        <!-- Connections inner -->
+        <line x1="160" y1="65" x2="232" y2="112" stroke="#1a3fff" stroke-width="0.8" opacity="0.4"/>
+        <line x1="232" y1="112" x2="255" y2="160" stroke="#1a3fff" stroke-width="0.8" opacity="0.4"/>
+        <line x1="255" y1="160" x2="232" y2="208" stroke="#1a3fff" stroke-width="0.8" opacity="0.4"/>
+        <line x1="232" y1="208" x2="160" y2="255" stroke="#1a3fff" stroke-width="0.8" opacity="0.4"/>
+        <line x1="160" y1="255" x2="88" y2="208" stroke="#1a3fff" stroke-width="0.8" opacity="0.4"/>
+        <line x1="88" y1="208" x2="65" y2="160" stroke="#1a3fff" stroke-width="0.8" opacity="0.4"/>
+        <line x1="65" y1="160" x2="88" y2="112" stroke="#1a3fff" stroke-width="0.8" opacity="0.4"/>
+        <line x1="88" y1="112" x2="160" y2="65" stroke="#1a3fff" stroke-width="0.8" opacity="0.4"/>
+
+        <!-- Cross links -->
+        <line x1="160" y1="30" x2="160" y2="65" stroke="#c8a84b" stroke-width="0.8" opacity="0.5"/>
+        <line x1="258" y1="85" x2="232" y2="112" stroke="#c8a84b" stroke-width="0.8" opacity="0.5"/>
+        <line x1="290" y1="160" x2="255" y2="160" stroke="#c8a84b" stroke-width="0.8" opacity="0.5"/>
+        <line x1="258" y1="235" x2="232" y2="208" stroke="#c8a84b" stroke-width="0.8" opacity="0.5"/>
+        <line x1="160" y1="290" x2="160" y2="255" stroke="#c8a84b" stroke-width="0.8" opacity="0.5"/>
+        <line x1="62" y1="235" x2="88" y2="208" stroke="#c8a84b" stroke-width="0.8" opacity="0.5"/>
+        <line x1="30" y1="160" x2="65" y2="160" stroke="#c8a84b" stroke-width="0.8" opacity="0.5"/>
+        <line x1="62" y1="85" x2="88" y2="112" stroke="#c8a84b" stroke-width="0.8" opacity="0.5"/>
+      </svg>
+      <div class="mol-center">
+        <div class="star-row">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <p class="mol-label" style="margin-top:8px">5 STAR</p>
+        <p class="mol-sublabel">PEPTIDES</p>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-cell">
+        <span class="stat-num">99%+</span>
+        <span class="stat-desc">Purity Guaranteed</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-num">3rd Party</span>
+        <span class="stat-desc">Lab Verified</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-num">HPLC</span>
+        <span class="stat-desc">Mass Spec Tested</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-num">48hr</span>
+        <span class="stat-desc">Fast Dispatch</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner" id="ticker">
+    <span class="ticker-item"><span class="dot">●</span>Research Use Only</span>
+    <span class="ticker-item"><span class="dot">●</span>Wolverine — BPC-157 + TB-500 — 99.78%</span>
+    <span class="ticker-item"><span class="dot">●</span>Retatrutide 10mg — 99.89% Purity</span>
+    <span class="ticker-item"><span class="dot">●</span>Retatrutide 20mg — 99.85% Purity</span>
+    <span class="ticker-item"><span class="dot">●</span>GHK-Cu — 99.88% Purity</span>
+    <span class="ticker-item"><span class="dot">●</span>MOTS-c — 99.98% Purity</span>
+    <span class="ticker-item"><span class="dot">●</span>Tesamorelin — 99.83% Purity</span>
+    <span class="ticker-item"><span class="dot">●</span>Bacteriostatic Water — $10 / 10ml</span>
+    <span class="ticker-item"><span class="dot">●</span>Pay via Zelle · (805) 901-3730</span>
+    <!-- Duplicate for seamless loop -->
+    <span class="ticker-item"><span class="dot">●</span>Research Use Only</span>
+    <span class="ticker-item"><span class="dot">●</span>Wolverine — BPC-157 + TB-500 — 99.78%</span>
+    <span class="ticker-item"><span class="dot">●</span>Retatrutide 10mg — 99.89% Purity</span>
+    <span class="ticker-item"><span class="dot">●</span>Retatrutide 20mg — 99.85% Purity</span>
+    <span class="ticker-item"><span class="dot">●</span>GHK-Cu — 99.88% Purity</span>
+    <span class="ticker-item"><span class="dot">●</span>MOTS-c — 99.98% Purity</span>
+    <span class="ticker-item"><span class="dot">●</span>Tesamorelin — 99.83% Purity</span>
+    <span class="ticker-item"><span class="dot">●</span>Bacteriostatic Water — $10 / 10ml</span>
+    <span class="ticker-item"><span class="dot">●</span>Pay via Zelle · (805) 901-3730</span>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="section" id="products" style="background: var(--white);">
+  <div class="products-header">
+    <div>
+      <p class="section-label">// catalog</p>
+      <h2 class="section-title">Research Peptides</h2>
+      <p class="section-sub">All peptides lyophilized, sealed under argon, and shipped cold. COA available for every product.</p>
+    </div>
+    <a href="#" class="btn-ghost">View All →</a>
+  </div>
+
+  <div class="product-grid">
+
+    <!-- Wolverine -->
+    <div class="product-card">
+                  <div class="product-img" style="background:#f0efe9;">
+        <svg width="120" height="180" viewBox="0 0 120 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Cap -->
+          <rect x="42" y="10" width="36" height="14" rx="3" fill="#888888"/>
+          <rect x="46" y="22" width="28" height="6" rx="1" fill="#888888" opacity="0.7"/>
+          <!-- Crimp ring -->
+          <rect x="44" y="28" width="32" height="5" rx="2" fill="#c0bdb5"/>
+          <!-- Vial body -->
+          <rect x="38" y="33" width="44" height="110" rx="6" fill="white" stroke="#d4d2cb" stroke-width="1.5"/>
+          <!-- Liquid fill -->
+          <rect x="39.5" y="100" width="41" height="42" rx="0" fill="#e0e0e0" opacity="0.3"/>
+          <rect x="39.5" y="137" width="41" height="5" rx="0" fill="#e0e0e0" opacity="0.4"/>
+          <!-- Label background -->
+          <rect x="41" y="48" width="38" height="60" rx="3" fill="#f8f7f3" stroke="#e0ddd5" stroke-width="1"/>
+          <!-- 5 Star branding -->
+          <text x="60" y="62" text-anchor="middle" font-family="monospace" font-size="6" fill="#888888" font-weight="700" letter-spacing="1">★★★★★</text>
+          <text x="60" y="73" text-anchor="middle" font-family="monospace" font-size="5" fill="#7a7a7a" letter-spacing="0.5">5 STAR</text>
+          <line x1="47" y1="77" x2="73" y2="77" stroke="#e0ddd5" stroke-width="0.8"/>
+          <!-- Product name -->
+          <text x="60" y="89" text-anchor="middle" font-family="monospace" font-size="7.5" fill="#0d0d0d" font-weight="700">WOLVERINE</text>
+          <text x="60" y="100" text-anchor="middle" font-family="monospace" font-size="7.5" fill="#0d0d0d" font-weight="700">STACK</text>
+          <line x1="47" y1="104" x2="73" y2="104" stroke="#e0ddd5" stroke-width="0.8"/>
+          <text x="60" y="112" text-anchor="middle" font-family="monospace" font-size="5" fill="#aaa" letter-spacing="0.3">RESEARCH USE</text>
+          <!-- Vial bottom dome -->
+          <ellipse cx="60" cy="143" rx="22" ry="5" fill="white" stroke="#d4d2cb" stroke-width="1"/>
+          <!-- Shine -->
+          <rect x="44" y="36" width="5" height="100" rx="2" fill="white" opacity="0.5"/>
+        </svg>
+        <div class="purity-badge" style="background:#0d0d0d">99.78% Pure</div>
+      </div>
+      <div class="product-body">
+        <p class="product-seq">BPC-157: Gly-Glu-Pro-Pro-Pro-Gly... + TB-500: Ac-Ser-Asp-Lys-Pro...</p>
+        <p class="product-name">Wolverine</p>
+        <div class="product-tags">
+          <span class="tag">BPC-157</span>
+          <span class="tag">TB-500</span>
+          <span class="tag">Combo Stack</span>
+        </div>
+        <p class="product-desc">BPC-157 + TB-500 stacked together. Both lyophilized, sealed under argon, HPLC verified. The ultimate recovery research combo.</p>
+        <div class="product-footer">
+          <div class="product-price">$45 <span>/ stack</span></div>
+          <button class="add-btn" onclick="addToCart(this, 'Wolverine', 45)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Retatrutide 10mg -->
+    <div class="product-card">
+                  <div class="product-img" style="background:#f0efe9;">
+        <svg width="120" height="180" viewBox="0 0 120 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Cap -->
+          <rect x="42" y="10" width="36" height="14" rx="3" fill="#888888"/>
+          <rect x="46" y="22" width="28" height="6" rx="1" fill="#888888" opacity="0.7"/>
+          <!-- Crimp ring -->
+          <rect x="44" y="28" width="32" height="5" rx="2" fill="#c0bdb5"/>
+          <!-- Vial body -->
+          <rect x="38" y="33" width="44" height="110" rx="6" fill="white" stroke="#d4d2cb" stroke-width="1.5"/>
+          <!-- Liquid fill -->
+          <rect x="39.5" y="100" width="41" height="42" rx="0" fill="#e0e0e0" opacity="0.3"/>
+          <rect x="39.5" y="137" width="41" height="5" rx="0" fill="#e0e0e0" opacity="0.4"/>
+          <!-- Label background -->
+          <rect x="41" y="48" width="38" height="60" rx="3" fill="#f8f7f3" stroke="#e0ddd5" stroke-width="1"/>
+          <!-- 5 Star branding -->
+          <text x="60" y="62" text-anchor="middle" font-family="monospace" font-size="6" fill="#888888" font-weight="700" letter-spacing="1">★★★★★</text>
+          <text x="60" y="73" text-anchor="middle" font-family="monospace" font-size="5" fill="#7a7a7a" letter-spacing="0.5">5 STAR</text>
+          <line x1="47" y1="77" x2="73" y2="77" stroke="#e0ddd5" stroke-width="0.8"/>
+          <!-- Product name -->
+          <text x="60" y="89" text-anchor="middle" font-family="monospace" font-size="7.5" fill="#0d0d0d" font-weight="700">RETA</text>
+          <text x="60" y="100" text-anchor="middle" font-family="monospace" font-size="7.5" fill="#0d0d0d" font-weight="700">10mg</text>
+          <line x1="47" y1="104" x2="73" y2="104" stroke="#e0ddd5" stroke-width="0.8"/>
+          <text x="60" y="112" text-anchor="middle" font-family="monospace" font-size="5" fill="#aaa" letter-spacing="0.3">RESEARCH USE</text>
+          <!-- Vial bottom dome -->
+          <ellipse cx="60" cy="143" rx="22" ry="5" fill="white" stroke="#d4d2cb" stroke-width="1"/>
+          <!-- Shine -->
+          <rect x="44" y="36" width="5" height="100" rx="2" fill="white" opacity="0.5"/>
+        </svg>
+        <div class="purity-badge" style="background:#888888">99.89% Pure</div>
+      </div>
+      <div class="product-body">
+        <p class="product-seq">His-Aib-Glu-Gly-Thr-Phe-Thr-Ser-Asp-Val-Ser-Ser-Tyr-Leu-Glu...</p>
+        <p class="product-name">Retatrutide 10mg</p>
+        <div class="product-tags">
+          <span class="tag">Lyophilized</span>
+          <span class="tag">10mg</span>
+          <span class="tag">Triple Agonist</span>
+        </div>
+        <p class="product-desc">GLP-1 / GIP / Glucagon triple receptor agonist. 36 amino acid acylated peptide. Research-grade vial.</p>
+        <div class="product-footer">
+          <div class="product-price">$80 <span>/ 10mg</span></div>
+          <button class="add-btn" onclick="addToCart(this, 'Retatrutide 10mg', 80)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Retatrutide 20mg -->
+    <div class="product-card">
+                  <div class="product-img" style="background:#f0efe9;">
+        <svg width="120" height="180" viewBox="0 0 120 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Cap -->
+          <rect x="42" y="10" width="36" height="14" rx="3" fill="#888888"/>
+          <rect x="46" y="22" width="28" height="6" rx="1" fill="#888888" opacity="0.7"/>
+          <!-- Crimp ring -->
+          <rect x="44" y="28" width="32" height="5" rx="2" fill="#c0bdb5"/>
+          <!-- Vial body -->
+          <rect x="38" y="33" width="44" height="110" rx="6" fill="white" stroke="#d4d2cb" stroke-width="1.5"/>
+          <!-- Liquid fill -->
+          <rect x="39.5" y="100" width="41" height="42" rx="0" fill="#e0e0e0" opacity="0.3"/>
+          <rect x="39.5" y="137" width="41" height="5" rx="0" fill="#e0e0e0" opacity="0.4"/>
+          <!-- Label background -->
+          <rect x="41" y="48" width="38" height="60" rx="3" fill="#f8f7f3" stroke="#e0ddd5" stroke-width="1"/>
+          <!-- 5 Star branding -->
+          <text x="60" y="62" text-anchor="middle" font-family="monospace" font-size="6" fill="#888888" font-weight="700" letter-spacing="1">★★★★★</text>
+          <text x="60" y="73" text-anchor="middle" font-family="monospace" font-size="5" fill="#7a7a7a" letter-spacing="0.5">5 STAR</text>
+          <line x1="47" y1="77" x2="73" y2="77" stroke="#e0ddd5" stroke-width="0.8"/>
+          <!-- Product name -->
+          <text x="60" y="89" text-anchor="middle" font-family="monospace" font-size="7.5" fill="#0d0d0d" font-weight="700">RETA</text>
+          <text x="60" y="100" text-anchor="middle" font-family="monospace" font-size="7.5" fill="#0d0d0d" font-weight="700">20mg</text>
+          <line x1="47" y1="104" x2="73" y2="104" stroke="#e0ddd5" stroke-width="0.8"/>
+          <text x="60" y="112" text-anchor="middle" font-family="monospace" font-size="5" fill="#aaa" letter-spacing="0.3">RESEARCH USE</text>
+          <!-- Vial bottom dome -->
+          <ellipse cx="60" cy="143" rx="22" ry="5" fill="white" stroke="#d4d2cb" stroke-width="1"/>
+          <!-- Shine -->
+          <rect x="44" y="36" width="5" height="100" rx="2" fill="white" opacity="0.5"/>
+        </svg>
+        <div class="purity-badge" style="background:#888888">99.85% Pure</div>
+      </div>
+      <div class="product-body">
+        <p class="product-seq">His-Aib-Glu-Gly-Thr-Phe-Thr-Ser-Asp-Val-Ser-Ser-Tyr-Leu-Glu...</p>
+        <p class="product-name">Retatrutide 20mg</p>
+        <div class="product-tags">
+          <span class="tag">Lyophilized</span>
+          <span class="tag">20mg</span>
+          <span class="tag">Triple Agonist</span>
+        </div>
+        <p class="product-desc">High-dose GLP-1 / GIP / Glucagon triple receptor agonist. 36 amino acid acylated peptide. Research-grade vial.</p>
+        <div class="product-footer">
+          <div class="product-price">$110 <span>/ 20mg</span></div>
+          <button class="add-btn" onclick="addToCart(this, 'Retatrutide 20mg', 110)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- GHK-Cu -->
+    <div class="product-card">
+            <div class="product-img" style="background:#f0efe9;">
+        <svg width="120" height="180" viewBox="0 0 120 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Cap -->
+          <rect x="42" y="10" width="36" height="14" rx="3" fill="#1a3fff"/>
+          <rect x="46" y="22" width="28" height="6" rx="1" fill="#1a3fff" opacity="0.7"/>
+          <!-- Crimp ring -->
+          <rect x="44" y="28" width="32" height="5" rx="2" fill="#c0bdb5"/>
+          <!-- Vial body -->
+          <rect x="38" y="33" width="44" height="110" rx="6" fill="white" stroke="#d4d2cb" stroke-width="1.5"/>
+          <!-- Liquid fill -->
+          <rect x="39.5" y="100" width="41" height="42" rx="0" fill="#1a3fff" opacity="0.15"/>
+          <rect x="39.5" y="137" width="41" height="5" rx="0" fill="#1a3fff" opacity="0.25"/>
+          <!-- Label background -->
+          <rect x="41" y="48" width="38" height="60" rx="3" fill="#f8f7f3" stroke="#e0ddd5" stroke-width="1"/>
+          <!-- 5 Star branding -->
+          <text x="60" y="62" text-anchor="middle" font-family="monospace" font-size="6" fill="#1a3fff" font-weight="700" letter-spacing="1">★★★★★</text>
+          <text x="60" y="73" text-anchor="middle" font-family="monospace" font-size="5" fill="#7a7a7a" letter-spacing="0.5">5 STAR</text>
+          <line x1="47" y1="77" x2="73" y2="77" stroke="#e0ddd5" stroke-width="0.8"/>
+          <!-- Product name -->
+          <text x="60" y="89" text-anchor="middle" font-family="monospace" font-size="7.5" fill="#1a3fff" font-weight="700">GHK</text>
+          <text x="60" y="100" text-anchor="middle" font-family="monospace" font-size="7.5" fill="#1a3fff" font-weight="700">-Cu</text>
+          <line x1="47" y1="104" x2="73" y2="104" stroke="#e0ddd5" stroke-width="0.8"/>
+          <text x="60" y="112" text-anchor="middle" font-family="monospace" font-size="5" fill="#aaa" letter-spacing="0.3">RESEARCH USE</text>
+          <!-- Vial bottom dome -->
+          <ellipse cx="60" cy="143" rx="22" ry="5" fill="white" stroke="#d4d2cb" stroke-width="1"/>
+          <!-- Shine -->
+          <rect x="44" y="36" width="5" height="100" rx="2" fill="white" opacity="0.5"/>
+        </svg>
+        <div class="purity-badge" >99.88% Pure</div>
+      </div>
+      <div class="product-body">
+        <p class="product-seq">Gly-His-Lys · Cu²⁺ · tripeptide complex · MW 340.38 Da...</p>
+        <p class="product-name">GHK-Cu</p>
+        <div class="product-tags">
+          <span class="tag">Lyophilized</span>
+          <span class="tag">50mg</span>
+          <span class="tag">Copper Complex</span>
+        </div>
+        <p class="product-desc">Copper peptide tripeptide-1. Naturally occurring human plasma peptide-copper chelate complex.</p>
+        <div class="product-footer">
+          <div class="product-price">$40 <span>/ 50mg</span></div>
+          <button class="add-btn" onclick="addToCart(this, 'GHK-Cu', 40)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOTS-c -->
+    <div class="product-card">
+                  <div class="product-img" style="background:#f0efe9;">
+        <svg width="120" height="180" viewBox="0 0 120 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Cap -->
+          <rect x="42" y="10" width="36" height="14" rx="3" fill="#888888"/>
+          <rect x="46" y="22" width="28" height="6" rx="1" fill="#888888" opacity="0.7"/>
+          <!-- Crimp ring -->
+          <rect x="44" y="28" width="32" height="5" rx="2" fill="#c0bdb5"/>
+          <!-- Vial body -->
+          <rect x="38" y="33" width="44" height="110" rx="6" fill="white" stroke="#d4d2cb" stroke-width="1.5"/>
+          <!-- Liquid fill -->
+          <rect x="39.5" y="100" width="41" height="42" rx="0" fill="#e0e0e0" opacity="0.3"/>
+          <rect x="39.5" y="137" width="41" height="5" rx="0" fill="#e0e0e0" opacity="0.4"/>
+          <!-- Label background -->
+          <rect x="41" y="48" width="38" height="60" rx="3" fill="#f8f7f3" stroke="#e0ddd5" stroke-width="1"/>
+          <!-- 5 Star branding -->
+          <text x="60" y="62" text-anchor="middle" font-family="monospace" font-size="6" fill="#888888" font-weight="700" letter-spacing="1">★★★★★</text>
+          <text x="60" y="73" text-anchor="middle" font-family="monospace" font-size="5" fill="#7a7a7a" letter-spacing="0.5">5 STAR</text>
+          <line x1="47" y1="77" x2="73" y2="77" stroke="#e0ddd5" stroke-width="0.8"/>
+          <!-- Product name -->
+          <text x="60" y="89" text-anchor="middle" font-family="monospace" font-size="7.5" fill="#0d0d0d" font-weight="700">MOTS</text>
+          <text x="60" y="100" text-anchor="middle" font-family="monospace" font-size="7.5" fill="#0d0d0d" font-weight="700">-c</text>
+          <line x1="47" y1="104" x2="73" y2="104" stroke="#e0ddd5" stroke-width="0.8"/>
+          <text x="60" y="112" text-anchor="middle" font-family="monospace" font-size="5" fill="#aaa" letter-spacing="0.3">RESEARCH USE</text>
+          <!-- Vial bottom dome -->
+          <ellipse cx="60" cy="143" rx="22" ry="5" fill="white" stroke="#d4d2cb" stroke-width="1"/>
+          <!-- Shine -->
+          <rect x="44" y="36" width="5" height="100" rx="2" fill="white" opacity="0.5"/>
+        </svg>
+        <div class="purity-badge" style="background:#888888">99.98% Pure</div>
+      </div>
+      <div class="product-body">
+        <p class="product-seq">Tyr-Arg-Trp-Leu-Lys-Thr-Leu-Leu-Ala-Gly-Leu-Leu-Arg-Arg-Leu-Ser...</p>
+        <p class="product-name">MOTS-c</p>
+        <div class="product-tags">
+          <span class="tag">Lyophilized</span>
+          <span class="tag">5mg</span>
+          <span class="tag">Mitochondrial</span>
+        </div>
+        <p class="product-desc">Mitochondrial-derived peptide. 16 amino acid sequence encoded in the 12S rRNA region of mtDNA. Research-grade vial.</p>
+        <div class="product-footer">
+          <div class="product-price">$45 <span>/ 5mg</span></div>
+          <button class="add-btn" onclick="addToCart(this, 'MOTS-c', 45)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tesamorelin -->
+    <div class="product-card">
+                  <div class="product-img" style="background:#f0efe9;">
+        <svg width="120" height="180" viewBox="0 0 120 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Cap -->
+          <rect x="42" y="10" width="36" height="14" rx="3" fill="#888888"/>
+          <rect x="46" y="22" width="28" height="6" rx="1" fill="#888888" opacity="0.7"/>
+          <!-- Crimp ring -->
+          <rect x="44" y="28" width="32" height="5" rx="2" fill="#c0bdb5"/>
+          <!-- Vial body -->
+          <rect x="38" y="33" width="44" height="110" rx="6" fill="white" stroke="#d4d2cb" stroke-width="1.5"/>
+          <!-- Liquid fill -->
+          <rect x="39.5" y="100" width="41" height="42" rx="0" fill="#e0e0e0" opacity="0.3"/>
+          <rect x="39.5" y="137" width="41" height="5" rx="0" fill="#e0e0e0" opacity="0.4"/>
+          <!-- Label background -->
+          <rect x="41" y="48" width="38" height="60" rx="3" fill="#f8f7f3" stroke="#e0ddd5" stroke-width="1"/>
+          <!-- 5 Star branding -->
+          <text x="60" y="62" text-anchor="middle" font-family="monospace" font-size="6" fill="#888888" font-weight="700" letter-spacing="1">★★★★★</text>
+          <text x="60" y="73" text-anchor="middle" font-family="monospace" font-size="5" fill="#7a7a7a" letter-spacing="0.5">5 STAR</text>
+          <line x1="47" y1="77" x2="73" y2="77" stroke="#e0ddd5" stroke-width="0.8"/>
+          <!-- Product name -->
+          <text x="60" y="89" text-anchor="middle" font-family="monospace" font-size="7.5" fill="#0d0d0d" font-weight="700">TESA-</text>
+          <text x="60" y="100" text-anchor="middle" font-family="monospace" font-size="7.5" fill="#0d0d0d" font-weight="700">MORELIN</text>
+          <line x1="47" y1="104" x2="73" y2="104" stroke="#e0ddd5" stroke-width="0.8"/>
+          <text x="60" y="112" text-anchor="middle" font-family="monospace" font-size="5" fill="#aaa" letter-spacing="0.3">RESEARCH USE</text>
+          <!-- Vial bottom dome -->
+          <ellipse cx="60" cy="143" rx="22" ry="5" fill="white" stroke="#d4d2cb" stroke-width="1"/>
+          <!-- Shine -->
+          <rect x="44" y="36" width="5" height="100" rx="2" fill="white" opacity="0.5"/>
+        </svg>
+        <div class="purity-badge" style="background:#888888">99.83% Pure</div>
+      </div>
+      <div class="product-body">
+        <p class="product-seq">Tyr-Ala-Asp-Ala-Ile-Phe-Thr-Asn-Ser-Tyr-Arg-Lys-Val-Leu-Gly...</p>
+        <p class="product-name">Tesamorelin</p>
+        <div class="product-tags">
+          <span class="tag">Lyophilized</span>
+          <span class="tag">2mg</span>
+          <span class="tag">GHRH Analog</span>
+        </div>
+        <p class="product-desc">Synthetic GHRH analog. 44 amino acid peptide with trans-3-hexenoic acid modification. Research-grade sealed vial.</p>
+        <div class="product-footer">
+          <div class="product-price">$65 <span>/ 2mg</span></div>
+          <button class="add-btn" onclick="addToCart(this, 'Tesamorelin', 65)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bacteriostatic Water -->
+    <div class="product-card">
+                  <div class="product-img" style="background:#f0efe9;">
+        <svg width="120" height="180" viewBox="0 0 120 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Cap white -->
+          <rect x="42" y="10" width="36" height="14" rx="3" fill="#888888"/>
+          <rect x="46" y="22" width="28" height="6" rx="1" fill="#888888" opacity="0.7"/>
+          <rect x="44" y="28" width="32" height="5" rx="2" fill="#c0bdb5"/>
+          <rect x="38" y="33" width="44" height="110" rx="6" fill="white" stroke="#d4d2cb" stroke-width="1.5"/>
+          <rect x="39.5" y="80" width="41" height="62" rx="0" fill="#e8e8e8" opacity="0.4"/>
+          <rect x="39.5" y="137" width="41" height="5" rx="0" fill="#e8e8e8" opacity="0.5"/>
+          <rect x="41" y="48" width="38" height="62" rx="3" fill="#f8f7f3" stroke="#e0ddd5" stroke-width="1"/>
+          <text x="60" y="62" text-anchor="middle" font-family="monospace" font-size="6" fill="#888888" font-weight="700" letter-spacing="1">★★★★★</text>
+          <text x="60" y="73" text-anchor="middle" font-family="monospace" font-size="5" fill="#7a7a7a" letter-spacing="0.5">5 STAR</text>
+          <line x1="47" y1="77" x2="73" y2="77" stroke="#e0ddd5" stroke-width="0.8"/>
+          <text x="60" y="88" text-anchor="middle" font-family="monospace" font-size="6.5" fill="#0d0d0d" font-weight="700">BACT.</text>
+          <text x="60" y="99" text-anchor="middle" font-family="monospace" font-size="6.5" fill="#0d0d0d" font-weight="700">WATER</text>
+          <line x1="47" y1="103" x2="73" y2="103" stroke="#e0ddd5" stroke-width="0.8"/>
+          <text x="60" y="111" text-anchor="middle" font-family="monospace" font-size="5.5" fill="#aaa">10ml</text>
+          <ellipse cx="60" cy="143" rx="22" ry="5" fill="white" stroke="#d4d2cb" stroke-width="1"/>
+          <rect x="44" y="36" width="5" height="100" rx="2" fill="white" opacity="0.5"/>
+        </svg>
+        <div class="purity-badge">99% Pure</div>
+      </div>
+      <div class="product-body">
+        <p class="product-seq">H₂O · 0.9% Benzyl Alcohol · USP Grade · Sterile filtered...</p>
+        <p class="product-name">Bacteriostatic Water</p>
+        <div class="product-tags">
+          <span class="tag">10ml Vial</span>
+          <span class="tag">USP Grade</span>
+          <span class="tag">Sterile</span>
+        </div>
+        <p class="product-desc">0.9% benzyl alcohol preserved sterile water. USP-grade, multi-dose vial for reconstituting lyophilized peptides.</p>
+        <div class="product-footer">
+          <div class="product-price">$10 <span>/ 10ml</span></div>
+          <button class="add-btn" onclick="addToCart(this, 'Bacteriostatic Water', 10)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="section" id="why">
+  <div>
+    <p class="section-label">// why 5 star</p>
+    <h2 class="section-title">Built for Researchers.</h2>
+    <p class="section-sub">We know what serious researchers need. Documented purity, fast shipping, and compounds that are what the label says they are.</p>
+  </div>
+
+  <div class="why-grid">
+    <div class="why-card">
+      <svg class="why-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M20 4 L34 12 L34 28 L20 36 L6 28 L6 12 Z"/>
+        <path d="M14 20 L18 24 L26 16" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h3 class="why-title">Third-Party Verified</h3>
+      <p class="why-desc">Every batch is independently tested by accredited labs. We publish the results — no cherry-picking, no hiding failures.</p>
+    </div>
+    <div class="why-card">
+      <svg class="why-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="6" y="8" width="28" height="24" rx="2"/>
+        <line x1="6" y1="16" x2="34" y2="16"/>
+        <line x1="14" y1="8" x2="14" y2="16"/>
+        <line x1="26" y1="8" x2="26" y2="16"/>
+      </svg>
+      <h3 class="why-title">HPLC + Mass Spec</h3>
+      <p class="why-desc">Dual verification methodology. High-performance liquid chromatography combined with mass spectrometry for absolute confidence.</p>
+    </div>
+    <div class="why-card">
+      <svg class="why-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M8 32 L16 20 L22 26 L28 14 L36 20"/>
+        <circle cx="8" cy="32" r="2" fill="currentColor"/>
+        <circle cx="36" cy="20" r="2" fill="currentColor"/>
+      </svg>
+      <h3 class="why-title">Batch Traceability</h3>
+      <p class="why-desc">Every vial carries a lot number traceable to its synthesis date, raw materials, and full QC record. Full chain of custody.</p>
+    </div>
+    <div class="why-card">
+      <svg class="why-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="10" y="6" width="20" height="28" rx="2"/>
+        <circle cx="20" cy="28" r="3"/>
+        <line x1="14" y1="14" x2="26" y2="14"/>
+        <line x1="14" y1="19" x2="26" y2="19"/>
+      </svg>
+      <h3 class="why-title">Cold-Chain Shipping</h3>
+      <p class="why-desc">Lyophilized peptides ship with cold packs and insulated packaging. We don't cut corners on the last mile.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DISCLAIMER -->
+<div class="disclaimer">
+  <span class="disclaimer-icon">⚠</span>
+  <p>FOR RESEARCH USE ONLY. All products sold by 5 Star Peptides are intended solely for in vitro research and laboratory use. Not for human or veterinary use, consumption, or diagnostic purposes. Not approved by the FDA. By purchasing, you confirm you are a qualified researcher and will use these compounds in accordance with all applicable laws and regulations.</p>
+</div>
+
+<!-- COA SECTION -->
+<section class="section" id="coa" style="background: var(--ink); color: var(--white);">
+  <p class="section-label">// quality assurance</p>
+  <h2 class="section-title" style="color:var(--white)">Certificate of Analysis.<br>Every Batch.</h2>
+  <p class="section-sub" style="color:rgba(255,255,255,0.5)">We don't ask you to trust us. We give you the data.</p>
+
+  <div class="coa-layout">
+    <div class="coa-terminal">
+      <div class="terminal-bar">
+        <div class="t-dot r"></div>
+        <div class="t-dot y"></div>
+        <div class="t-dot g"></div>
+        <span class="terminal-title">coa_report_BPC157_LOT2026-0604.txt</span>
+      </div>
+      <div class="terminal-body">
+        <span><span class="t-key">PRODUCT    </span><span class="t-val">BPC-157</span></span><br>
+        <span><span class="t-key">LOT        </span><span class="t-val">2026-0604</span></span><br>
+        <span><span class="t-key">MW         </span><span class="t-val">1419.53 Da</span></span><br>
+        <span><span class="t-key">SEQUENCE   </span><span class="t-val">GEPPPGKPAD...</span></span><br>
+        <span class="t-sep">────────────────────────────</span>
+        <span><span class="t-key">HPLC       </span><span class="t-pass">99.1% ✓ PASS</span></span><br>
+        <span><span class="t-key">MASS SPEC  </span><span class="t-pass">CONFIRMED ✓</span></span><br>
+        <span><span class="t-key">WATER      </span><span class="t-pass">&lt;5% ✓ PASS</span></span><br>
+        <span><span class="t-key">STERILITY  </span><span class="t-pass">PASS ✓</span></span><br>
+        <span><span class="t-key">ENDOTOXIN  </span><span class="t-pass">&lt;1 EU/mg ✓</span></span><br>
+        <span class="t-sep">────────────────────────────</span>
+        <span><span class="t-key">LAB        </span><span class="t-val">Intertek Analytics</span></span><br>
+        <span><span class="t-key">DATE       </span><span class="t-val">2026-06-04</span></span><br>
+        <span><span class="t-key">STATUS     </span><span class="t-pass">RELEASED ✓</span></span>
+      </div>
+    </div>
+
+    <ul class="coa-list">
+      <li class="coa-item">
+        <span class="coa-num">01</span>
+        <div>
+          <p class="coa-item-title">Synthesis & Purification</p>
+          <p class="coa-item-desc">Solid-phase peptide synthesis (SPPS) followed by RP-HPLC purification to &gt;98% minimum purity before QC testing.</p>
+        </div>
+      </li>
+      <li class="coa-item">
+        <span class="coa-num">02</span>
+        <div>
+          <p class="coa-item-title">Independent Lab Testing</p>
+          <p class="coa-item-desc">Each batch sent to a third-party accredited laboratory. We have no control over results — just the commitment to publish them.</p>
+        </div>
+      </li>
+      <li class="coa-item">
+        <span class="coa-num">03</span>
+        <div>
+          <p class="coa-item-title">COA Download per Lot</p>
+          <p class="coa-item-desc">Every order ships with the lot number. Use it to pull the full PDF certificate directly from our site at any time.</p>
+        </div>
+      </li>
+      <li class="coa-item">
+        <span class="coa-num">04</span>
+        <div>
+          <p class="coa-item-title">Batch Rejection Policy</p>
+          <p class="coa-item-desc">If a batch doesn't meet our purity threshold, it never ships. Simple as that.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ZELLE PAYMENT SECTION -->
+<section class="section" id="payment" style="background: var(--white); border-top: 1px solid var(--border);">
+  <div style="display:flex; flex-direction:column; align-items:center; text-align:center; max-width:520px; margin:0 auto;">
+    <p class="section-label">// payment</p>
+    <h2 class="section-title">Pay with Zelle</h2>
+    <p class="section-sub" style="margin:0 auto 40px;">We accept payment via Zelle for fast, secure checkout. Send payment directly to our number below.</p>
+
+    <div style="font-family:var(--code);font-size:28px;font-weight:700;color:var(--ink);margin-bottom:8px;">
+      (805) 901-3730
+    </div>
+    <p style="font-family:var(--mono);font-size:11px;letter-spacing:0.12em;color:var(--ink3);text-transform:uppercase;margin-bottom:32px;">
+      Send payment to this number via Zelle
+    </p>
+
+    <div style="background:var(--bg2);border:1px solid var(--border);padding:16px 24px;font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--ink2);line-height:1.7;max-width:400px;text-align:left;">
+      <strong style="color:var(--ink);">How to pay:</strong><br>
+      1. Open your banking app or Zelle app<br>
+      2. Send to <strong>(805) 901-3730</strong><br>
+      3. Include your order # in the memo<br>
+      4. Your order ships within 48 hrs of payment
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div>
+        <div class="star-row" style="margin-bottom:8px">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <p class="footer-logo">5 Star Peptides</p>
+      </div>
+      <p class="footer-tagline">Research-grade peptides. Third-party tested. Documented to the lot number.</p>
+      <p style="font-family:var(--mono);font-size:10px;color:rgba(255,255,255,0.25);letter-spacing:0.08em;">contact@5starpeptides.com</p>
+    </div>
+    <div class="footer-col">
+      <h4>Catalog</h4>
+      <ul>
+        <li><a href="#">Wolverine</a></li>
+        <li><a href="#">Retatrutide 10mg</a></li>
+        <li><a href="#">Retatrutide 20mg</a></li>
+        <li><a href="#">GHK-Cu</a></li>
+        <li><a href="#">MOTS-c</a></li>
+        <li><a href="#">Tesamorelin</a></li>
+        <li><a href="#">Bacteriostatic Water</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Info</h4>
+      <ul>
+        <li><a href="#">COA Library</a></li>
+        <li><a href="#">Shipping Policy</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Terms of Use</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Research Disclaimer</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 5 Star Peptides. All products for research use only. Not for human consumption.</p>
+    <p class="footer-copy" style="font-family:var(--code);">★★★★★</p>
+  </div>
+</footer>
+
+<script>
+  // ── CART STATE ──
+  let cart = [];
+
+  // ── CART DRAWER HTML ──
+  document.body.insertAdjacentHTML('beforeend', `
+    <!-- Cart Drawer -->
+    <div id="cart-overlay" onclick="closeCart()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:10000;"></div>
+    <div id="cart-drawer" style="
+      position:fixed;top:0;right:0;width:400px;max-width:100vw;height:100vh;
+      background:#f4f3ef;z-index:10001;transform:translateX(100%);
+      transition:transform 0.35s cubic-bezier(.4,0,.2,1);
+      display:flex;flex-direction:column;border-left:1px solid #d4d2cb;
+    ">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:24px;border-bottom:1px solid #d4d2cb;">
+        <span style="font-family:'Space Mono',monospace;font-size:14px;font-weight:700;letter-spacing:0.08em;">YOUR CART</span>
+        <button onclick="closeCart()" style="background:none;border:none;cursor:pointer;font-size:22px;color:#0d0d0d;line-height:1;">✕</button>
+      </div>
+      <div id="cart-items" style="flex:1;overflow-y:auto;padding:24px;"></div>
+      <div style="padding:24px;border-top:1px solid #d4d2cb;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:20px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#7a7a7a;">Total</span>
+          <span id="cart-total" style="font-family:'Space Mono',monospace;font-size:20px;font-weight:700;">$0</span>
+        </div>
+        <button onclick="openCheckout()" id="checkout-btn" style="
+          width:100%;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.12em;
+          text-transform:uppercase;background:#0d0d0d;color:#fff;border:none;padding:16px;
+          cursor:pointer;transition:background 0.2s;
+        " onmouseover="this.style.background='#1a3fff'" onmouseout="this.style.background='#0d0d0d'">
+          Proceed to Checkout →
+        </button>
+      </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-overlay" onclick="closeCheckout()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:10002;"></div>
+    <div id="checkout-modal" style="
+      display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+      background:#f4f3ef;z-index:10003;width:480px;max-width:95vw;max-height:90vh;
+      overflow-y:auto;border:1px solid #d4d2cb;padding:40px;
+    ">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;">
+        <span style="font-family:'Space Mono',monospace;font-size:14px;font-weight:700;letter-spacing:0.08em;">CHECKOUT</span>
+        <button onclick="closeCheckout()" style="background:none;border:none;cursor:pointer;font-size:20px;color:#0d0d0d;">✕</button>
+      </div>
+
+      <div id="checkout-order-summary" style="background:#eceae4;border:1px solid #d4d2cb;padding:16px 20px;margin-bottom:28px;"></div>
+
+      <div style="margin-bottom:20px;">
+        <label style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#7a7a7a;display:block;margin-bottom:6px;">Full Name</label>
+        <input id="co-name" type="text" placeholder="John Doe" style="width:100%;padding:12px 14px;border:1px solid #d4d2cb;background:#fff;font-family:'IBM Plex Mono',monospace;font-size:13px;outline:none;box-sizing:border-box;">
+      </div>
+      <div style="margin-bottom:20px;">
+        <label style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#7a7a7a;display:block;margin-bottom:6px;">Email</label>
+        <input id="co-email" type="email" placeholder="you@email.com" style="width:100%;padding:12px 14px;border:1px solid #d4d2cb;background:#fff;font-family:'IBM Plex Mono',monospace;font-size:13px;outline:none;box-sizing:border-box;">
+      </div>
+      <div style="margin-bottom:20px;">
+        <label style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#7a7a7a;display:block;margin-bottom:6px;">Shipping Address</label>
+        <input id="co-addr" type="text" placeholder="123 Main St, City, State ZIP" style="width:100%;padding:12px 14px;border:1px solid #d4d2cb;background:#fff;font-family:'IBM Plex Mono',monospace;font-size:13px;outline:none;box-sizing:border-box;">
+      </div>
+
+      <div style="background:#fff8e6;border:1px solid #e8d5a0;padding:14px 18px;margin-bottom:24px;">
+        <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.05em;color:#7a5f00;line-height:1.7;">
+          <strong>Payment via Zelle:</strong> After submitting, send your total to <strong>(805) 901-3730</strong> on Zelle. Include your name in the memo. Orders ship within 48 hrs of payment confirmation.
+        </p>
+      </div>
+
+      <button onclick="submitOrder()" style="
+        width:100%;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.12em;
+        text-transform:uppercase;background:#0d0d0d;color:#fff;border:none;padding:16px;
+        cursor:pointer;transition:background 0.2s;
+      " onmouseover="this.style.background='#1a3fff'" onmouseout="this.style.background='#0d0d0d'">
+        Submit Order
+      </button>
+    </div>
+
+    <!-- Order Confirmation -->
+    <div id="confirm-modal" style="
+      display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+      background:#f4f3ef;z-index:10004;width:440px;max-width:95vw;
+      border:1px solid #d4d2cb;padding:48px 40px;text-align:center;
+    ">
+      <div style="font-size:36px;margin-bottom:16px;">★</div>
+      <p style="font-family:'Space Mono',monospace;font-size:16px;font-weight:700;margin-bottom:12px;">Order Received!</p>
+      <p style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#3a3a3a;line-height:1.7;margin-bottom:8px;">
+        Send your payment via Zelle to <strong>(805) 901-3730</strong><br>and include your name in the memo.
+      </p>
+      <p style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#7a7a7a;line-height:1.7;margin-bottom:28px;">
+        DM <strong>@isaacroman3</strong> on Instagram after paying to confirm.
+      </p>
+      <button onclick="closeConfirm()" style="
+        font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;
+        background:#0d0d0d;color:#fff;border:none;padding:12px 28px;cursor:pointer;
+      ">Done</button>
+    </div>
+  `);
+
+  // ── CART FUNCTIONS ──
+  function openCart() {
+    document.getElementById('cart-overlay').style.display = 'block';
+    document.getElementById('cart-drawer').style.transform = 'translateX(0)';
+    renderCart();
+  }
+
+  function closeCart() {
+    document.getElementById('cart-overlay').style.display = 'none';
+    document.getElementById('cart-drawer').style.transform = 'translateX(100%)';
+  }
+
+  function renderCart() {
+    const el = document.getElementById('cart-items');
+    if (cart.length === 0) {
+      el.innerHTML = '<p style="font-family:\'IBM Plex Mono\',monospace;font-size:12px;color:#7a7a7a;text-align:center;margin-top:60px;letter-spacing:0.08em;">Your cart is empty.</p>';
+      document.getElementById('cart-total').textContent = '$0';
+      return;
+    }
+    el.innerHTML = cart.map((item, i) => `
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid #d4d2cb;">
+        <div>
+          <p style="font-family:'Space Mono',monospace;font-size:13px;font-weight:700;margin-bottom:4px;">${item.name}</p>
+          <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7a7a7a;">$${item.price} × ${item.qty}</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-family:'Space Mono',monospace;font-size:14px;font-weight:700;">$${item.price * item.qty}</span>
+          <button onclick="removeItem(${i})" style="background:none;border:1px solid #d4d2cb;width:26px;height:26px;cursor:pointer;font-size:14px;color:#7a7a7a;display:flex;align-items:center;justify-content:center;">✕</button>
+        </div>
+      </div>
+    `).join('');
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    document.getElementById('cart-total').textContent = '$' + total;
+  }
+
+  function removeItem(i) {
+    cart.splice(i, 1);
+    updateCartBtn();
+    renderCart();
+  }
+
+  function updateCartBtn() {
+    const total = cart.reduce((s, i) => s + i.qty, 0);
+    document.querySelector('.nav-cart').textContent = `Cart (${total})`;
+  }
+
+  // ── CHECKOUT FUNCTIONS ──
+  function openCheckout() {
+    if (cart.length === 0) return;
+    closeCart();
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    document.getElementById('checkout-order-summary').innerHTML = `
+      <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#7a7a7a;margin-bottom:10px;">Order Summary</p>
+      ${cart.map(i => `<div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:12px;margin-bottom:6px;"><span>${i.name} ×${i.qty}</span><span>$${i.price * i.qty}</span></div>`).join('')}
+      <div style="display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:14px;font-weight:700;margin-top:10px;padding-top:10px;border-top:1px solid #d4d2cb;"><span>Total</span><span>$${total}</span></div>
+    `;
+    document.getElementById('checkout-overlay').style.display = 'block';
+    document.getElementById('checkout-modal').style.display = 'block';
+  }
+
+  function closeCheckout() {
+    document.getElementById('checkout-overlay').style.display = 'none';
+    document.getElementById('checkout-modal').style.display = 'none';
+  }
+
+  function submitOrder() {
+    const name = document.getElementById('co-name').value.trim();
+    const email = document.getElementById('co-email').value.trim();
+    const addr = document.getElementById('co-addr').value.trim();
+    if (!name || !email || !addr) {
+      alert('Please fill in all fields before submitting.');
+      return;
+    }
+    closeCheckout();
+    document.getElementById('confirm-modal').style.display = 'block';
+    cart = [];
+    updateCartBtn();
+  }
+
+  function closeConfirm() {
+    document.getElementById('confirm-modal').style.display = 'none';
+  }
+
+  // Wire up nav cart button to open drawer
+  document.querySelector('.nav-cart').addEventListener('click', openCart);
+
+  // ── ADD TO CART ──
+  function addToCart(btn, name, price) {
+    const existing = cart.find(i => i.name === name);
+    if (existing) {
+      existing.qty++;
+    } else {
+      cart.push({ name, price, qty: 1 });
+    }
+    updateCartBtn();
+
+    btn.textContent = 'Added ✓';
+    btn.style.background = '#1a3fff';
+    setTimeout(() => {
+      btn.textContent = 'Add to Cart';
+      btn.style.background = '';
+    }, 1800);
+
+    // Instagram notification
+    const notif = document.createElement('div');
+    notif.innerHTML = `
+      <div style="display:flex;align-items:center;gap:14px;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="20" height="20" rx="6" stroke="white" stroke-width="1.5"/>
+          <circle cx="12" cy="12" r="4" stroke="white" stroke-width="1.5"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="white"/>
+        </svg>
+        <div>
+          <div style="font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:#fff;letter-spacing:0.04em;">${name} added!</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:rgba(255,255,255,0.75);margin-top:3px;letter-spacing:0.06em;">DM <strong style="color:#fff;">@isaacroman3</strong> on Instagram to order</div>
+        </div>
+      </div>`;
+    notif.style.cssText = `
+      position:fixed;bottom:28px;right:28px;
+      background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);
+      padding:18px 24px;border-radius:4px;box-shadow:0 8px 32px rgba(0,0,0,0.22);
+      z-index:9999;max-width:320px;opacity:0;transform:translateY(16px);
+      transition:opacity 0.3s ease,transform 0.3s ease;cursor:pointer;
+    `;
+    document.body.appendChild(notif);
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      notif.style.opacity = '1';
+      notif.style.transform = 'translateY(0)';
+    }));
+    notif.addEventListener('click', () => window.open('https://www.instagram.com/isaacroman3/', '_blank'));
+    setTimeout(() => {
+      notif.style.opacity = '0';
+      notif.style.transform = 'translateY(16px)';
+      setTimeout(() => notif.remove(), 400);
+    }, 5000);
+  }
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        window.scrollTo({ top: target.offsetTop - 72, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
