@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5 Star Peptides — Research Grade</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0a;
+  --bg2: #111111;
+  --bg3: #181818;
+  --border: #242424;
+  --border2: #2e2e2e;
+  --ink: #f0ede8;
+  --ink2: #a0a0a0;
+  --ink3: #555;
+  --accent: #00b4d8;
+  --accent2: #0096b7;
+  --gold: #c8a84b;
+  --green: #22c55e;
+  --red: #ef4444;
+  --white: #ffffff;
+  --sans: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: #000000;
+  color: #f0ede8;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; width: 100%;
+  z-index: 200;
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  height: 60px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.nav-stars { color: var(--gold); font-size: 11px; letter-spacing: 2px; }
+
+.nav-wordmark {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink2);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+
+.nav-right { display: flex; align-items: center; gap: 12px; }
+
+.nav-cart-btn {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: #000;
+  border: none;
+  padding: 8px 18px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.nav-cart-btn:hover { background: var(--accent2); }
+
+/* ── ANNOUNCEMENT BAR ── */
+.announce {
+  background: var(--accent);
+  color: #000;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  padding: 8px;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-top: 60px;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px 60px;
+  position: relative;
+  overflow: hidden;
+  background: #000000;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0,180,216,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.1s forwards;
+}
+
+.hero-h1 {
+  font-size: clamp(48px, 8vw, 100px);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  margin-bottom: 28px;
+}
+
+.hero-h1 span { color: var(--accent); }
+
+.hero-sub {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--ink2);
+  max-width: 480px;
+  line-height: 1.7;
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.4s forwards;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.55s forwards;
+}
+
+.btn-primary {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: #000;
+  border: none;
+  padding: 14px 36px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s, transform 0.15s;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-primary:hover { background: var(--accent2); transform: translateY(-2px); }
+
+.btn-outline {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--border2);
+  padding: 14px 36px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-outline:hover { border-color: var(--ink2); }
+
+/* ── TRUST BADGES ── */
+.trust-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg2);
+}
+
+.trust-item {
+  padding: 28px 24px;
+  border-right: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.trust-item:last-child { border-right: none; }
+
+.trust-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(0,180,216,0.1);
+  border: 1px solid rgba(0,180,216,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--accent);
+  font-size: 16px;
+}
+
+.trust-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+
+.trust-desc {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink3);
+  letter-spacing: 0.05em;
+}
+
+/* ── TICKER ── */
+.ticker {
+  overflow: hidden;
+  background: var(--bg3);
+  border-bottom: 1px solid var(--border);
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.ticker-inner {
+  display: flex;
+  white-space: nowrap;
+  animation: ticker 30s linear infinite;
+}
+
+.ticker-item {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0 40px;
+  color: var(--ink3);
+  flex-shrink: 0;
+}
+
+.ticker-item .dot { color: var(--accent); margin-right: 8px; }
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── SECTIONS ── */
+.section { padding: 80px 40px; }
+
+.section-eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 12px;
+  line-height: 1.05;
+}
+
+.section-sub {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink2);
+  max-width: 480px;
+  line-height: 1.7;
+}
+
+/* ── PRODUCTS ── */
+#products { background: var(--bg); }
+
+.products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.product-card {
+  background: var(--bg2);
+  display: flex;
+  flex-direction: column;
+  transition: background 0.2s;
+  cursor: pointer;
+  position: relative;
+}
+.product-card:hover { background: var(--bg3); }
+
+.product-img {
+  height: 160px;
+  background: var(--bg3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.product-img svg { width: 70px; height: auto; }
+
+.product-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(0,180,216,0.05), transparent 70%);
+  pointer-events: none;
+}
+
+.purity-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-family: var(--mono);
+  font-size: 7px;
+  letter-spacing: 0.06em;
+  background: var(--accent);
+  color: #000;
+  padding: 3px 6px;
+  text-transform: uppercase;
+  font-weight: 500;
+  white-space: nowrap;
+  max-width: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-body {
+  padding: 10px 12px 12px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-category {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 3px;
+}
+
+.product-name {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 5px;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.product-tags {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 7px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid var(--border2);
+  color: var(--ink3);
+  padding: 2px 5px;
+}
+
+.product-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.product-price {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.product-price span {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--ink3);
+  font-weight: 400;
+}
+
+.add-btn {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: #000;
+  border: none;
+  padding: 9px 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+  width: 100%;
+  text-align: center;
+}
+.add-btn:hover { background: var(--accent2); }
+
+/* Desktop enhancements */
+@media (min-width: 901px) {
+  .product-img { height: 220px; }
+  .product-img svg { width: 100px; }
+  .product-body { padding: 18px 20px 20px; }
+  .product-name { font-size: 17px; }
+  .product-price { font-size: 20px; }
+  .product-category { font-size: 9px; }
+  .tag { font-size: 9px; padding: 3px 8px; }
+  .product-footer { flex-direction: row; align-items: center; gap: 0; padding-top: 14px; }
+  .add-btn { width: auto; padding: 10px 14px; font-size: 10px; }
+  .purity-badge { font-size: 9px; padding: 4px 10px; top: 12px; right: 12px; max-width: none; }
+}
+
+/* ── FEATURES ── */
+#features { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 56px;
+}
+
+.feature-card {
+  background: var(--bg2);
+  padding: 36px 28px;
+  transition: background 0.2s;
+}
+.feature-card:hover { background: var(--bg3); }
+
+.feature-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.feature-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+.feature-desc {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink2);
+  line-height: 1.7;
+}
+
+.feature-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid var(--border2);
+  color: var(--ink3);
+  padding: 3px 10px;
+  margin-top: 16px;
+}
+
+/* ── FAQ ── */
+#faq { background: var(--bg); }
+
+.faq-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+  margin-top: 56px;
+  align-items: start;
+}
+
+.faq-list { display: flex; flex-direction: column; }
+
+.faq-item {
+  border-top: 1px solid var(--border);
+  padding: 0;
+  overflow: hidden;
+}
+
+.faq-item:last-child { border-bottom: 1px solid var(--border); }
+
+.faq-q {
+  width: 100%;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 0;
+  cursor: pointer;
+  text-align: left;
+  gap: 16px;
+}
+
+.faq-q-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.faq-icon {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--border2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 18px;
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+
+.faq-a {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink2);
+  line-height: 1.8;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s;
+}
+
+.faq-item.open .faq-a { max-height: 200px; padding-bottom: 20px; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+
+/* ── PAYMENT ── */
+#payment {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.payment-inner {
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.zelle-card {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  padding: 36px;
+  margin: 40px 0 28px;
+}
+
+.zelle-number {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+.zelle-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 28px;
+}
+
+.zelle-steps {
+  text-align: left;
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.zelle-step {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink2);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.zelle-step-num {
+  color: var(--accent);
+  flex-shrink: 0;
+  font-weight: 500;
+}
+
+/* ── DISCLAIMER ── */
+.disclaimer {
+  background: rgba(200,168,75,0.06);
+  border: 1px solid rgba(200,168,75,0.2);
+  padding: 16px 24px;
+  margin: 0 40px 40px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.disclaimer p {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: rgba(200,168,75,0.7);
+  line-height: 1.7;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  padding: 60px 40px 32px;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--border);
+}
+
+.footer-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.footer-wordmark {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.footer-tagline {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink3);
+  line-height: 1.7;
+  max-width: 220px;
+  margin-bottom: 20px;
+}
+
+.footer-col h4 {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 16px;
+}
+
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+.footer-col a {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink2);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--accent); }
+
+.footer-bottom {
+  padding-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-copy {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--ink3);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes rotate3d {
+  0%   { transform: perspective(600px) rotateY(0deg); }
+  20%  { transform: perspective(600px) rotateY(360deg); }
+  100% { transform: perspective(600px) rotateY(360deg); }
+}
+
+@keyframes fadeUpThen3d {
+  0%   { opacity: 0; transform: translateY(20px); }
+  30%  { opacity: 1; transform: translateY(0); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.hero-3d {
+  display: inline-block;
+  color: inherit;
+  opacity: 0;
+  animation: fadeUpThen3d 0.8s 0.25s forwards, rotate3d 5s 1.2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.hero-3d span { color: var(--accent); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .trust-strip { grid-template-columns: 1fr 1fr; }
+  .trust-item { border-right: none; border-bottom: 1px solid var(--border); }
+  .section { padding: 60px 20px; }
+  .faq-layout { grid-template-columns: 1fr; gap: 0; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .disclaimer { margin: 0 20px 32px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <span class="nav-stars">★★★★★</span>
+    <span class="nav-wordmark">5 Star Peptides</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#products">Shop</a></li>
+    <li><a href="#features">Quality</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#payment">Payment</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="nav-cart-btn">Cart (0)</button>
+  </div>
+</nav>
+
+<!-- ANNOUNCE -->
+<div class="announce" style="background:linear-gradient(90deg,#00b4d8,#0096b7,#00b4d8);background-size:200% auto;animation:shimmer 3s linear infinite;font-size:12px;padding:10px;">🔥 PRE-ORDER SALE — Use code <strong style="background:#000;color:#00b4d8;padding:2px 8px;margin:0 4px;letter-spacing:0.15em;">STAR10</strong> for 10% OFF your entire order · Limited time only 🔥</div>
+<style>@keyframes shimmer{0%{background-position:0% center}100%{background-position:200% center}}</style>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Research-Grade Peptides · Lab Verified · USA</p>
+  <h1 class="hero-h1 hero-3d">5 Star<br><span>Peptides</span></h1>
+  <p class="hero-sub">High quality, third-party tested peptides for your research needs. 99%+ purity guaranteed — Certificate of Analysis with every batch.</p>
+  <div class="hero-ctas">
+    <a href="#products" class="btn-primary">Shop Now</a>
+    <a href="#features" class="btn-outline">Our Quality Promise</a>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-item">
+    <div class="trust-icon">✓</div>
+    <div>
+      <p class="trust-title">99%+ Purity</p>
+      <p class="trust-desc">Lab verified</p>
+    </div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">⚗</div>
+    <div>
+      <p class="trust-title">3rd Party Tested</p>
+      <p class="trust-desc">COA every batch</p>
+    </div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">⚡</div>
+    <div>
+      <p class="trust-title">48hr Dispatch</p>
+      <p class="trust-desc">Fast shipping</p>
+    </div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">🔒</div>
+    <div>
+      <p class="trust-title">Secure & Discreet</p>
+      <p class="trust-desc">Full tracking</p>
+    </div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item"><span class="dot">●</span>Research Use Only</span>
+    <span class="ticker-item"><span class="dot">●</span>Wolverine Stack — BPC-157 + TB-500</span>
+    <span class="ticker-item"><span class="dot">●</span>Retatrutide 10mg — 99.89% Purity</span>
+    <span class="ticker-item"><span class="dot">●</span>Retatrutide 20mg — 99.85% Purity</span>
+    <span class="ticker-item"><span class="dot">●</span>GHK-Cu — 99.88% Purity</span>
+    <span class="ticker-item"><span class="dot">●</span>MOTS-c — 99.98% Purity</span>
+    <span class="ticker-item"><span class="dot">●</span>Tesamorelin — 99.83% Purity</span>
+    <span class="ticker-item"><span class="dot">●</span>Bacteriostatic Water 3ml — $10</span>
+    <span class="ticker-item"><span class="dot">●</span>KPV — Pre-Order Now</span>
+    <span class="ticker-item"><span class="dot">●</span>Starter Pack — Everything You Need for $110</span>
+    <span class="ticker-item"><span class="dot">●</span>COA On Every Order</span>
+    <span class="ticker-item"><span class="dot">●</span>Pay securely via Zelle at Checkout</span>
+    <!-- duplicate -->
+    <span class="ticker-item"><span class="dot">●</span>Research Use Only</span>
+    <span class="ticker-item"><span class="dot">●</span>Wolverine Stack — BPC-157 + TB-500</span>
+    <span class="ticker-item"><span class="dot">●</span>Retatrutide 10mg — 99.89% Purity</span>
+    <span class="ticker-item"><span class="dot">●</span>Retatrutide 20mg — 99.85% Purity</span>
+    <span class="ticker-item"><span class="dot">●</span>GHK-Cu — 99.88% Purity</span>
+    <span class="ticker-item"><span class="dot">●</span>MOTS-c — 99.98% Purity</span>
+    <span class="ticker-item"><span class="dot">●</span>Tesamorelin — 99.83% Purity</span>
+    <span class="ticker-item"><span class="dot">●</span>Bacteriostatic Water 3ml — $10</span>
+    <span class="ticker-item"><span class="dot">●</span>KPV — Pre-Order Now</span>
+    <span class="ticker-item"><span class="dot">●</span>Starter Pack — Everything You Need for $110</span>
+    <span class="ticker-item"><span class="dot">●</span>COA On Every Order</span>
+    <span class="ticker-item"><span class="dot">●</span>Pay securely via Zelle at Checkout</span>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="section" id="products">
+  <div class="products-header">
+    <div>
+      <p class="section-eyebrow">// catalog</p>
+      <h2 class="section-title">Bestsellers</h2>
+    </div>
+  </div>
+
+  <div class="product-grid">
+
+    <!-- Retatrutide 10mg -->
+    <!-- Retatrutide 10mg -->
+    <div class="product-card">
+      <div class="product-img">
+        <svg width="110" height="190" viewBox="0 0 110 190" fill="none">
+          <rect x="35" y="12" width="40" height="14" rx="3" fill="#888"/>
+          <rect x="39" y="24" width="32" height="6" rx="1" fill="#666"/>
+          <rect x="37" y="30" width="36" height="5" rx="2" fill="#555"/>
+          <rect x="31" y="35" width="48" height="118" rx="7" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1.5"/>
+          <rect x="32.5" y="108" width="45" height="44" fill="#c8a84b" opacity="0.08"/>
+          <rect x="33" y="50" width="42" height="68" rx="3" fill="#111" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="55" y="65" text-anchor="middle" font-family="monospace" font-size="6" fill="#c8a84b" font-weight="700" letter-spacing="2">★★★★★</text>
+          <text x="55" y="76" text-anchor="middle" font-family="monospace" font-size="5" fill="#555" letter-spacing="1">5 STAR</text>
+          <line x1="40" y1="80" x2="70" y2="80" stroke="#2a2a2a" stroke-width="0.8"/>
+          <text x="55" y="91" text-anchor="middle" font-family="monospace" font-size="8" fill="#f0ede8" font-weight="700">RETA</text>
+          <text x="55" y="103" text-anchor="middle" font-family="monospace" font-size="7" fill="#c8a84b">10mg</text>
+          <line x1="40" y1="108" x2="70" y2="108" stroke="#2a2a2a" stroke-width="0.8"/>
+          <text x="55" y="116" text-anchor="middle" font-family="monospace" font-size="5" fill="#555">RESEARCH USE</text>
+          <ellipse cx="55" cy="153" rx="24" ry="5" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1"/>
+          <rect x="37" y="37" width="5" height="112" rx="2" fill="white" opacity="0.04"/>
+        </svg>
+        <div class="purity-badge" style="background:#c8a84b;color:#000">99.89% Pure</div>
+        <div class="purity-badge" style="background:#00b4d8;color:#000;top:auto;bottom:12px;">Pre-Order</div>
+      </div>
+      <div class="product-body">
+        <p class="product-category">Triple Agonist</p>
+        <p class="product-name">Retatrutide 10mg</p>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink2);line-height:1.6;margin-bottom:10px;">Triple receptor agonist targeting GLP-1, GIP, and glucagon pathways. Among the most studied metabolic research peptides available.</p>
+        <div class="product-tags">
+          <span class="tag">10mg Vial</span><span class="tag">GLP-1/GIP/GCG</span><span class="tag">Lyophilized</span>
+        </div>
+        <div class="product-footer">
+          <div>
+            <div class="product-price">$85 <span>/ 10mg</span></div>
+          </div>
+          <button class="add-btn" onclick="addToCart(this,'Retatrutide 10mg (Pre-Order)',85)" style="background:#00b4d8;color:#000;">Pre-Order</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Retatrutide 20mg -->
+    <!-- Retatrutide 20mg -->
+    <div class="product-card">
+      <div class="product-img">
+        <svg width="110" height="190" viewBox="0 0 110 190" fill="none">
+          <rect x="35" y="12" width="40" height="14" rx="3" fill="#888"/>
+          <rect x="39" y="24" width="32" height="6" rx="1" fill="#666"/>
+          <rect x="37" y="30" width="36" height="5" rx="2" fill="#555"/>
+          <rect x="31" y="35" width="48" height="118" rx="7" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1.5"/>
+          <rect x="32.5" y="95" width="45" height="57" fill="#c8a84b" opacity="0.12"/>
+          <rect x="33" y="50" width="42" height="68" rx="3" fill="#111" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="55" y="65" text-anchor="middle" font-family="monospace" font-size="6" fill="#c8a84b" font-weight="700" letter-spacing="2">★★★★★</text>
+          <text x="55" y="76" text-anchor="middle" font-family="monospace" font-size="5" fill="#555" letter-spacing="1">5 STAR</text>
+          <line x1="40" y1="80" x2="70" y2="80" stroke="#2a2a2a" stroke-width="0.8"/>
+          <text x="55" y="91" text-anchor="middle" font-family="monospace" font-size="8" fill="#f0ede8" font-weight="700">RETA</text>
+          <text x="55" y="103" text-anchor="middle" font-family="monospace" font-size="7" fill="#c8a84b">20mg</text>
+          <line x1="40" y1="108" x2="70" y2="108" stroke="#2a2a2a" stroke-width="0.8"/>
+          <text x="55" y="116" text-anchor="middle" font-family="monospace" font-size="5" fill="#555">RESEARCH USE</text>
+          <ellipse cx="55" cy="153" rx="24" ry="5" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1"/>
+          <rect x="37" y="37" width="5" height="112" rx="2" fill="white" opacity="0.04"/>
+        </svg>
+        <div class="purity-badge" style="background:#c8a84b;color:#000">99.85% Pure</div>
+        <div class="purity-badge" style="background:#00b4d8;color:#000;top:auto;bottom:12px;">Pre-Order</div>
+      </div>
+      <div class="product-body">
+        <p class="product-category">Triple Agonist</p>
+        <p class="product-name">Retatrutide 20mg</p>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink2);line-height:1.6;margin-bottom:10px;">High-dose triple agonist formulation. Same GLP-1/GIP/glucagon mechanism with double the concentration for extended research protocols.</p>
+        <div class="product-tags">
+          <span class="tag">20mg Vial</span><span class="tag">GLP-1/GIP/GCG</span><span class="tag">Lyophilized</span>
+        </div>
+        <div class="product-footer">
+          <div>
+            <div class="product-price">$115 <span>/ 20mg</span></div>
+          </div>
+          <button class="add-btn" onclick="addToCart(this,'Retatrutide 20mg (Pre-Order)',115)" style="background:#00b4d8;color:#000;">Pre-Order</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wolverine -->
+    <!-- Wolverine -->
+    <div class="product-card">
+      <div class="product-img">
+        <svg width="110" height="190" viewBox="0 0 110 190" fill="none">
+          <rect x="35" y="12" width="40" height="14" rx="3" fill="#888"/>
+          <rect x="39" y="24" width="32" height="6" rx="1" fill="#666"/>
+          <rect x="37" y="30" width="36" height="5" rx="2" fill="#555"/>
+          <rect x="31" y="35" width="48" height="118" rx="7" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1.5"/>
+          <rect x="32.5" y="108" width="45" height="44" fill="#333" opacity="0.5"/>
+          <rect x="33" y="50" width="42" height="68" rx="3" fill="#111" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="55" y="65" text-anchor="middle" font-family="monospace" font-size="6" fill="#00b4d8" font-weight="700" letter-spacing="2">★★★★★</text>
+          <text x="55" y="76" text-anchor="middle" font-family="monospace" font-size="5" fill="#555" letter-spacing="1">5 STAR</text>
+          <line x1="40" y1="80" x2="70" y2="80" stroke="#2a2a2a" stroke-width="0.8"/>
+          <text x="55" y="92" text-anchor="middle" font-family="monospace" font-size="8" fill="#f0ede8" font-weight="700">WOLVERINE</text>
+          <text x="55" y="103" text-anchor="middle" font-family="monospace" font-size="7" fill="#888">10mg</text>
+          <line x1="40" y1="108" x2="70" y2="108" stroke="#2a2a2a" stroke-width="0.8"/>
+          <text x="55" y="116" text-anchor="middle" font-family="monospace" font-size="5" fill="#555">RESEARCH USE</text>
+          <ellipse cx="55" cy="153" rx="24" ry="5" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1"/>
+          <rect x="37" y="37" width="5" height="112" rx="2" fill="white" opacity="0.04"/>
+        </svg>
+        <div class="purity-badge">99.78% Pure</div>
+      </div>
+      <div class="product-body">
+        <p class="product-category">Peptide Stack</p>
+        <p class="product-name">Wolverine</p>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink2);line-height:1.6;margin-bottom:10px;">BPC-157 + TB-500 recovery stack. Supports tissue repair, joint health, and inflammation reduction in research models.</p>
+        <div class="product-tags">
+          <span class="tag">BPC-157</span><span class="tag">TB-500</span><span class="tag">Lyophilized</span>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">$60 <span>/ 10mg</span></div>
+          <button class="add-btn" onclick="addToCart(this,'Wolverine',60)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- GHK-Cu -->
+    <!-- GHK-Cu -->
+    <div class="product-card">
+      <div class="product-img">
+        <svg width="110" height="190" viewBox="0 0 110 190" fill="none">
+          <rect x="35" y="12" width="40" height="14" rx="3" fill="#00b4d8"/>
+          <rect x="39" y="24" width="32" height="6" rx="1" fill="#0096b7"/>
+          <rect x="37" y="30" width="36" height="5" rx="2" fill="#555"/>
+          <rect x="31" y="35" width="48" height="118" rx="7" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1.5"/>
+          <rect x="32.5" y="108" width="45" height="44" fill="#00b4d8" opacity="0.1"/>
+          <rect x="33" y="50" width="42" height="68" rx="3" fill="#111" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="55" y="65" text-anchor="middle" font-family="monospace" font-size="6" fill="#00b4d8" font-weight="700" letter-spacing="2">★★★★★</text>
+          <text x="55" y="76" text-anchor="middle" font-family="monospace" font-size="5" fill="#555" letter-spacing="1">5 STAR</text>
+          <line x1="40" y1="80" x2="70" y2="80" stroke="#2a2a2a" stroke-width="0.8"/>
+          <text x="55" y="91" text-anchor="middle" font-family="monospace" font-size="9" fill="#f0ede8" font-weight="700">GHK-Cu</text>
+          <text x="55" y="103" text-anchor="middle" font-family="monospace" font-size="7" fill="#00b4d8">50mg</text>
+          <line x1="40" y1="108" x2="70" y2="108" stroke="#2a2a2a" stroke-width="0.8"/>
+          <text x="55" y="116" text-anchor="middle" font-family="monospace" font-size="5" fill="#555">RESEARCH USE</text>
+          <ellipse cx="55" cy="153" rx="24" ry="5" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1"/>
+          <rect x="37" y="37" width="5" height="112" rx="2" fill="white" opacity="0.04"/>
+        </svg>
+        <div class="purity-badge">99.88% Pure</div>
+        <div class="purity-badge" style="background:#ef4444;color:#fff;top:auto;bottom:12px;">⚠ Low Stock</div>
+      </div>
+      <div class="product-body">
+        <p class="product-category">Copper Peptide</p>
+        <p class="product-name">GHK-Cu</p>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink2);line-height:1.6;margin-bottom:10px;">Naturally occurring copper-binding tripeptide found in human plasma. Widely researched for its role in cellular repair and regeneration.</p>
+        <div class="product-tags">
+          <span class="tag">50mg</span><span class="tag">Copper Complex</span><span class="tag">Lyophilized</span>
+        </div>
+        <div class="product-footer">
+          <div>
+            <div class="product-price">$40 <span>/ 50mg</span></div>
+          </div>
+          <button class="add-btn" onclick="addToCart(this,'GHK-Cu',40)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOTS-c -->
+    <!-- MOTS-c -->
+    <div class="product-card">
+      <div class="product-img">
+        <svg width="110" height="190" viewBox="0 0 110 190" fill="none">
+          <rect x="35" y="12" width="40" height="14" rx="3" fill="#888"/>
+          <rect x="39" y="24" width="32" height="6" rx="1" fill="#666"/>
+          <rect x="37" y="30" width="36" height="5" rx="2" fill="#555"/>
+          <rect x="31" y="35" width="48" height="118" rx="7" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1.5"/>
+          <rect x="32.5" y="108" width="45" height="44" fill="#22c55e" opacity="0.07"/>
+          <rect x="33" y="50" width="42" height="68" rx="3" fill="#111" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="55" y="65" text-anchor="middle" font-family="monospace" font-size="6" fill="#22c55e" font-weight="700" letter-spacing="2">★★★★★</text>
+          <text x="55" y="76" text-anchor="middle" font-family="monospace" font-size="5" fill="#555" letter-spacing="1">5 STAR</text>
+          <line x1="40" y1="80" x2="70" y2="80" stroke="#2a2a2a" stroke-width="0.8"/>
+          <text x="55" y="91" text-anchor="middle" font-family="monospace" font-size="9" fill="#f0ede8" font-weight="700">MOTS-c</text>
+          <text x="55" y="103" text-anchor="middle" font-family="monospace" font-size="7" fill="#22c55e">10mg</text>
+          <line x1="40" y1="108" x2="70" y2="108" stroke="#2a2a2a" stroke-width="0.8"/>
+          <text x="55" y="116" text-anchor="middle" font-family="monospace" font-size="5" fill="#555">RESEARCH USE</text>
+          <ellipse cx="55" cy="153" rx="24" ry="5" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1"/>
+          <rect x="37" y="37" width="5" height="112" rx="2" fill="white" opacity="0.04"/>
+        </svg>
+        <div class="purity-badge" style="background:#22c55e;color:#000">99.98% Pure</div>
+        <div class="purity-badge" style="background:#00b4d8;color:#000;top:auto;bottom:12px;">Pre-Order</div>
+      </div>
+      <div class="product-body">
+        <p class="product-category">Mitochondrial Peptide</p>
+        <p class="product-name">MOTS-c</p>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink2);line-height:1.6;margin-bottom:10px;">Mitochondria-derived peptide encoded in mitochondrial DNA. Researched for metabolic regulation and cellular energy homeostasis.</p>
+        <div class="product-tags">
+          <span class="tag">10mg</span><span class="tag">Mitochondrial</span><span class="tag">Lyophilized</span>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">$45 <span>/ 10mg</span></div>
+          <button class="add-btn" onclick="addToCart(this,'MOTS-c 10mg (Pre-Order)',45)" style="background:#00b4d8;color:#000;">Pre-Order</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tesamorelin -->
+    <!-- Tesamorelin -->
+    <div class="product-card">
+      <div class="product-img">
+        <svg width="110" height="190" viewBox="0 0 110 190" fill="none">
+          <rect x="35" y="12" width="40" height="14" rx="3" fill="#888"/>
+          <rect x="39" y="24" width="32" height="6" rx="1" fill="#666"/>
+          <rect x="37" y="30" width="36" height="5" rx="2" fill="#555"/>
+          <rect x="31" y="35" width="48" height="118" rx="7" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1.5"/>
+          <rect x="32.5" y="108" width="45" height="44" fill="#a78bfa" opacity="0.07"/>
+          <rect x="33" y="50" width="42" height="68" rx="3" fill="#111" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="55" y="65" text-anchor="middle" font-family="monospace" font-size="6" fill="#a78bfa" font-weight="700" letter-spacing="2">★★★★★</text>
+          <text x="55" y="76" text-anchor="middle" font-family="monospace" font-size="5" fill="#555" letter-spacing="1">5 STAR</text>
+          <line x1="40" y1="80" x2="70" y2="80" stroke="#2a2a2a" stroke-width="0.8"/>
+          <text x="55" y="89" text-anchor="middle" font-family="monospace" font-size="7.5" fill="#f0ede8" font-weight="700">TESA-</text>
+          <text x="55" y="101" text-anchor="middle" font-family="monospace" font-size="7.5" fill="#f0ede8" font-weight="700">MORELIN</text>
+          <line x1="40" y1="108" x2="70" y2="108" stroke="#2a2a2a" stroke-width="0.8"/>
+          <text x="55" y="116" text-anchor="middle" font-family="monospace" font-size="5" fill="#555">RESEARCH USE</text>
+          <ellipse cx="55" cy="153" rx="24" ry="5" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1"/>
+          <rect x="37" y="37" width="5" height="112" rx="2" fill="white" opacity="0.04"/>
+        </svg>
+        <div class="purity-badge" style="background:#a78bfa;color:#000">99.83% Pure</div>
+        <div class="purity-badge" style="background:#00b4d8;color:#000;top:auto;bottom:12px;">Pre-Order</div>
+      </div>
+      <div class="product-body">
+        <p class="product-category">GHRH Analog</p>
+        <p class="product-name">Tesamorelin</p>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink2);line-height:1.6;margin-bottom:10px;">Synthetic GHRH analog with a 44 amino acid chain. Studied for its role in growth hormone stimulation and lipid metabolism research.</p>
+        <div class="product-tags">
+          <span class="tag">10mg</span><span class="tag">GHRH</span><span class="tag">Lyophilized</span>
+        </div>
+        <div class="product-footer">
+          <div>
+            <div class="product-price">$70 <span>/ 10mg</span></div>
+          </div>
+          <button class="add-btn" onclick="addToCart(this,'Tesamorelin 10mg (Pre-Order)',70)" style="background:#00b4d8;color:#000;">Pre-Order</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bacteriostatic Water -->
+    <!-- Bacteriostatic Water -->
+    <div class="product-card">
+      <div class="product-img">
+        <svg width="110" height="190" viewBox="0 0 110 190" fill="none">
+          <rect x="35" y="12" width="40" height="14" rx="3" fill="#888"/>
+          <rect x="39" y="24" width="32" height="6" rx="1" fill="#666"/>
+          <rect x="37" y="30" width="36" height="5" rx="2" fill="#555"/>
+          <rect x="31" y="35" width="48" height="118" rx="7" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1.5"/>
+          <rect x="32.5" y="85" width="45" height="67" fill="#93c5fd" opacity="0.1"/>
+          <rect x="33" y="50" width="42" height="68" rx="3" fill="#111" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="55" y="65" text-anchor="middle" font-family="monospace" font-size="6" fill="#93c5fd" font-weight="700" letter-spacing="2">★★★★★</text>
+          <text x="55" y="76" text-anchor="middle" font-family="monospace" font-size="5" fill="#555" letter-spacing="1">5 STAR</text>
+          <line x1="40" y1="80" x2="70" y2="80" stroke="#2a2a2a" stroke-width="0.8"/>
+          <text x="55" y="90" text-anchor="middle" font-family="monospace" font-size="7" fill="#f0ede8" font-weight="700">BACT.</text>
+          <text x="55" y="101" text-anchor="middle" font-family="monospace" font-size="7" fill="#f0ede8" font-weight="700">WATER</text>
+          <line x1="40" y1="108" x2="70" y2="108" stroke="#2a2a2a" stroke-width="0.8"/>
+          <text x="55" y="116" text-anchor="middle" font-family="monospace" font-size="5" fill="#555">10ml</text>
+          <ellipse cx="55" cy="153" rx="24" ry="5" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1"/>
+          <rect x="37" y="37" width="5" height="112" rx="2" fill="white" opacity="0.04"/>
+        </svg>
+        <div class="purity-badge" style="background:#93c5fd;color:#000">99% Pure</div>
+        <div class="purity-badge" style="background:#ef4444;color:#fff;top:auto;bottom:12px;">Out of Stock</div>
+      </div>
+      <div class="product-body">
+        <p class="product-category">Supplies</p>
+        <p class="product-name">Bacteriostatic Water</p>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink2);line-height:1.6;margin-bottom:10px;">USP-grade sterile water with 0.9% benzyl alcohol. Essential for safe reconstitution of lyophilized peptide vials.</p>
+        <div class="product-tags">
+          <span class="tag">10ml Vial</span><span class="tag">USP Grade</span><span class="tag">Sterile</span>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">$15 <span>/ 10ml</span></div>
+          <button class="add-btn" disabled style="background:#2a2a2a;color:#555;cursor:not-allowed;">Out of Stock</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bacteriostatic Water 3ml -->
+    <!-- Bacteriostatic Water 3ml -->
+    <div class="product-card">
+      <div class="product-img" style="background:#0d0d0d;">
+        <svg width="110" height="190" viewBox="0 0 110 190" fill="none">
+          <rect x="38" y="12" width="34" height="12" rx="3" fill="#888"/>
+          <rect x="41" y="22" width="28" height="5" rx="1" fill="#666"/>
+          <rect x="39" y="27" width="32" height="4" rx="2" fill="#555"/>
+          <rect x="34" y="31" width="42" height="100" rx="7" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1.5"/>
+          <rect x="35.5" y="95" width="39" height="35" fill="#93c5fd" opacity="0.08"/>
+          <rect x="36" y="44" width="38" height="60" rx="3" fill="#111" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="55" y="58" text-anchor="middle" font-family="monospace" font-size="6" fill="#93c5fd" font-weight="700" letter-spacing="2">★★★★★</text>
+          <text x="55" y="68" text-anchor="middle" font-family="monospace" font-size="4" fill="#555" letter-spacing="1">5 STAR</text>
+          <line x1="42" y1="72" x2="68" y2="72" stroke="#2a2a2a" stroke-width="0.8"/>
+          <text x="55" y="82" text-anchor="middle" font-family="monospace" font-size="7" fill="#f0ede8" font-weight="700">BACT.</text>
+          <text x="55" y="92" text-anchor="middle" font-family="monospace" font-size="7" fill="#f0ede8" font-weight="700">WATER</text>
+          <line x1="42" y1="97" x2="68" y2="97" stroke="#2a2a2a" stroke-width="0.8"/>
+          <text x="55" y="105" text-anchor="middle" font-family="monospace" font-size="5.5" fill="#555">3ml</text>
+          <ellipse cx="55" cy="131" rx="21" ry="4" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1"/>
+          <rect x="40" y="33" width="4" height="94" rx="2" fill="white" opacity="0.04"/>
+        </svg>
+        <div class="purity-badge" style="background:#93c5fd;color:#000;">99% Pure</div>
+        <div class="purity-badge" style="background:#00b4d8;color:#000;top:auto;bottom:12px;">Pre-Order</div>
+      </div>
+      <div class="product-body">
+        <p class="product-category">Supplies</p>
+        <p class="product-name">Bacteriostatic Water 3ml</p>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink2);line-height:1.6;margin-bottom:10px;">USP-grade sterile water with 0.9% benzyl alcohol. Compact 3ml vial — ideal for single-use peptide reconstitution.</p>
+        <div class="product-tags">
+          <span class="tag">3ml Vial</span><span class="tag">USP Grade</span><span class="tag">Sterile</span>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">$10 <span>/ 3ml</span></div>
+          <button class="add-btn" onclick="addToCart(this,'Bacteriostatic Water 3ml (Pre-Order)',10)" style="background:#00b4d8;color:#000;">Pre-Order</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPV -->
+    <!-- KPV -->
+    <div class="product-card">
+      <div class="product-img" style="background:#0d0d0d;">
+        <svg width="110" height="190" viewBox="0 0 110 190" fill="none">
+          <rect x="35" y="12" width="40" height="14" rx="3" fill="#888"/>
+          <rect x="39" y="24" width="32" height="6" rx="1" fill="#666"/>
+          <rect x="37" y="30" width="36" height="5" rx="2" fill="#555"/>
+          <rect x="31" y="35" width="48" height="118" rx="7" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1.5"/>
+          <rect x="32.5" y="108" width="45" height="44" fill="#f97316" opacity="0.07"/>
+          <rect x="33" y="50" width="42" height="68" rx="3" fill="#111" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="55" y="65" text-anchor="middle" font-family="monospace" font-size="6" fill="#f97316" font-weight="700" letter-spacing="2">★★★★★</text>
+          <text x="55" y="76" text-anchor="middle" font-family="monospace" font-size="5" fill="#555" letter-spacing="1">5 STAR</text>
+          <line x1="40" y1="80" x2="70" y2="80" stroke="#2a2a2a" stroke-width="0.8"/>
+          <text x="55" y="94" text-anchor="middle" font-family="monospace" font-size="14" fill="#f0ede8" font-weight="700">KPV</text>
+          <line x1="40" y1="104" x2="70" y2="104" stroke="#2a2a2a" stroke-width="0.8"/>
+          <text x="55" y="112" text-anchor="middle" font-family="monospace" font-size="5" fill="#555">RESEARCH USE</text>
+          <ellipse cx="55" cy="153" rx="24" ry="5" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1"/>
+          <rect x="37" y="37" width="5" height="112" rx="2" fill="white" opacity="0.04"/>
+        </svg>
+        <div class="purity-badge" style="background:#f97316;color:#000;">99%+ Pure</div>
+        <div class="purity-badge" style="background:#00b4d8;color:#000;top:auto;bottom:12px;">Pre-Order</div>
+      </div>
+      <div class="product-body">
+        <p class="product-category">Anti-Inflammatory</p>
+        <p class="product-name">KPV</p>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink2);line-height:1.6;margin-bottom:10px;">Tripeptide derived from alpha-MSH (Lys-Pro-Val). Researched for its potent anti-inflammatory properties and gut health applications.</p>
+        <div class="product-tags">
+          <span class="tag">Tripeptide</span><span class="tag">Lyophilized</span><span class="tag">10mg</span>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">$40 <span>/ 10mg</span></div>
+          <button class="add-btn" onclick="addToCart(this,'KPV (Pre-Order)',40)" style="background:#00b4d8;color:#000;">Pre-Order</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Starter Pack Bundle -->
+    <!-- Starter Pack Bundle -->
+    <div class="product-card" style="border:1px solid rgba(200,168,75,0.3);position:relative;">
+      <div style="position:absolute;top:0;left:0;right:0;background:var(--gold);color:#000;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;text-align:center;padding:5px;z-index:2;">⭐ Starter Pack — Everything You Need</div>
+      <div class="product-img" style="background:#0d1205;margin-top:24px;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px;">
+          <div style="display:flex;gap:6px;align-items:center;">
+            <!-- Reta vial mini -->
+            <svg width="36" height="80" viewBox="0 0 36 80" fill="none">
+              <rect x="10" y="4" width="16" height="6" rx="2" fill="#888"/>
+              <rect x="8" y="10" width="20" height="2" rx="1" fill="#555"/>
+              <rect x="6" y="12" width="24" height="52" rx="5" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1"/>
+              <rect x="7" y="42" width="22" height="21" fill="#c8a84b" opacity="0.1"/>
+              <text x="18" y="32" text-anchor="middle" font-family="monospace" font-size="4" fill="#c8a84b" font-weight="700">RETA</text>
+              <text x="18" y="39" text-anchor="middle" font-family="monospace" font-size="3.5" fill="#888">10mg</text>
+              <ellipse cx="18" cy="64" rx="12" ry="2.5" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="0.8"/>
+            </svg>
+            <!-- Bac water mini -->
+            <svg width="36" height="80" viewBox="0 0 36 80" fill="none">
+              <rect x="10" y="4" width="16" height="6" rx="2" fill="#888"/>
+              <rect x="8" y="10" width="20" height="2" rx="1" fill="#555"/>
+              <rect x="6" y="12" width="24" height="52" rx="5" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1"/>
+              <rect x="7" y="38" width="22" height="25" fill="#93c5fd" opacity="0.1"/>
+              <text x="18" y="30" text-anchor="middle" font-family="monospace" font-size="4" fill="#93c5fd" font-weight="700">BAC</text>
+              <text x="18" y="37" text-anchor="middle" font-family="monospace" font-size="3.5" fill="#888">3ml</text>
+              <ellipse cx="18" cy="64" rx="12" ry="2.5" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="0.8"/>
+            </svg>
+          </div>
+          <!-- Needles + wipes icons -->
+          <div style="display:flex;gap:10px;align-items:center;margin-top:4px;">
+            <div style="text-align:center;">
+              <div style="font-size:18px;">💉</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:7px;color:#555;margin-top:2px;">31g Needles</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:18px;">🧴</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:7px;color:#555;margin-top:2px;">Alcohol Wipes</div>
+            </div>
+          </div>
+        </div>
+        <div class="purity-badge" style="background:var(--gold);color:#000;">Best Starter</div>
+      </div>
+      <div class="product-body">
+        <p class="product-category" style="color:var(--gold);">Starter Bundle</p>
+        <p class="product-name">Starter Pack</p>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink2);line-height:1.6;margin-bottom:8px;">Everything you need to get started. Reta 10mg + Bac Water 3ml + a full month supply of 31g needles + alcohol wipes. Ready to go.</p>
+        <div class="product-tags">
+          <span class="tag">Reta 10mg</span>
+          <span class="tag">Bac Water</span>
+          <span class="tag">31g Needles</span>
+          <span class="tag">Wipes</span>
+        </div>
+        <div class="product-footer">
+          <div class="product-price" style="color:var(--gold);">$110 <span>/ kit</span></div>
+          <button class="add-btn" onclick="addToCart(this,'Starter Pack',110)" style="background:var(--gold);color:#000;">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bundle Deal -->
+    <!-- Bundle Deal -->
+    <div class="product-card" style="border:1px solid rgba(0,180,216,0.3);position:relative;">
+      <div style="position:absolute;top:0;left:0;right:0;background:var(--accent);color:#000;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;text-align:center;padding:6px;z-index:2;">★ Bundle Deal — Save $10</div>
+      <div class="product-img" style="background:#0d1a1f;margin-top:28px;">
+        <div style="display:flex;gap:8px;align-items:center;">
+          <svg width="70" height="160" viewBox="0 0 70 160" fill="none">
+            <rect x="15" y="8" width="40" height="12" rx="3" fill="#888"/>
+            <rect x="18" y="18" width="34" height="5" rx="1" fill="#666"/>
+            <rect x="16" y="23" width="38" height="4" rx="2" fill="#555"/>
+            <rect x="11" y="27" width="48" height="105" rx="7" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1.5"/>
+            <rect x="12" y="85" width="46" height="46" fill="#c8a84b" opacity="0.1"/>
+            <rect x="13" y="40" width="44" height="64" rx="3" fill="#111" stroke="#2a2a2a" stroke-width="1"/>
+            <text x="35" y="56" text-anchor="middle" font-family="monospace" font-size="5" fill="#c8a84b" font-weight="700" letter-spacing="1">★★★★★</text>
+            <text x="35" y="66" text-anchor="middle" font-family="monospace" font-size="4" fill="#555">5 STAR</text>
+            <line x1="20" y1="70" x2="50" y2="70" stroke="#2a2a2a" stroke-width="0.8"/>
+            <text x="35" y="80" text-anchor="middle" font-family="monospace" font-size="7" fill="#f0ede8" font-weight="700">RETA</text>
+            <text x="35" y="90" text-anchor="middle" font-family="monospace" font-size="6" fill="#c8a84b">10mg</text>
+            <ellipse cx="35" cy="132" rx="24" ry="4" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1"/>
+          </svg>
+          <div style="color:#00b4d8;font-size:22px;font-weight:800;">+</div>
+          <svg width="70" height="160" viewBox="0 0 70 160" fill="none">
+            <rect x="15" y="8" width="40" height="12" rx="3" fill="#00b4d8"/>
+            <rect x="18" y="18" width="34" height="5" rx="1" fill="#0096b7"/>
+            <rect x="16" y="23" width="38" height="4" rx="2" fill="#555"/>
+            <rect x="11" y="27" width="48" height="105" rx="7" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1.5"/>
+            <rect x="12" y="95" width="46" height="36" fill="#00b4d8" opacity="0.08"/>
+            <rect x="13" y="40" width="44" height="64" rx="3" fill="#111" stroke="#2a2a2a" stroke-width="1"/>
+            <text x="35" y="56" text-anchor="middle" font-family="monospace" font-size="5" fill="#00b4d8" font-weight="700" letter-spacing="1">★★★★★</text>
+            <text x="35" y="66" text-anchor="middle" font-family="monospace" font-size="4" fill="#555">5 STAR</text>
+            <line x1="20" y1="70" x2="50" y2="70" stroke="#2a2a2a" stroke-width="0.8"/>
+            <text x="35" y="80" text-anchor="middle" font-family="monospace" font-size="7" fill="#f0ede8" font-weight="700">GHK</text>
+            <text x="35" y="90" text-anchor="middle" font-family="monospace" font-size="6" fill="#00b4d8">-Cu</text>
+            <ellipse cx="35" cy="132" rx="24" ry="4" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="purity-badge" style="background:var(--accent);color:#000;">Best Value</div>
+      </div>
+      <div class="product-body">
+        <p class="product-category" style="color:var(--accent);">Bundle Deal</p>
+        <p class="product-name">Reta 10mg + GHK-Cu</p>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink2);line-height:1.6;margin-bottom:10px;">Our most popular research stack — Retatrutide 10mg paired with GHK-Cu 50mg. Best value combination, $10 off when bundled.</p>
+        <div class="product-tags">
+          <span class="tag">Reta 10mg</span><span class="tag">GHK-Cu 50mg</span><span class="tag" style="border-color:var(--accent);color:var(--accent);">Save $10</span>
+        </div>
+        <div class="product-footer">
+          <div>
+            <div class="product-price" style="color:var(--accent);">$110 <span>/ bundle</span></div>
+          </div>
+          <button class="add-btn" onclick="addBundleToCart(this)">Add Bundle</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- REVIEWS -->
+<section class="section" id="reviews" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:20px;">
+    <div>
+      <p class="section-eyebrow">// reviews</p>
+      <h2 class="section-title">Trusted by Researchers.</h2>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-size:42px;font-weight:800;color:var(--ink);line-height:1;">4.9</div>
+      <div style="color:var(--gold);font-size:18px;letter-spacing:3px;margin:4px 0;">★★★★★</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:0.1em;">FROM 200+ CUSTOMERS</div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);">
+    <div style="background:var(--bg2);padding:28px;">
+      <div style="color:var(--gold);font-size:14px;letter-spacing:2px;margin-bottom:14px;">★★★★★</div>
+      <p style="font-size:14px;color:var(--ink);line-height:1.7;margin-bottom:16px;font-weight:500;">"Wolverine stack is incredible. Best quality I've found anywhere. Purity is legit and the COA checked out. Will be a repeat customer."</p>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:36px;height:36px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:800;color:#000;font-size:14px;">M</div>
+        <div>
+          <p style="font-size:13px;font-weight:700;color:var(--ink);">Marcus T.</p>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:0.08em;">Verified Purchase · Wolverine</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--bg2);padding:28px;">
+      <div style="color:var(--gold);font-size:14px;letter-spacing:2px;margin-bottom:14px;">★★★★★</div>
+      <p style="font-size:14px;color:var(--ink);line-height:1.7;margin-bottom:16px;font-weight:500;">"GHK-Cu quality is top tier. Ordered from 4 other vendors and 5 Star beats them all on purity and packaging. Fast shipping too."</p>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:36px;height:36px;border-radius:50%;background:#22c55e;display:flex;align-items:center;justify-content:center;font-weight:800;color:#000;font-size:14px;">J</div>
+        <div>
+          <p style="font-size:13px;font-weight:700;color:var(--ink);">Jake S.</p>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:0.08em;">Verified Purchase · GHK-Cu</p>
+        </div>
+      </div>
+    </div>
+    <div style="background:var(--bg2);padding:28px;">
+      <div style="color:var(--gold);font-size:14px;letter-spacing:2px;margin-bottom:14px;">★★★★★</div>
+      <p style="font-size:14px;color:var(--ink);line-height:1.7;margin-bottom:16px;font-weight:500;">"Ordered the bundle deal — great value. Communication via Instagram was fast. Payment through Zelle was smooth. Already placed my second order."</p>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:36px;height:36px;border-radius:50%;background:#a78bfa;display:flex;align-items:center;justify-content:center;font-weight:800;color:#000;font-size:14px;">A</div>
+        <div>
+          <p style="font-size:13px;font-weight:700;color:var(--ink);">Alex M.</p>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:0.08em;">Verified Purchase · Bundle Deal</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="features">
+  <p class="section-eyebrow">// why 5 star</p>
+  <h2 class="section-title">Science-Driven.<br>Results You Can Measure.</h2>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <p class="feature-num">01</p>
+      <p class="feature-title">Pharmaceutical Grade</p>
+      <p class="feature-desc">Every batch independently verified with full Certificates of Analysis available on demand. No exceptions.</p>
+      <span class="feature-badge">ISO Verified</span>
+    </div>
+    <div class="feature-card">
+      <p class="feature-num">02</p>
+      <p class="feature-title">48hr Dispatch</p>
+      <p class="feature-desc">Orders ship from our facility within 48 hours, fully tracked from warehouse to door. Cold-chain packaging included.</p>
+      <span class="feature-badge">Fast Shipping</span>
+    </div>
+    <div class="feature-card">
+      <p class="feature-num">03</p>
+      <p class="feature-title">99%+ Purity</p>
+      <p class="feature-desc">Our peptides exceed 99% purity thresholds, tested by accredited third-party labs using HPLC and mass spectrometry.</p>
+      <span class="feature-badge">Lab Tested</span>
+    </div>
+    <div class="feature-card">
+      <p class="feature-num">04</p>
+      <p class="feature-title">Batch Traceability</p>
+      <p class="feature-desc">Every vial carries a lot number traceable to its synthesis date, raw materials, and full QC record.</p>
+      <span class="feature-badge">Full Chain</span>
+    </div>
+  </div>
+</section>
+
+<!-- DISCLAIMER -->
+<div class="disclaimer">
+  <span style="color:rgba(200,168,75,0.7);font-size:14px;flex-shrink:0;">⚠</span>
+  <p>FOR RESEARCH USE ONLY. All products sold by 5 Star Peptides are intended solely for in vitro research and laboratory use. Not for human or veterinary use, consumption, or diagnostic purposes. Not approved by the FDA. By purchasing, you confirm you are a qualified researcher and will use these compounds in accordance with all applicable laws and regulations.</p>
+</div>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="faq-layout">
+    <div>
+      <p class="section-eyebrow">// faq</p>
+      <h2 class="section-title">Still have<br>questions?</h2>
+      <p class="section-sub" style="margin-top:16px;">Everything you need to know about 5 Star Peptides and our research compounds.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">What are research peptides?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Research peptides are synthetically synthesized compounds designed exclusively for use in controlled scientific settings. They are employed in preclinical studies, academic research, and early-stage compound development — not intended for human consumption under any circumstances.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">How do you ensure purity?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Every compound undergoes independent analysis by accredited third-party laboratories before dispatch. We validate purity levels, structural integrity, and batch consistency on every production run using HPLC and mass spectrometry. A COA is issued for each product — always available, no exceptions.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">How do I pay?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">We accept payment via Zelle. After submitting your order at checkout, you will receive our Zelle number to send payment. Include your name in the memo. Your order ships within 48 hours of payment confirmation. You can also DM @isaacroman3 on Instagram to place your order directly.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">How fast does shipping take?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Orders ship within 48 hours of payment confirmation. All orders ship with a tracking number. Peptides are lyophilized and shipped with cold packs and insulated packaging to maintain integrity during transit.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Do you offer discount codes?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Yes! We offer discount codes for loyal customers and first-time buyers. Follow @isaacroman3 on Instagram for exclusive codes and promotions. You can enter your code at checkout.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAYMENT -->
+<section class="section" id="payment">
+  <div class="payment-inner">
+    <p class="section-eyebrow" style="text-align:center">// payment</p>
+    <h2 class="section-title" style="text-align:center">Simple & Secure Payment</h2>
+    <p class="section-sub" style="text-align:center;margin:12px auto 0;">We accept Zelle for fast, secure checkout. Your payment details will be provided after you place your order.</p>
+    <div class="zelle-card">
+      <p class="zelle-number" style="font-size:20px;letter-spacing:0;">Zelle Payment</p>
+      <p class="zelle-label">Payment info revealed at checkout</p>
+      <div class="zelle-steps">
+        <div class="zelle-step"><span class="zelle-step-num">01.</span><span>Add items to your cart and proceed to checkout</span></div>
+        <div class="zelle-step"><span class="zelle-step-num">02.</span><span>Fill in your name, email, and shipping address</span></div>
+        <div class="zelle-step"><span class="zelle-step-num">03.</span><span>Submit your order — Zelle details appear on confirmation</span></div>
+        <div class="zelle-step"><span class="zelle-step-num">04.</span><span>Your order ships within 48 hrs of payment</span></div>
+      </div>
+    </div>
+    <a href="https://www.instagram.com/isaacroman3/" target="_blank" class="btn-primary" style="display:block;text-align:center;">DM @isaacroman3 on Instagram</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo-row">
+        <span style="color:var(--gold);font-size:12px;letter-spacing:2px;">★★★★★</span>
+        <span class="footer-wordmark">5 Star Peptides</span>
+      </div>
+      <p class="footer-tagline">Research-grade peptides. Third-party tested. Documented to the lot number.</p>
+      <p style="font-family:var(--mono);font-size:10px;color:var(--ink3);">support@5starpeps.com</p>
+    </div>
+    <div class="footer-col">
+      <h4>Catalog</h4>
+      <ul>
+        <li><a href="#">Wolverine</a></li>
+        <li><a href="#">Retatrutide</a></li>
+        <li><a href="#">GHK-Cu</a></li>
+        <li><a href="#">MOTS-c</a></li>
+        <li><a href="#">Tesamorelin</a></li>
+        <li><a href="#">Bact. Water</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Info</h4>
+      <ul>
+        <li><a href="#">COA Library</a></li>
+        <li><a href="#">Shipping Policy</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Terms of Use</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Research Disclaimer</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 5 Star Peptides. All products for research use only. Not for human consumption.</p>
+    <p class="footer-copy" style="color:var(--gold);letter-spacing:3px;">★★★★★</p>
+  </div>
+</footer>
+
+<script>
+  // ── CART STATE ──
+  let cart = [];
+
+  // ── CART DRAWER HTML ──
+  document.body.insertAdjacentHTML('beforeend', `
+    <div id="cart-overlay" onclick="closeCart()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:10000;"></div>
+    <div id="cart-drawer" style="
+      position:fixed;top:0;right:0;width:400px;max-width:100vw;height:100vh;
+      background:#111;z-index:10001;transform:translateX(100%);
+      transition:transform 0.35s cubic-bezier(.4,0,.2,1);
+      display:flex;flex-direction:column;border-left:1px solid #242424;
+    ">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:24px;border-bottom:1px solid #242424;">
+        <span style="font-family:'Inter',sans-serif;font-size:16px;font-weight:800;letter-spacing:0.06em;color:#f0ede8;">YOUR CART</span>
+        <button onclick="closeCart()" style="background:none;border:none;cursor:pointer;font-size:22px;color:#f0ede8;line-height:1;">✕</button>
+      </div>
+      <div id="cart-items" style="flex:1;overflow-y:auto;padding:24px 24px 0;"></div>
+
+      <!-- Bac Water Upsell -->
+      <div id="bac-upsell" style="margin:0 24px 0;padding:14px 16px;background:#0d1a1f;border:1px solid rgba(0,180,216,0.2);display:none;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;">💧 Don't forget</p>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+          <div>
+            <p style="font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:#f0ede8;margin-bottom:2px;">Bacteriostatic Water 3ml</p>
+            <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#555;">Needed to reconstitute your peptides</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+            <span style="font-family:'Inter',sans-serif;font-size:14px;font-weight:800;color:#f0ede8;">$10</span>
+            <button onclick="addBacWaterFromCart()" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;background:#00b4d8;color:#000;border:none;padding:8px 14px;cursor:pointer;font-weight:500;white-space:nowrap;">+ Add</button>
+          </div>
+        </div>
+      </div>
+      <div style="padding:24px;border-top:1px solid #242424;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#555;">Subtotal</span>
+          <span id="cart-subtotal" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#f0ede8;">$0</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#555;">Shipping</span>
+          <span id="cart-shipping-amt" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#f0ede8;">$15</span>
+        </div>
+        <div style="background:rgba(0,180,216,0.06);border:1px solid rgba(0,180,216,0.15);padding:10px 14px;margin-bottom:12px;">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);line-height:1.6;">📍 <strong>805 area code?</strong> Enter your ZIP at checkout — I'll deliver for free!</p>
+        </div>
+        <div id="cart-discount-row" style="display:none;justify-content:space-between;margin-bottom:8px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#22c55e;">Discount</span>
+          <span id="cart-discount-amt" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#22c55e;">-$0</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:20px;padding-top:12px;border-top:1px solid #242424;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#555;">Total</span>
+          <span id="cart-total" style="font-family:'Inter',sans-serif;font-size:22px;font-weight:800;color:#f0ede8;">$0</span>
+        </div>
+        <button onclick="openCheckout()" style="
+          width:100%;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.15em;
+          text-transform:uppercase;background:#00b4d8;color:#000;border:none;padding:16px;
+          cursor:pointer;font-weight:500;transition:background 0.2s;
+        " onmouseover="this.style.background='#0096b7'" onmouseout="this.style.background='#00b4d8'">
+          Proceed to Checkout →
+        </button>
+      </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-overlay" onclick="closeCheckout()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:10002;"></div>
+    <div id="checkout-modal" style="
+      display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+      background:#111;z-index:10003;width:480px;max-width:95vw;max-height:90vh;
+      overflow-y:auto;border:1px solid #242424;padding:40px;
+    ">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;">
+        <span style="font-family:'Inter',sans-serif;font-size:16px;font-weight:800;color:#f0ede8;letter-spacing:0.06em;">CHECKOUT</span>
+        <button onclick="closeCheckout()" style="background:none;border:none;cursor:pointer;font-size:20px;color:#f0ede8;">✕</button>
+      </div>
+      <div id="checkout-order-summary" style="background:#181818;border:1px solid #242424;padding:16px 20px;margin-bottom:28px;"></div>
+      <div style="margin-bottom:20px;">
+        <label style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#555;display:block;margin-bottom:6px;">Full Name</label>
+        <input id="co-name" type="text" placeholder="John Doe" style="width:100%;padding:12px 14px;border:1px solid #242424;background:#181818;color:#f0ede8;font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;box-sizing:border-box;">
+      </div>
+      <div style="margin-bottom:20px;">
+        <label style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#555;display:block;margin-bottom:6px;">Email</label>
+        <input id="co-email" type="email" placeholder="you@email.com" style="width:100%;padding:12px 14px;border:1px solid #242424;background:#181818;color:#f0ede8;font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;box-sizing:border-box;">
+      </div>
+      <div style="margin-bottom:20px;">
+        <label style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#555;display:block;margin-bottom:6px;">Street Address</label>
+        <input id="co-street" type="text" placeholder="123 Main St" style="width:100%;padding:12px 14px;border:1px solid #242424;background:#181818;color:#f0ede8;font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;box-sizing:border-box;">
+      </div>
+      <div style="margin-bottom:20px;">
+        <label style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#555;display:block;margin-bottom:6px;">City</label>
+        <input id="co-city" type="text" placeholder="Los Angeles" style="width:100%;padding:12px 14px;border:1px solid #242424;background:#181818;color:#f0ede8;font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;box-sizing:border-box;">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
+        <div>
+          <label style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#555;display:block;margin-bottom:6px;">State</label>
+          <input id="co-state" type="text" placeholder="CA" style="width:100%;padding:12px 14px;border:1px solid #242424;background:#181818;color:#f0ede8;font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;box-sizing:border-box;">
+        </div>
+        <div>
+          <label style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#555;display:block;margin-bottom:6px;">ZIP Code</label>
+          <input id="co-zip" type="text" placeholder="90001" style="width:100%;padding:12px 14px;border:1px solid #242424;background:#181818;color:#f0ede8;font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;box-sizing:border-box;" oninput="check805()">
+        </div>
+      </div>
+
+      <div id="local-delivery-msg" style="display:none;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);padding:12px 16px;margin-bottom:20px;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#22c55e;line-height:1.7;">🎉 <strong>805 area detected — FREE local delivery!</strong> No shipping fee will be charged. I'll deliver directly to you.</p>
+      </div>
+      <div style="margin-bottom:20px;">
+        <label style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#555;display:block;margin-bottom:6px;">Discount Code (optional)</label>
+        <div style="display:flex;gap:8px;">
+          <input id="co-discount" type="text" placeholder="Enter code" style="flex:1;padding:12px 14px;border:1px solid #242424;background:#181818;color:#f0ede8;font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;box-sizing:border-box;text-transform:uppercase;">
+          <button onclick="applyDiscount()" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;background:#242424;color:#f0ede8;border:1px solid #2e2e2e;padding:0 16px;cursor:pointer;">Apply</button>
+        </div>
+        <p id="discount-msg" style="font-family:'JetBrains Mono',monospace;font-size:11px;margin-top:6px;display:none;"></p>
+      </div>
+      <div style="background:rgba(200,168,75,0.06);border:1px solid rgba(200,168,75,0.2);padding:14px 18px;margin-bottom:24px;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(200,168,75,0.7);line-height:1.7;">
+          <strong style="color:rgba(200,168,75,0.9);">Payment via Zelle:</strong> After submitting, send your total to <strong style="color:#f0ede8;">(805) 901-3730</strong> on Zelle. Include your name in the memo.
+        </p>
+      </div>
+      <button onclick="submitOrder()" style="
+        width:100%;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.15em;
+        text-transform:uppercase;background:#00b4d8;color:#000;border:none;padding:16px;
+        cursor:pointer;font-weight:500;
+      ">Submit Order</button>
+    </div>
+
+    <!-- Confirm Modal -->
+    <div id="confirm-modal" style="
+      display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+      background:#111;z-index:10004;width:440px;max-width:95vw;
+      border:1px solid #242424;padding:48px 40px;text-align:center;
+    ">
+      <div style="color:#c8a84b;font-size:32px;letter-spacing:4px;margin-bottom:16px;">★★★★★</div>
+      <p style="font-family:'Inter',sans-serif;font-size:18px;font-weight:800;color:#f0ede8;margin-bottom:12px;">Order Received!</p>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#a0a0a0;line-height:1.7;margin-bottom:8px;">
+        Send payment via Zelle to <strong style="color:#f0ede8;">(805) 901-3730</strong><br>Include your name in the memo.<br>
+        <strong style="color:#00b4d8;">Amount due: <span id="confirm-total">$0</span></strong>
+      </p>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#555;line-height:1.7;margin-bottom:28px;">
+        DM <strong style="color:#f0ede8;">@isaacroman3</strong> on Instagram after paying.
+      </p>
+      <button onclick="closeConfirm()" style="
+        font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;
+        background:#00b4d8;color:#000;border:none;padding:12px 32px;cursor:pointer;font-weight:500;
+      ">Done</button>
+    </div>
+  `);
+
+  // ── DISCOUNT CODES ──
+  const DISCOUNT_CODES = {
+    'STAR10':   { type: 'percent', value: 10, label: '10% off' },
+    'SAVE15':   { type: 'percent', value: 15, label: '15% off' },
+    'FREESHIP': { type: 'shipping', value: 15, label: 'Free shipping' },
+    'WELCOME20':{ type: 'percent', value: 20, label: '20% off' },
+  };
+
+  const SHIPPING = 15;
+  let appliedDiscount = null;
+
+  function getSubtotal() { return cart.reduce((s,i) => s + i.price * i.qty, 0); }
+  function getTotal() {
+    const sub = getSubtotal();
+    let ship = SHIPPING, disc = 0;
+    if (sub >= 250) ship = 0;
+    if (is805()) ship = 0; // Free local delivery for 805
+    if (appliedDiscount) {
+      if (appliedDiscount.type === 'percent') disc = Math.round(sub * appliedDiscount.value / 100);
+      if (appliedDiscount.type === 'shipping') ship = 0;
+    }
+    return sub - disc + ship;
+  }
+
+  function applyDiscount() {
+    const code = document.getElementById('co-discount').value.trim().toUpperCase();
+    const msg = document.getElementById('discount-msg');
+    msg.style.display = 'block';
+    if (DISCOUNT_CODES[code]) {
+      appliedDiscount = { ...DISCOUNT_CODES[code], code };
+      msg.style.color = '#22c55e';
+      msg.textContent = '✓ Code applied: ' + appliedDiscount.label;
+      updateCartTotals(); updateCheckoutSummary();
+    } else {
+      appliedDiscount = null;
+      msg.style.color = '#ef4444';
+      msg.textContent = '✕ Invalid code';
+      updateCartTotals(); updateCheckoutSummary();
+    }
+  }
+
+  function updateCartTotals() {
+    const sub = getSubtotal(), total = getTotal();
+    const freeShip = sub >= 250 || (appliedDiscount && appliedDiscount.type === 'shipping');
+    document.getElementById('cart-subtotal').textContent = '$' + sub;
+    document.getElementById('cart-total').textContent = '$' + total;
+    // Update shipping display
+    const shipEl = document.getElementById('cart-shipping-amt');
+    if (shipEl) shipEl.innerHTML = freeShip ? '<span style="color:#22c55e">FREE</span>' : '$15';
+    const row = document.getElementById('cart-discount-row');
+    const amt = document.getElementById('cart-discount-amt');
+    if (appliedDiscount && row && !freeShip) {
+      row.style.display = 'flex';
+      amt.textContent = appliedDiscount.type === 'percent'
+        ? '-$' + Math.round(sub * appliedDiscount.value / 100)
+        : '-$15 (Free shipping)';
+    } else if (appliedDiscount && row && freeShip) {
+      row.style.display = 'flex';
+      amt.textContent = appliedDiscount.type === 'percent'
+        ? '-$' + Math.round(sub * appliedDiscount.value / 100)
+        : '-$15 (Free shipping)';
+    } else if (row) row.style.display = 'none';
+  }
+
+  function openCart() {
+    document.getElementById('cart-overlay').style.display = 'block';
+    document.getElementById('cart-drawer').style.transform = 'translateX(0)';
+    renderCart();
+  }
+
+  function closeCart() {
+    document.getElementById('cart-overlay').style.display = 'none';
+    document.getElementById('cart-drawer').style.transform = 'translateX(100%)';
+  }
+
+  function renderCart() {
+    const el = document.getElementById('cart-items');
+    if (cart.length === 0) {
+      el.innerHTML = '<p style="font-family:\'DM Mono\',monospace;font-size:12px;color:#555;text-align:center;margin-top:60px;letter-spacing:0.08em;">Your cart is empty.</p>';
+      document.getElementById('cart-subtotal').textContent = '$0';
+      document.getElementById('cart-total').textContent = '$0';
+      return;
+    }
+    el.innerHTML = cart.map((item,i) => `
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid #242424;gap:12px;">
+        <div style="flex:1;min-width:0;">
+          <p style="font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:#f0ede8;margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.name}</p>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <button onclick="changeQty(${i},-1)" style="background:#181818;border:1px solid #2e2e2e;width:28px;height:28px;cursor:pointer;font-size:18px;color:#f0ede8;display:flex;align-items:center;justify-content:center;line-height:1;">−</button>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:500;color:#f0ede8;min-width:24px;text-align:center;">${item.qty}</span>
+            <button onclick="changeQty(${i},1)" style="background:#181818;border:1px solid #2e2e2e;width:28px;height:28px;cursor:pointer;font-size:18px;color:#f0ede8;display:flex;align-items:center;justify-content:center;line-height:1;">+</button>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0;">
+          <span style="font-family:'Inter',sans-serif;font-size:15px;font-weight:800;color:#f0ede8;">$${item.price * item.qty}</span>
+          <button onclick="removeItem(${i})" style="background:none;border:1px solid #242424;width:26px;height:26px;cursor:pointer;font-size:12px;color:#555;display:flex;align-items:center;justify-content:center;">✕</button>
+        </div>
+      </div>`).join('');
+    updateCartTotals();
+    // Show bac water upsell if cart has peptides but no bac water
+    const upsell = document.getElementById('bac-upsell');
+    const hasBac = cart.some(i => i.name.toLowerCase().includes('bacteriostatic'));
+    if (upsell) upsell.style.display = (cart.length > 0 && !hasBac) ? 'block' : 'none';
+  }
+
+  function removeItem(i) { cart.splice(i,1); updateCartBtn(); renderCart(); }
+
+  function changeQty(i, delta) {
+    cart[i].qty += delta;
+    if (cart[i].qty <= 0) cart.splice(i, 1);
+    updateCartBtn();
+    renderCart();
+  }
+
+  function addBacWaterFromCart() {
+    const ex = cart.find(i => i.name.includes('Bacteriostatic Water'));
+    if (ex) { ex.qty++; } else { cart.push({ name: 'Bacteriostatic Water 3ml (Pre-Order)', price: 10, qty: 1 }); }
+    updateCartBtn();
+    renderCart();
+    const btn = document.querySelector('#bac-upsell button');
+    if (btn) { btn.textContent = 'Added ✓'; btn.style.background = '#22c55e'; setTimeout(() => { btn.textContent = '+ Add'; btn.style.background = '#00b4d8'; }, 1800); }
+  }
+
+  function updateCartBtn() {
+    const n = cart.reduce((s,i) => s + i.qty, 0);
+    document.querySelector('.nav-cart-btn').textContent = `Cart (${n})`;
+  }
+
+  function updateCheckoutSummary() {
+    const sub = getSubtotal();
+    const local = is805();
+    const ship = (local || sub >= 250 || (appliedDiscount && appliedDiscount.type === 'shipping')) ? 0 : SHIPPING;
+    const disc = (appliedDiscount && appliedDiscount.type === 'percent') ? Math.round(sub * appliedDiscount.value / 100) : 0;
+    const total = getTotal();
+    const shipLabel = local ? '<span style="color:#22c55e">FREE (Local Delivery)</span>' : ship === 0 ? '<span style="color:#22c55e">FREE</span>' : '$15';
+    document.getElementById('checkout-order-summary').innerHTML = `
+      <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#555;margin-bottom:10px;">Order Summary</p>
+      ${cart.map(i => `<div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:12px;color:#a0a0a0;margin-bottom:6px;"><span>${i.name} ×${i.qty}</span><span>$${i.price*i.qty}</span></div>`).join('')}
+      <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:12px;color:#a0a0a0;margin-top:10px;padding-top:10px;border-top:1px solid #242424;"><span>Shipping</span><span>${shipLabel}</span></div>
+      ${disc>0?`<div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:12px;color:#22c55e;margin-top:6px;"><span>Discount (${appliedDiscount.code})</span><span>-$${disc}</span></div>`:''}
+      <div style="display:flex;justify-content:space-between;font-family:'Inter',sans-serif;font-size:16px;font-weight:800;color:#f0ede8;margin-top:12px;padding-top:12px;border-top:1px solid #242424;"><span>Total</span><span>$${total}</span></div>`;
+  }
+
+  function openCheckout() {
+    if (!cart.length) return;
+    closeCart(); updateCheckoutSummary();
+    document.getElementById('checkout-overlay').style.display = 'block';
+    document.getElementById('checkout-modal').style.display = 'block';
+  }
+
+  function closeCheckout() {
+    document.getElementById('checkout-overlay').style.display = 'none';
+    document.getElementById('checkout-modal').style.display = 'none';
+  }
+
+  function submitOrder() {
+    const name = document.getElementById('co-name').value.trim();
+    const email = document.getElementById('co-email').value.trim();
+    const street = document.getElementById('co-street').value.trim();
+    const city = document.getElementById('co-city').value.trim();
+    const state = document.getElementById('co-state').value.trim();
+    const zip = document.getElementById('co-zip').value.trim();
+    const addr = `${street}, ${city}, ${state} ${zip}`;
+    if (!name || !email || !street || !city || !state || !zip) { alert('Please fill in all fields.'); return; }
+    const sub = getSubtotal(), total = getTotal();
+    const ship = (appliedDiscount && appliedDiscount.type==='shipping') ? 0 : SHIPPING;
+    const disc = (appliedDiscount && appliedDiscount.type==='percent') ? Math.round(sub*appliedDiscount.value/100) : 0;
+    const items = cart.map(i => `${i.name} x${i.qty} = $${i.price*i.qty}`).join('\n');
+    const btn = document.querySelector('#checkout-modal button:last-of-type');
+    btn.textContent = 'Sending...'; btn.style.background = '#555'; btn.disabled = true;
+    fetch('https://formspree.io/f/xdavkqbe', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify({ name, email, address:addr, order:items,
+        discount_code: appliedDiscount ? appliedDiscount.code : 'None',
+        shipping:'$'+ship, total:'$'+total,
+        message:`New order from ${name}\n\nItems:\n${items}\nShipping: $${ship}${appliedDiscount?'\nDiscount ('+appliedDiscount.code+'): -$'+disc:''}\n\nTOTAL: $${total}\n\nShip to: ${addr}\nEmail: ${email}` })
+    })
+    .then(r=>r.json()).then(d=>{
+      if(d.ok) {
+        closeCheckout();
+        document.getElementById('confirm-total').textContent = '$'+total;
+        document.getElementById('confirm-modal').style.display = 'block';
+        cart=[]; appliedDiscount=null; updateCartBtn();
+      } else { alert('Error. DM @isaacroman3 on Instagram.'); btn.textContent='Submit Order'; btn.style.background='#00b4d8'; btn.disabled=false; }
+    }).catch(()=>{ alert('Error. DM @isaacroman3 on Instagram.'); btn.textContent='Submit Order'; btn.style.background='#00b4d8'; btn.disabled=false; });
+  }
+
+  function closeConfirm() { document.getElementById('confirm-modal').style.display='none'; }
+
+  document.querySelector('.nav-cart-btn').addEventListener('click', openCart);
+
+  function addToCart(btn, name, price) {
+    const ex = cart.find(i=>i.name===name);
+    if(ex) ex.qty++; else cart.push({name,price,qty:1});
+    updateCartBtn();
+    btn.textContent='Added ✓'; btn.style.background='#0096b7';
+    setTimeout(()=>{ btn.textContent='Add to Cart'; btn.style.background=''; }, 1800);
+    const notif = document.createElement('div');
+    notif.innerHTML = `<div style="display:flex;align-items:center;gap:14px;">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="6" stroke="white" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke="white" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="white"/></svg>
+      <div>
+        <div style="font-family:'Inter',sans-serif;font-size:14px;font-weight:800;color:#fff;">${name} added!</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,0.75);margin-top:3px;">DM <strong>@isaacroman3</strong> on Instagram</div>
+      </div></div>`;
+    notif.style.cssText='position:fixed;bottom:28px;right:28px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);padding:18px 24px;border-radius:2px;box-shadow:0 8px 40px rgba(0,0,0,0.5);z-index:9999;max-width:320px;opacity:0;transform:translateY(16px);transition:opacity 0.3s,transform 0.3s;cursor:pointer;';
+    document.body.appendChild(notif);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{ notif.style.opacity='1'; notif.style.transform='translateY(0)'; }));
+    notif.onclick=()=>window.open('https://www.instagram.com/isaacroman3/','_blank');
+    setTimeout(()=>{ notif.style.opacity='0'; notif.style.transform='translateY(16px)'; setTimeout(()=>notif.remove(),400); },5000);
+  }
+
+  // 805 area zip codes (Ventura County)
+  const ZIPS_805 = ['93001','93003','93004','93010','93012','93013','93015','93021','93022','93023','93030','93033','93035','93036','93040','93041','93060','93063','93064','93065','93066','93101','93103','93105','93106','93108','93109','93110','93111','93117','93120','93121','93130','93150','93160'];
+
+  function is805() {
+    const zip = (document.getElementById('co-zip') || {}).value || '';
+    return ZIPS_805.includes(zip.trim()) || zip.trim().startsWith('930') || zip.trim().startsWith('931') || zip.trim().startsWith('932') || zip.trim().startsWith('933');
+  }
+
+  function check805() {
+    const msg = document.getElementById('local-delivery-msg');
+    if (!msg) return;
+    const zip = document.getElementById('co-zip').value.trim();
+    const local = zip.length >= 5 && (ZIPS_805.includes(zip) || zip.startsWith('930') || zip.startsWith('931') || zip.startsWith('932') || zip.startsWith('933'));
+    msg.style.display = local ? 'block' : 'none';
+    updateCheckoutSummary();
+  }
+
+  function addBundleToCart(btn) {
+    const ex = cart.find(i => i.name === 'Bundle: Reta 10mg + GHK-Cu');
+    if (ex) ex.qty++;
+    else cart.push({ name: 'Bundle: Reta 10mg + GHK-Cu', price: 110, qty: 1 });
+    updateCartBtn();
+    btn.textContent = 'Added ✓'; btn.style.background = '#0096b7';
+    setTimeout(() => { btn.textContent = 'Add Bundle'; btn.style.background = ''; }, 1800);
+    const notif = document.createElement('div');
+    notif.innerHTML = `<div style="display:flex;align-items:center;gap:14px;">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="6" stroke="white" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke="white" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="white"/></svg>
+      <div>
+        <div style="font-family:'Inter',sans-serif;font-size:14px;font-weight:800;color:#fff;">Bundle added! Save $10 🎉</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,0.75);margin-top:3px;">DM <strong>@isaacroman3</strong> on Instagram</div>
+      </div></div>`;
+    notif.style.cssText = 'position:fixed;bottom:28px;right:28px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);padding:18px 24px;border-radius:2px;box-shadow:0 8px 40px rgba(0,0,0,0.5);z-index:9999;max-width:320px;opacity:0;transform:translateY(16px);transition:opacity 0.3s,transform 0.3s;cursor:pointer;';
+    document.body.appendChild(notif);
+    requestAnimationFrame(() => requestAnimationFrame(() => { notif.style.opacity = '1'; notif.style.transform = 'translateY(0)'; }));
+    notif.onclick = () => window.open('https://www.instagram.com/isaacroman3/', '_blank');
+    setTimeout(() => { notif.style.opacity = '0'; notif.style.transform = 'translateY(16px)'; setTimeout(() => notif.remove(), 400); }, 5000);
+  }
+
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      const t=document.querySelector(a.getAttribute('href'));
+      if(t){ e.preventDefault(); window.scrollTo({top:t.offsetTop-68,behavior:'smooth'}); }
+    });
+  });
+</script>
+</body>
+</html>
