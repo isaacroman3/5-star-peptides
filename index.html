@@ -775,7 +775,7 @@
           <svg viewBox="0 0 20 20" class="star-fill"><polygon points="10,1 12.6,7 19,7.5 14,12 15.5,18.5 10,15 4.5,18.5 6,12 1,7.5 7.4,7"/></svg>
           <svg viewBox="0 0 20 20" class="star-fill"><polygon points="10,1 12.6,7 19,7.5 14,12 15.5,18.5 10,15 4.5,18.5 6,12 1,7.5 7.4,7"/></svg>
         </span> = independently tested, not a review score</div>
-        <div>📦 Free shipping on orders $250+ or in the 805</div>
+        <div>📦 Free shipping on orders $250+ &middot; 805 local delivery $5 (Mon &amp; Thu)</div>
         <div>🇺🇸 USA Based &amp; Operated</div>
         <div>⚡ Same or next business day shipping</div>
         <div>Direct from manufacturer, no middlemen</div>
@@ -870,7 +870,7 @@
         </details>
         <details class="faq-item">
           <summary>How long does shipping take?</summary>
-          <p>Most orders ship same or next business day after payment is confirmed. Domestic delivery typically takes 2-4 business days. You'll receive tracking information once your order ships.</p>
+          <p>Most orders ship same or next business day after payment is confirmed. Domestic delivery typically takes 2-4 business days. Local delivery in the 805 area is available Mondays and Thursdays only. You'll receive tracking information once your order ships.</p>
         </details>
         <details class="faq-item">
           <summary>Can I get a certificate of analysis?</summary>
@@ -937,7 +937,7 @@
       <div class="cart-subtotal" style="font-size:15px; font-weight:500;"><span style="color:rgba(255,255,255,0.6);">Subtotal</span><span id="cartSubtotal">$0</span></div>
       <div class="cart-subtotal" style="font-size:15px; font-weight:500;" id="discountRow"><span id="discountLabel" style="color:#6ee7b7;">Discount (10% off)</span><span id="discountAmt" style="color:#6ee7b7;">-$0</span></div>
       <div class="cart-subtotal" style="font-size:15px; font-weight:500;" id="shippingRow"><span style="color:rgba(255,255,255,0.6);"><span id="shippingLabel">Shipping</span> <span id="shippingHint" style="font-size:11px;color:#6ee7b7;">(805 area: $5)</span></span><span id="shippingAmt">$15</span></div>
-      <div style="margin:2px 0 8px;"><input id="cartZip" type="text" inputmode="numeric" maxlength="5" placeholder="Zip code (805 area = $5 delivery)" style="width:100%;background:#111;border:1px solid rgba(255,255,255,0.2);border-radius:4px;padding:7px 10px;color:#fff;font-size:12px;font-family:var(--body);" oninput="setCurrentZip(this.value);renderCart();"></div>
+      <div style="margin:2px 0 8px;"><input id="cartZip" type="text" inputmode="numeric" maxlength="5" placeholder="Zip code (805 = $5 local delivery, Mon & Thu)" style="width:100%;background:#111;border:1px solid rgba(255,255,255,0.2);border-radius:4px;padding:7px 10px;color:#fff;font-size:12px;font-family:var(--body);" oninput="setCurrentZip(this.value);renderCart();"></div>
       <div class="cart-subtotal" style="border-top:1px solid rgba(255,255,255,0.15); padding-top:12px; margin-top:4px;"><span>Total</span><span id="cartTotal">$0</span></div>
       <div id="addonBox" style="border-top:1px solid rgba(255,255,255,0.1);padding:10px 0 4px;display:none;">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,255,255,0.4);margin-bottom:8px;">Add-on services</div>
@@ -1513,7 +1513,7 @@
     var shipLabel = document.getElementById("shippingLabel");
     var shipHint = document.getElementById("shippingHint");
     var in805 = currentZip && AREA_805.indexOf(currentZip) !== -1;
-    if (shipLabel) shipLabel.textContent = in805 ? "Delivery (805 area)" : "Shipping";
+    if (shipLabel) shipLabel.textContent = in805 ? "Local delivery (Mon & Thu)" : "Shipping";
     if (shipHint) shipHint.style.display = (currentZip || fee === 0) ? "none" : "";
     if (totEl) totEl.textContent = "$" + t.total;
     if (discRow) discRow.style.display = discount > 0 ? "flex" : "none";
@@ -1617,7 +1617,7 @@
       if (sub >= 250) {
         msg.innerHTML = "<span style='color:#6ee7b7;'>Free shipping - order over $250!</span>";
       } else if (AREA_805.indexOf(zip) !== -1) {
-        msg.innerHTML = "<span style='color:#6ee7b7;'>$5 delivery - you are in the 805!</span>";
+        msg.innerHTML = "<span style='color:#6ee7b7;'>$5 local delivery - you are in the 805! Delivery is Mondays &amp; Thursdays only.</span>";
       } else {
         msg.innerHTML = "<span style='color:rgba(255,255,255,0.5);'>Outside 805 - $15 shipping applies.</span>";
       }
