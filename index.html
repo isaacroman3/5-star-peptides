@@ -1014,8 +1014,18 @@
           <div id="zipMsg" style="font-size:12px;margin-top:5px;"></div>
         </div>
         <div style="margin-bottom:10px;">
-          <label style="font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,255,255,0.45);display:block;margin-bottom:5px;">Shipping Address</label>
-          <textarea id="orderAddress" placeholder="Street, City, State, ZIP" rows="3" style="width:100%;background:#111;border:1px solid rgba(255,255,255,0.2);border-radius:4px;padding:10px 12px;color:#fff;font-size:14px;font-family:var(--body);resize:none;"></textarea>
+          <label style="font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,255,255,0.45);display:block;margin-bottom:5px;">Street Address</label>
+          <input id="orderAddress" type="text" placeholder="123 Main St, Apt 4" autocomplete="address-line1" style="width:100%;background:#111;border:1px solid rgba(255,255,255,0.2);border-radius:4px;padding:10px 12px;color:#fff;font-size:14px;font-family:var(--body);">
+        </div>
+        <div style="display:flex;gap:10px;margin-bottom:10px;">
+          <div style="flex:2;min-width:0;">
+            <label style="font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,255,255,0.45);display:block;margin-bottom:5px;">City</label>
+            <input id="orderCity" type="text" placeholder="City" autocomplete="address-level2" style="width:100%;background:#111;border:1px solid rgba(255,255,255,0.2);border-radius:4px;padding:10px 12px;color:#fff;font-size:14px;font-family:var(--body);">
+          </div>
+          <div style="flex:1;min-width:0;">
+            <label style="font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,255,255,0.45);display:block;margin-bottom:5px;">State</label>
+            <input id="orderState" type="text" placeholder="CA" maxlength="2" autocomplete="address-level1" style="width:100%;background:#111;border:1px solid rgba(255,255,255,0.2);border-radius:4px;padding:10px 12px;color:#fff;font-size:14px;font-family:var(--body);text-transform:uppercase;">
+          </div>
         </div>
         <div style="margin-bottom:10px;">
           <label style="font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,255,255,0.45);display:block;margin-bottom:5px;">Referred by (optional)</label>
@@ -1628,8 +1638,11 @@
     var ref = (el("orderRef")||{}).textContent || "";
     var referredBy = ((el("orderReferrer")||{}).value || "").trim();
     var total = (el("zelleAmount")||{}).textContent || "";
+    var city = ((el("orderCity")||{}).value || "").trim();
+    var state = ((el("orderState")||{}).value || "").trim().toUpperCase();
     name = name.trim(); email = email.trim(); zip = zip.trim(); address = address.trim();
-    if (!name || !email || !address) { alert("Please fill in your name, email, and shipping address."); return; }
+    if (!name || !email || !address || !city || !state) { alert("Please fill in your name, email, street address, city, and state."); return; }
+    var fullAddress = address + ", " + city + ", " + state + " " + zip;
     var itemParts = [];
     var ids = Object.keys(cart);
     for (var i = 0; i < ids.length; i++) {
@@ -1643,7 +1656,7 @@
     var btn = e.target;
     btn.textContent = "Sending...";
     btn.disabled = true;
-    var payload = JSON.stringify({name:name, email:email, phone:phone, address:address, zip:zip, order_reference:ref, referred_by: referredBy || "None", total:total, items:items, shipping: shippingFee(zip.length === 5 ? zip : "")===0?"Free":"$" + shippingFee(zip.length === 5 ? zip : ""), mixing_service: mixingService ? "Yes +$5" : "No", prefill_needles: prefillService ? "Yes +$10" : "No", message:"New order from 5starpeps.com"});
+    var payload = JSON.stringify({name:name, email:email, phone:phone, address:address, city:city, state:state, zip:zip, full_address:fullAddress, order_reference:ref, referred_by: referredBy || "None", total:total, items:items, shipping: shippingFee(zip.length === 5 ? zip : "")===0?"Free":"$" + shippingFee(zip.length === 5 ? zip : ""), mixing_service: mixingService ? "Yes +$5" : "No", prefill_needles: prefillService ? "Yes +$10" : "No", message:"New order from 5starpeps.com"});
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "https://formspree.io/f/xdavkqbe", true);
     xhr.setRequestHeader("Content-Type", "application/json");
