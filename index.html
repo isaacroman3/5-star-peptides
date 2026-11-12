@@ -1676,7 +1676,8 @@
     var btn = e.target;
     btn.textContent = "Sending...";
     btn.disabled = true;
-    var payload = JSON.stringify({name:name, email:email, phone:phone, address:address, city:city, state:state, zip:zip, full_address:fullAddress, order_reference:ref, referred_by: referredBy || "None", total:total, items:items, shipping: shippingFee(zip.length === 5 ? zip : "")===0?"Free":"$" + shippingFee(zip.length === 5 ? zip : ""), mixing_service: mixingService ? "Yes +$5" : "No", prefill_needles: prefillService ? "Yes +$10" : "No", message:"New order from 5starpeps.com"});
+    var needsLabel = !(zip.length === 5 && AREA_805.indexOf(zip) !== -1);
+    var payload = JSON.stringify({delivery_method: needsLabel ? "SHIP - LABEL NEEDED" : "LOCAL DELIVERY - NO LABEL", name:name, email:email, phone:phone, address:address, city:city, state:state, zip:zip, full_address:fullAddress, order_reference:ref, referred_by: referredBy || "None", total:total, items:items, shipping: shippingFee(zip.length === 5 ? zip : "")===0?"Free":"$" + shippingFee(zip.length === 5 ? zip : ""), mixing_service: mixingService ? "Yes +$5" : "No", prefill_needles: prefillService ? "Yes +$10" : "No", message:"New order from 5starpeps.com"});
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "https://formspree.io/f/xdavkqbe", true);
     xhr.setRequestHeader("Content-Type", "application/json");
