@@ -1053,7 +1053,7 @@
 
 <script>
   var PRODUCTS = [
-    {id:"reta10",     name:"Retatrutide",          dose:"10mg",    price:85,  tag:"BEST SELLER", desc:"Lyophilized vial, single peptide. Purity: 99.93%."},
+    {id:"reta10",     name:"Retatrutide",          dose:"10mg",    price:85,  tag:"13 LEFT", maxQty:13, desc:"Lyophilized vial, single peptide. Purity: 99.93%."},
     {id:"reta20",     name:"Retatrutide",           dose:"20mg",    price:115, tag:"TOP SELLER", desc:"Lyophilized vial, single peptide. Purity: 99.93%."},
     {id:"tirz30",     name:"Tirzepatide",            dose:"30mg",    price:135, tag:null, desc:"Lyophilized vial, single peptide. Purity: 99.96%."},
     {id:"reta30",     name:"Retatrutide",            dose:"30mg",    price:155, tag:"1 LEFT", maxQty:1, desc:"Lyophilized vial, single peptide. Purity: 99.93%."},
@@ -1312,7 +1312,7 @@
             tag.className = "pc-tag";
             tag.textContent = prod.tag;
             if (prod.outOfStock) tag.style.cssText = "background:#cc0000;color:#fff;";
-            if (prod.tag === "LOW STOCK" || prod.tag === "1 LEFT") tag.style.cssText = "background:#cc6600;color:#fff;font-weight:700;";
+            if (prod.tag === "LOW STOCK" || /^\d+ LEFT$/.test(prod.tag)) tag.style.cssText = "background:#cc6600;color:#fff;font-weight:700;";
             if (prod.tag === "TOP SELLER" || prod.tag === "BEST SELLER" || prod.tag === "BEST VALUE" || prod.tag === "NEW") tag.style.cssText = "background:#A8842C;color:#fff;font-weight:700;";
             if (prod.comingSoon) tag.style.cssText = "background:#444;color:#fff;";
             if (prod.preOrder) tag.style.cssText = "background:#1e5f8a;color:#fff;font-weight:700;";
