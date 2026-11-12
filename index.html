@@ -1569,6 +1569,8 @@
     if (zelle) zelle.classList.remove("active");
   }
 
+  var sessionRef = "";
+
   function showZellePanel() {
     var zipInput = document.getElementById("orderZip");
     if (zipInput && !zipInput.value.trim() && currentZip) zipInput.value = currentZip;
@@ -1576,9 +1578,26 @@
     var zt = calcTotals(zipVal.length === 5 ? zipVal : "");
     var amtEl = document.getElementById("zelleAmount");
     if (amtEl) amtEl.textContent = "$" + zt.total;
-    var ref = "5SP-" + Math.floor(1000 + Math.random() * 9000);
     var refEl = document.getElementById("orderRef");
-    if (refEl) refEl.textContent = ref;
+    if (sessionRef) {
+      if (refEl) refEl.textContent = sessionRef;
+    } else {
+      if (refEl) refEl.textContent = "5SP-...";
+      var fallbackRef = function() { return "5SP-" + Math.floor(1000 + Math.random() * 9000); };
+      var setRef = function(r) { sessionRef = r; var e2 = document.getElementById("orderRef"); if (e2) e2.textContent = r; };
+      try {
+        var cx = new XMLHttpRequest();
+        cx.open("GET", "https://abacus.jasoncameron.dev/hit/5starpeps/orders", true);
+        cx.timeout = 4000;
+        cx.onload = function() {
+          var n = 0;
+          try { n = JSON.parse(cx.responseText).value; } catch (e) {}
+          setRef(n > 0 ? "5SP-" + (1000 + n) : fallbackRef());
+        };
+        cx.onerror = cx.ontimeout = function() { setRef(fallbackRef()); };
+        cx.send();
+      } catch (e) { setRef(fallbackRef()); }
+    }
     var main = document.getElementById("cartMainPanel");
     var zelle = document.getElementById("zellePanel");
     if (main) main.style.display = "none";
@@ -1641,6 +1660,7 @@
     var city = ((el("orderCity")||{}).value || "").trim();
     var state = ((el("orderState")||{}).value || "").trim().toUpperCase();
     name = name.trim(); email = email.trim(); zip = zip.trim(); address = address.trim();
+    if (ref.indexOf(".") !== -1) { ref = "5SP-" + Math.floor(1000 + Math.random() * 9000); sessionRef = ref; var re2 = el("orderRef"); if (re2) re2.textContent = ref; }
     if (!name || !email || !address || !city || !state) { alert("Please fill in your name, email, street address, city, and state."); return; }
     var fullAddress = address + ", " + city + ", " + state + " " + zip;
     var itemParts = [];
@@ -1665,6 +1685,7 @@
       if (xhr.readyState !== 4) return;
       if (xhr.status === 200) {
         btn.style.display = "none";
+        sessionRef = "";
         var succ = el("orderSuccess"); if (succ) succ.style.display = "block";
       } else {
         btn.textContent = "Submit Order"; btn.disabled = false;
