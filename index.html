@@ -1053,27 +1053,27 @@
 
 <script>
   var PRODUCTS = [
-    {id:"reta10",     name:"Retatrutide",          dose:"10mg",    price:85,  tag:"13 LEFT", maxQty:13, desc:"Lyophilized vial, single peptide. Purity: 99.93%."},
-    {id:"reta20",     name:"Retatrutide",           dose:"20mg",    price:115, tag:"22 LEFT", maxQty:22, desc:"Lyophilized vial, single peptide. Purity: 99.93%."},
-    {id:"tirz30",     name:"Tirzepatide",            dose:"30mg",    price:135, tag:"10 LEFT", maxQty:10, desc:"Lyophilized vial, single peptide. Purity: 99.96%."},
-    {id:"reta30",     name:"Retatrutide",            dose:"30mg",    price:155, tag:"1 LEFT", maxQty:1, desc:"Lyophilized vial, single peptide. Purity: 99.93%."},
-    {id:"ghk50",      name:"GHK-Cu",                dose:"50mg",    price:40,  tag:"17 LEFT", maxQty:17,          desc:"Copper peptide complex, lyophilized. Purity: 99.97%."},
-    {id:"gluta600",   name:"Glutathione",           dose:"600mg",   price:55,  tag:"7 LEFT", maxQty:7,                  desc:"Antioxidant peptide, lyophilized vial. Purity: 99.95%."},
-    {id:"kpv10",      name:"KPV",                   dose:"10mg",    price:40,  tag:"24 LEFT", maxQty:24,          desc:"Tripeptide, lyophilized vial. Purity: 99.95%."},
+    {id:"reta10",     name:"Retatrutide",          dose:"10mg",    price:85,  tag:"BEST SELLER", maxQty:13, desc:"Lyophilized vial, single peptide. Purity: 99.93%."},
+    {id:"reta20",     name:"Retatrutide",           dose:"20mg",    price:115, tag:"TOP SELLER", maxQty:22, desc:"Lyophilized vial, single peptide. Purity: 99.93%."},
+    {id:"tirz30",     name:"Tirzepatide",            dose:"30mg",    price:135, tag:null, maxQty:10, desc:"Lyophilized vial, single peptide. Purity: 99.96%."},
+    {id:"reta30",     name:"Retatrutide",            dose:"30mg",    price:155, tag:"LOW STOCK", maxQty:1, desc:"Lyophilized vial, single peptide. Purity: 99.93%."},
+    {id:"ghk50",      name:"GHK-Cu",                dose:"50mg",    price:40,  tag:"TOP SELLER", maxQty:17,          desc:"Copper peptide complex, lyophilized. Purity: 99.97%."},
+    {id:"gluta600",   name:"Glutathione",           dose:"600mg",   price:55,  tag:null, maxQty:7,                  desc:"Antioxidant peptide, lyophilized vial. Purity: 99.95%."},
+    {id:"kpv10",      name:"KPV",                   dose:"10mg",    price:40,  tag:null, maxQty:24,          desc:"Tripeptide, lyophilized vial. Purity: 99.95%."},
     {id:"motsc10",    name:"MOTS-c",                dose:"10mg",    price:40,  tag:null, outOfStock:true, desc:"Mitochondrial-derived peptide, lyophilized. Purity: 99.96%."},
-    {id:"motsc40",    name:"MOTS-c",                dose:"40mg",    price:140, tag:"3 LEFT", maxQty:3,          desc:"Mitochondrial-derived peptide, lyophilized. Purity: 99.96%."},
-    {id:"tesa10",     name:"Tesamorelin",           dose:"10mg",    price:70,  tag:"7 LEFT", maxQty:7,          desc:"Lyophilized vial, single peptide. Purity: 99.98%."},
-    {id:"tesa20",     name:"Tesamorelin",           dose:"20mg",    price:120, tag:"6 LEFT", maxQty:6, desc:"Lyophilized vial, single peptide. Purity: 99.98%."},
+    {id:"motsc40",    name:"MOTS-c",                dose:"40mg",    price:140, tag:null, maxQty:3,          desc:"Mitochondrial-derived peptide, lyophilized. Purity: 99.96%."},
+    {id:"tesa10",     name:"Tesamorelin",           dose:"10mg",    price:70,  tag:null, maxQty:7,          desc:"Lyophilized vial, single peptide. Purity: 99.98%."},
+    {id:"tesa20",     name:"Tesamorelin",           dose:"20mg",    price:120, tag:null, maxQty:6, desc:"Lyophilized vial, single peptide. Purity: 99.98%."},
     {id:"wolverine10",name:"Wolverine Blend",       dose:"10mg",    price:60,  tag:null, desc:"Multi-peptide blend, lyophilized vial. Purity: 99.94%."},
-    {id:"wolverine20",name:"Wolverine Blend",       dose:"20mg",    price:90,  tag:"8 LEFT", maxQty:8, desc:"Multi-peptide blend, lyophilized vial. Purity: 99.94%."},
+    {id:"wolverine20",name:"Wolverine Blend",       dose:"20mg",    price:90,  tag:null, maxQty:8, desc:"Multi-peptide blend, lyophilized vial. Purity: 99.94%."},
     {id:"starter",    name:"Starter Pack",          dose:"Bundle",  price:110, tag:"TOP SELLER", desc:"Reta 10mg + Bac Water + needles + alcohol wipes. Everything to get started. Purity: 99.93%."},
     {id:"starter20",   name:"Pro Pack",      dose:"Bundle",  price:140, tag:"NEW", desc:"Reta 20mg + Bac Water + needles + alcohol wipes. More bang for your buck. Purity: 99.93%."},
     {id:"starter30",   name:"Max Pack",      dose:"Bundle",  price:180, tag:"NEW", desc:"Reta 30mg + Bac Water + needles + alcohol wipes. Our biggest bundle. Purity: 99.93%."},
     {id:"hgh",        name:"HGH",                   dose:"36IU", price:50, tag:"NEW", desc:"Lyophilized vial. Purity: 99.94%."},
-    {id:"semax10",    name:"Semax",                  dose:"10mg",    price:40,  tag:"8 LEFT", maxQty:8, desc:"Lyophilized vial. Purity: 99.95%."},
+    {id:"semax10",    name:"Semax",                  dose:"10mg",    price:40,  tag:null, maxQty:8, desc:"Lyophilized vial. Purity: 99.95%."},
     {id:"bigt250",    name:"The Big T",             dose:"250mg/10mL", price:100, tag:"NEW", outOfStock:true, desc:"Multi-dose vial. Purity: 99.94%."},
-    {id:"bac3",       name:"Bacteriostatic Water",  dose:"3mL",     price:10,  tag:"27 LEFT", maxQty:27,          desc:"Sterile, for reconstitution."},
-    {id:"bac10",      name:"Bacteriostatic Water",  dose:"10mL",    price:15,  tag:"21 LEFT", maxQty:21, desc:"Sterile, for reconstitution."}
+    {id:"bac3",       name:"Bacteriostatic Water",  dose:"3mL",     price:10,  tag:null, maxQty:27,          desc:"Sterile, for reconstitution."},
+    {id:"bac10",      name:"Bacteriostatic Water",  dose:"10mL",    price:15,  tag:null, maxQty:21, desc:"Sterile, for reconstitution."}
   ];
 
   var DELIVERY_FEE_START = new Date("2026-10-08T00:00:00");
@@ -1387,7 +1387,7 @@
             btn.style.cssText = "";
             btn.onclick = function() {
               if (prod.maxQty && (cart[prod.id] || 0) >= prod.maxQty) {
-                alert("Only " + prod.maxQty + " left in stock.");
+                alert("Sorry, that is the maximum available for this item right now.");
                 return;
               }
               cart[prod.id] = (cart[prod.id] || 0) + 1;
@@ -1477,7 +1477,7 @@
           plusBtn.onclick = function() {
             var capProd = getProduct(cartId);
             if (capProd && capProd.maxQty && (cart[cartId]||0) >= capProd.maxQty) {
-              alert("Only " + capProd.maxQty + " left in stock.");
+              alert("Sorry, that is the maximum available for this item right now.");
               return;
             }
             cart[cartId] = (cart[cartId]||0)+1;
@@ -1809,8 +1809,8 @@
       if (data[p.id] === undefined) continue;
       var n = Number(data[p.id]);
       if (isNaN(n)) continue;
-      if (n <= 0) { p.outOfStock = true; p.tag = null; p.maxQty = 0; }
-      else { p.outOfStock = false; p.tag = n + " LEFT"; p.maxQty = n; }
+      if (n <= 0) { p.outOfStock = true; p.maxQty = 0; }
+      else { p.outOfStock = false; p.maxQty = n; }
     }
     renderProducts();
     renderCart();
