@@ -854,6 +854,31 @@
   </div>
 </section>
 
+<section id="reviews" style="padding:56px 0;border-top:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head">
+      <div><p class="eyebrow">Reviews</p><h2>What customers say</h2></div>
+    </div>
+    <div id="reviewList" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:28px;"></div>
+    <div id="reviewEmpty" style="color:rgba(255,255,255,0.5);font-size:14px;margin-bottom:24px;">No reviews yet. Be the first to leave one.</div>
+    <div style="max-width:520px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:20px;">
+      <p class="eyebrow" style="margin-bottom:12px;">Leave a review</p>
+      <div id="rvStars" style="display:flex;gap:4px;margin-bottom:12px;">
+        <button type="button" data-v="1" aria-label="1 star" style="background:none;border:none;font-size:28px;line-height:1;color:rgba(255,255,255,0.25);cursor:pointer;padding:0 2px;">&#9733;</button>
+        <button type="button" data-v="2" aria-label="2 stars" style="background:none;border:none;font-size:28px;line-height:1;color:rgba(255,255,255,0.25);cursor:pointer;padding:0 2px;">&#9733;</button>
+        <button type="button" data-v="3" aria-label="3 stars" style="background:none;border:none;font-size:28px;line-height:1;color:rgba(255,255,255,0.25);cursor:pointer;padding:0 2px;">&#9733;</button>
+        <button type="button" data-v="4" aria-label="4 stars" style="background:none;border:none;font-size:28px;line-height:1;color:rgba(255,255,255,0.25);cursor:pointer;padding:0 2px;">&#9733;</button>
+        <button type="button" data-v="5" aria-label="5 stars" style="background:none;border:none;font-size:28px;line-height:1;color:rgba(255,255,255,0.25);cursor:pointer;padding:0 2px;">&#9733;</button>
+      </div>
+      <input id="rvName" type="text" maxlength="60" placeholder="Your name (first name is fine)" style="width:100%;background:#0a0a0a;border:1px solid rgba(255,255,255,0.2);border-radius:4px;padding:11px 12px;color:#fff;font-size:14px;font-family:inherit;margin-bottom:10px;box-sizing:border-box;">
+      <textarea id="rvText" maxlength="600" rows="4" placeholder="Tell us about your order" style="width:100%;background:#0a0a0a;border:1px solid rgba(255,255,255,0.2);border-radius:4px;padding:11px 12px;color:#fff;font-size:14px;font-family:inherit;margin-bottom:10px;resize:vertical;box-sizing:border-box;"></textarea>
+      <input id="rvHp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;">
+      <button id="rvSubmit" type="button" style="background:#fff;color:#000;border:none;padding:12px 22px;border-radius:4px;font-weight:700;font-size:14px;cursor:pointer;">Submit review</button>
+      <div id="rvMsg" style="margin-top:10px;font-size:13px;min-height:18px;"></div>
+    </div>
+  </div>
+</section>
+
 <section id="faq">
     <div class="wrap">
       <div class="section-head">
@@ -1824,6 +1849,84 @@
       sx.onload = function() { try { applyStock(JSON.parse(sx.responseText)); } catch (e) {} };
       sx.send();
     } catch (e) {}
+  })();
+
+  var rvRating = 0;
+
+  function rvPaintStars(n) {
+    var bs = document.querySelectorAll("#rvStars button");
+    for (var i = 0; i < bs.length; i++) {
+      bs[i].style.color = (i < n) ? "#f5c451" : "rgba(255,255,255,0.25)";
+    }
+  }
+
+  function renderReviews(list) {
+    var box = document.getElementById("reviewList");
+    var empty = document.getElementById("reviewEmpty");
+    if (!box) return;
+    box.innerHTML = "";
+    if (!list || !list.length) { if (empty) empty.style.display = ""; return; }
+    if (empty) empty.style.display = "none";
+    for (var i = 0; i < list.length; i++) {
+      var r = list[i];
+      var rating = Math.max(1, Math.min(5, Math.round(Number(r.rating) || 5)));
+      var card = document.createElement("div");
+      card.style.cssText = "background:var(--card);border:1px solid var(--line);border-radius:6px;padding:16px;";
+      var st = document.createElement("div");
+      st.style.cssText = "color:#f5c451;font-size:16px;letter-spacing:2px;margin-bottom:8px;";
+      var stars = "";
+      for (var k = 0; k < 5; k++) stars += (k < rating) ? "\u2605" : "\u2606";
+      st.textContent = stars;
+      var tx = document.createElement("p");
+      tx.style.cssText = "color:rgba(255,255,255,0.85);font-size:14px;line-height:1.5;margin-bottom:10px;";
+      tx.textContent = String(r.text || "");
+      var nm = document.createElement("div");
+      nm.style.cssText = "font-family:var(--mono);font-size:11px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.05em;";
+      nm.textContent = String(r.name || "");
+      card.appendChild(st); card.appendChild(tx); card.appendChild(nm);
+      box.appendChild(card);
+    }
+  }
+
+  (function() {
+    try {
+      var rx = new XMLHttpRequest();
+      rx.open("GET", STOCK_URL + "?reviews=1&cb=" + Date.now(), true);
+      rx.timeout = 6000;
+      rx.onload = function() { try { renderReviews(JSON.parse(rx.responseText)); } catch (e) {} };
+      rx.send();
+    } catch (e) {}
+  })();
+
+  (function() {
+    var bs = document.querySelectorAll("#rvStars button");
+    for (var i = 0; i < bs.length; i++) {
+      bs[i].addEventListener("click", function() {
+        rvRating = Number(this.getAttribute("data-v"));
+        rvPaintStars(rvRating);
+      });
+    }
+    var sub = document.getElementById("rvSubmit");
+    if (!sub) return;
+    sub.addEventListener("click", function() {
+      var msg = document.getElementById("rvMsg");
+      var name = (document.getElementById("rvName").value || "").trim();
+      var text = (document.getElementById("rvText").value || "").trim();
+      var hp = (document.getElementById("rvHp").value || "");
+      if (!rvRating) { msg.innerHTML = "<span style='color:rgba(255,0,0,0.7);'>Please tap a star rating.</span>"; return; }
+      if (!name) { msg.innerHTML = "<span style='color:rgba(255,0,0,0.7);'>Please add your name.</span>"; return; }
+      if (text.length < 5) { msg.innerHTML = "<span style='color:rgba(255,0,0,0.7);'>Please write a short review.</span>"; return; }
+      sub.disabled = true;
+      sub.textContent = "Sending...";
+      try {
+        fetch(STOCK_URL, {method: "POST", mode: "no-cors", keepalive: true, headers: {"Content-Type": "text/plain"}, body: JSON.stringify({review: {name: name, rating: rvRating, text: text, hp: hp}})});
+      } catch (e) {}
+      msg.innerHTML = "<span style='color:#6ee7b7;'>Thank you! Your review will appear once it is approved.</span>";
+      document.getElementById("rvName").value = "";
+      document.getElementById("rvText").value = "";
+      rvRating = 0; rvPaintStars(0);
+      sub.textContent = "Submitted";
+    });
   })();
 
   renderProducts();
