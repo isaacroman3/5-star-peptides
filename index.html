@@ -1417,7 +1417,7 @@
             btn.disabled = false;
             btn.style.cssText = "";
             btn.onclick = function() {
-              if (prod.maxQty && (cart[prod.id] || 0) >= prod.maxQty) {
+              if (atCap(prod.id)) {
                 alert("Sorry, that is the maximum available for this item right now.");
                 return;
               }
@@ -1507,7 +1507,7 @@
         (function(plusBtn, cartId) {
           plusBtn.onclick = function() {
             var capProd = getProduct(cartId);
-            if (capProd && capProd.maxQty && (cart[cartId]||0) >= capProd.maxQty) {
+            if (atCap(cartId)) {
               alert("Sorry, that is the maximum available for this item right now.");
               return;
             }
@@ -1834,7 +1834,8 @@
   var STOCK_URL = "https://script.google.com/macros/s/AKfycbwVbyEfWhdrTsFkLk1MWhNYCgVpwDBxFNBpD6FZT5dXS2UlqKLsZJrrwYBLmWjpI4VrUg/exec";
   var PACK_STOCK = {starter: "reta10", starter20: "reta20", starter30: "reta30"};
 
-  function applyStock(data) {
+  function atCap(id) { var base = PACK_STOCK[id] || id; var bp = getProduct(base); if (!bp) return false; if (bp.outOfStock) return true; if (!bp.maxQty) return false; var used = 0; for (var k in cart) { if ((PACK_STOCK[k] || k) === base) used += cart[k] || 0; } return used >= bp.maxQty; }
+function applyStock(data) {
     for (var i = 0; i < PRODUCTS.length; i++) {
       var p = PRODUCTS[i];
       if (data[p.id] === undefined) continue;
@@ -1843,7 +1844,8 @@
       if (n <= 0) { p.outOfStock = true; p.maxQty = 0; }
       else { p.outOfStock = false; p.maxQty = n; }
     }
-    renderProducts();
+    for (var pk in PACK_STOCK) { var pp = getProduct(pk), pb = getProduct(PACK_STOCK[pk]); if (pp && pb && data[PACK_STOCK[pk]] !== undefined) pp.outOfStock = !!pb.outOfStock; }
+renderProducts();
     renderCart();
   }
 
