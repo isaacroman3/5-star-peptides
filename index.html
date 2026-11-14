@@ -1422,6 +1422,7 @@
                 return;
               }
               cart[prod.id] = (cart[prod.id] || 0) + 1;
+              gaCart(prod.id);
               renderCart();
               btn.textContent = "Added";
               btn.classList.add("added");
@@ -1512,6 +1513,7 @@
               return;
             }
             cart[cartId] = (cart[cartId]||0)+1;
+            gaCart(cartId);
             renderCart();
           };
         })(plus, id);
@@ -1719,6 +1721,7 @@
       if (xhr.readyState !== 4) return;
       if (xhr.status === 200) {
         btn.style.display = "none";
+        gaPurchase(ref, total);
         sessionRef = "";
         try { fetch(STOCK_URL, {method: "POST", mode: "no-cors", keepalive: true, headers: {"Content-Type": "text/plain"}, body: JSON.stringify({items: stockItems})}); } catch (e) {}
         var succ = el("orderSuccess"); if (succ) succ.style.display = "block";
@@ -1833,6 +1836,20 @@
 
   var STOCK_URL = "https://script.google.com/macros/s/AKfycbwVbyEfWhdrTsFkLk1MWhNYCgVpwDBxFNBpD6FZT5dXS2UlqKLsZJrrwYBLmWjpI4VrUg/exec";
   var PACK_STOCK = {starter: "reta10", starter20: "reta20", starter30: "reta30"};
+
+  function gaCart(id) {
+    var p = getProduct(id);
+    if (!p) return;
+    try { gtag("event", "add_to_cart", {currency: "USD", value: p.price, items: [{item_id: id, item_name: p.name + " " + p.dose, price: p.price, quantity: 1}]}); } catch (e) {}
+  }
+  function gaPurchase(ref, total) {
+    try {
+      var v = parseFloat(String(total).replace(/[^0-9.]/g, "")) || 0;
+      var items = [];
+      for (var k in cart) { var p = getProduct(k); if (p && cart[k] > 0) items.push({item_id: k, item_name: p.name + " " + p.dose, price: p.price, quantity: cart[k]}); }
+      gtag("event", "purchase", {transaction_id: ref, currency: "USD", value: v, items: items});
+    } catch (e) {}
+  }
 
   function atCap(id) { var base = PACK_STOCK[id] || id; var bp = getProduct(base); if (!bp) return false; if (bp.outOfStock) return true; if (!bp.maxQty) return false; var used = 0; for (var k in cart) { if ((PACK_STOCK[k] || k) === base) used += cart[k] || 0; } return used >= bp.maxQty; }
 function applyStock(data) {
