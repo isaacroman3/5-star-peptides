@@ -751,6 +751,37 @@
     .reveal{opacity:1; transform:none; transition:none;}
   }
 
+  /* ===== Phone layout polish ===== */
+  @media (max-width:600px){
+    .wrap{padding:0 16px;}
+    #referralBanner{padding:8px 12px !important; font-size:11px !important;}
+    .hero{padding:34px 0 30px !important;}
+    .hero h1{margin:12px 0 14px;}
+    .hero p.lede{font-size:15px; margin-bottom:18px;}
+    .hero-badges{gap:8px 16px; margin-bottom:18px;}
+    .hero-badge{font-size:12.5px;}
+    .hero .btn-primary{width:100%; justify-content:center; padding:16px 20px; font-size:15.5px;}
+    .trust-strip{padding:14px 0;}
+    .trust-row{display:grid; grid-template-columns:1fr 1fr; gap:10px 14px; font-size:12px; line-height:1.35;}
+    section{padding:44px 0;}
+    .section-head{margin-bottom:22px;}
+    .product-grid{gap:18px 10px;}
+    .product-card{display:grid; grid-template-columns:62px 1fr; column-gap:14px; align-items:start; padding:16px 14px 14px;}
+    .product-card > .pc-top{grid-column:1; grid-row:1 / span 8; margin:0;}
+    .product-card > *:not(.pc-top){grid-column:2; min-width:0;}
+    .pc-top > span{position:absolute; top:0; right:12px; transform:translateY(-50%);}
+    .pc-name{font-size:16.5px; margin-bottom:2px;}
+    .pc-dose{font-size:11.5px; margin-bottom:6px;}
+    .product-card .star-rate{margin-top:2px;}
+    .product-card div[style*="margin-top: 7px"], .product-card div[style*="margin-top:7px"]{display:none !important;}
+    .trust-row > div:first-child{grid-column:1 / -1;}
+    .pc-desc{font-size:12.5px; line-height:1.45; margin:8px 0 10px !important; flex-grow:0;
+      display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
+    .pc-foot{padding-top:10px;}
+    .pc-price{font-size:18px;}
+    .pc-add{padding:10px 16px;}
+  }
+
 </style>
 </head>
 <body>
