@@ -717,6 +717,40 @@
     .sticky-cart-bar{display:none !important;}
   }
 
+  /* ===== Polish: hero glow + dot grid, card spotlight ===== */
+  .hero{position:relative; overflow:hidden; isolation:isolate;}
+  .hero::before{
+    content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+    background-image:radial-gradient(rgba(255,255,255,0.24) 1px, transparent 1.2px);
+    background-size:26px 26px;
+    -webkit-mask-image:radial-gradient(ellipse 70% 80% at 62% 40%, #000 0%, transparent 75%);
+    mask-image:radial-gradient(ellipse 70% 80% at 62% 40%, #000 0%, transparent 75%);
+  }
+  .hero::after{
+    content:""; position:absolute; z-index:-1; pointer-events:none;
+    width:520px; height:520px; right:-120px; top:-160px; border-radius:50%;
+    background:radial-gradient(circle, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0.04) 40%, transparent 70%);
+    filter:blur(10px);
+    animation:heroGlow 14s ease-in-out infinite alternate;
+  }
+  @keyframes heroGlow{
+    from{transform:translate(0,0) scale(1); opacity:0.8;}
+    to{transform:translate(-90px,70px) scale(1.15); opacity:1;}
+  }
+  .product-card{position:relative;}
+  .product-card::before{
+    content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+    background:radial-gradient(260px circle at var(--mx,50%) var(--my,0%), rgba(255,255,255,0.07), transparent 65%);
+    opacity:0; transition:opacity 0.25s;
+  }
+  .product-card:hover::before{opacity:1;}
+  .reveal{opacity:0; transform:translateY(14px); transition:opacity 0.6s ease, transform 0.6s ease;}
+  .reveal.in{opacity:1; transform:none;}
+  @media (prefers-reduced-motion: reduce){
+    .hero::after{animation:none;}
+    .reveal{opacity:1; transform:none; transition:none;}
+  }
+
 </style>
 </head>
 <body>
@@ -1969,5 +2003,31 @@ renderProducts();
   </button>
 </div>
 
+<script>
+(function () {
+  // Soft spotlight that follows the mouse over product cards
+  document.addEventListener("mousemove", function (e) {
+    var card = e.target && e.target.closest ? e.target.closest(".product-card") : null;
+    if (!card) return;
+    var r = card.getBoundingClientRect();
+    card.style.setProperty("--mx", (e.clientX - r.left) + "px");
+    card.style.setProperty("--my", (e.clientY - r.top) + "px");
+  }, {passive: true});
+
+  // Gentle fade-in as sections scroll into view
+  try {
+    if (!("IntersectionObserver" in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, {threshold: 0.08});
+    ["testing", "reviews", "faq"].forEach(function (id) {
+      var s = document.getElementById(id);
+      if (s) { s.classList.add("reveal"); io.observe(s); }
+    });
+  } catch (err) {}
+})();
+</script>
 </body>
 </html>
