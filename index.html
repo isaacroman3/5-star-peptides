@@ -751,6 +751,20 @@
     .reveal{opacity:1; transform:none; transition:none;}
   }
 
+  /* ===== Reviews strip ===== */
+  #reviewList.rv-marquee{display:block !important; overflow:hidden;
+    -webkit-mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);}
+  .rv-track{display:flex; gap:14px; width:max-content; animation:rvScroll var(--rv-dur,40s) linear infinite;}
+  .rv-track > div{width:300px; flex:none;}
+  .rv-marquee:hover .rv-track{animation-play-state:paused;}
+  @keyframes rvScroll{to{transform:translateX(calc(-50% - 7px));}}
+  @media (prefers-reduced-motion: reduce){
+    #reviewList.rv-marquee{overflow-x:auto; -webkit-mask-image:none; mask-image:none;}
+    .rv-track{animation:none;}
+  }
+  @media (max-width:600px){ .rv-track > div{width:260px;} }
+
   /* ===== Phone layout polish ===== */
   @media (max-width:600px){
     .wrap{padding:0 16px;}
@@ -1030,6 +1044,10 @@
       </div>
     </div>
     <div class="cart-foot" id="cartFoot" style="display:none;">
+      <div id="shipBar" style="margin-bottom:12px;">
+        <div id="shipBarText" style="font-size:12.5px;font-weight:600;color:#fff;margin-bottom:7px;"></div>
+        <div style="height:6px;background:rgba(255,255,255,0.14);border-radius:3px;overflow:hidden;"><div id="shipBarFill" style="height:100%;width:0;background:#fff;border-radius:3px;transition:width 0.4s ease;"></div></div>
+      </div>
       <div class="cart-subtotal" style="font-size:15px; font-weight:500;"><span style="color:rgba(255,255,255,0.6);">Subtotal</span><span id="cartSubtotal">$0</span></div>
       <div class="cart-subtotal" style="font-size:15px; font-weight:500;" id="discountRow"><span id="discountLabel" style="color:#6ee7b7;">Discount (10% off)</span><span id="discountAmt" style="color:#6ee7b7;">-$0</span></div>
       <div class="cart-subtotal" style="font-size:15px; font-weight:500;" id="shippingRow"><span style="color:rgba(255,255,255,0.6);"><span id="shippingLabel">Shipping</span> <span id="shippingHint" style="font-size:11px;color:#6ee7b7;">(805 area: $5)</span></span><span id="shippingAmt">$15</span></div>
@@ -1138,9 +1156,25 @@
       <div class="zelle-note">Orders are confirmed manually once Zelle payment is received. Keep your order reference until you get a shipping confirmation.</div>
       <button id="submitOrderBtn" style="width:100%;margin-top:16px;background:#fff;color:#0A0A0A;border:none;padding:15px;border-radius:4px;font-weight:700;font-size:15px;letter-spacing:0.02em;cursor:pointer;">Submit Order &rarr;</button>
       <div id="orderSuccess" style="display:none;background:#1a1a1a;border:1px solid rgba(255,255,255,0.15);border-radius:4px;padding:16px;margin-top:14px;text-align:center;">
-        <div style="font-size:22px;margin-bottom:8px;">✅</div>
-        <div style="font-weight:700;color:#fff;font-size:15px;margin-bottom:4px;">Order submitted!</div>
-        <div style="font-size:13px;color:rgba(255,255,255,0.55);">We'll confirm once your Zelle payment is received.</div>
+        <div style="width:46px;height:46px;border-radius:50%;background:#fff;color:#0A0A0A;font-size:24px;font-weight:700;line-height:46px;margin:2px auto 12px;">&#10003;</div>
+        <div style="font-weight:700;color:#fff;font-size:18px;margin-bottom:4px;">Order received</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:14px;">One last step: send your Zelle payment so we can ship it.</div>
+        <div style="display:flex;gap:10px;margin-bottom:14px;">
+          <div style="flex:1;background:#111;border:1px solid rgba(255,255,255,0.12);border-radius:4px;padding:10px 8px;">
+            <div style="font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,255,255,0.45);margin-bottom:4px;">Order number</div>
+            <div id="osRef" style="font-family:var(--mono);font-weight:700;font-size:15px;color:#fff;">-</div>
+          </div>
+          <div style="flex:1;background:#111;border:1px solid rgba(255,255,255,0.12);border-radius:4px;padding:10px 8px;">
+            <div style="font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,255,255,0.45);margin-bottom:4px;">Send via Zelle</div>
+            <div id="osAmt" style="font-family:var(--mono);font-weight:700;font-size:15px;color:#fff;">-</div>
+          </div>
+        </div>
+        <div style="text-align:left;background:#111;border:1px solid rgba(255,255,255,0.12);border-radius:4px;padding:12px 14px;font-size:13px;line-height:1.6;color:rgba(255,255,255,0.8);">
+          <div><b style="color:#fff;">1.</b> Send the exact amount to <b style="color:#fff;">(805) 901-3730</b> on Zelle.</div>
+          <div><b style="color:#fff;">2.</b> Leave the memo/note blank.</div>
+          <div><b style="color:#fff;">3.</b> We confirm your payment, then ship within 1 business day.</div>
+        </div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:12px;">Save your order number. Questions? orders@5starpeps.com</div>
       </div>
     </div>
   </div>
@@ -1403,7 +1437,7 @@
           // tag
           tagWrap.innerHTML = "";
           tagWrap.className = "";
-          if (prod.tag) {
+          if (prod.tag || (prod.outOfStock && !prod.comingSoon)) {
             var tag = document.createElement("span");
             tag.className = "pc-tag";
             tag.textContent = prod.tag;
@@ -1412,6 +1446,7 @@
             if (prod.tag === "TOP SELLER" || prod.tag === "BEST SELLER" || prod.tag === "BEST VALUE" || prod.tag === "NEW") tag.style.cssText = "background:#A8842C;color:#fff;font-weight:700;";
             if (prod.comingSoon) tag.style.cssText = "background:#444;color:#fff;";
             if (prod.preOrder) tag.style.cssText = "background:#1e5f8a;color:#fff;font-weight:700;";
+            if (prod.outOfStock && !prod.comingSoon) { tag.textContent = "SOLD OUT"; tag.style.cssText = "background:#cc0000;color:#fff;font-weight:700;"; }
             tagWrap.appendChild(tag);
           }
 
@@ -1462,9 +1497,10 @@
             btn.disabled = true;
             btn.style.cssText = "background:#333;color:rgba(255,255,255,0.4);cursor:not-allowed;";
           } else if (prod.outOfStock) {
-            btn.textContent = "Out of Stock";
-            btn.disabled = true;
-            btn.style.cssText = "background:#333;color:rgba(255,255,255,0.4);cursor:not-allowed;";
+            btn.textContent = "Notify me";
+            btn.disabled = false;
+            btn.style.cssText = "background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.45);";
+            btn.onclick = function() { openNotify(prod); };
           } else if (prod.preOrder) {
             btn.textContent = "Pre-Order";
             btn.disabled = false;
@@ -1614,6 +1650,17 @@
     if (shipLabel) shipLabel.textContent = in805 ? "Local delivery (Mon & Thu)" : "Shipping";
     if (shipHint) shipHint.style.display = (currentZip || fee === 0) ? "none" : "";
     if (totEl) totEl.textContent = "$" + t.total;
+    var sbText = document.getElementById("shipBarText"), sbFill = document.getElementById("shipBarFill");
+    if (sbText && sbFill) {
+      var sbLeft = 250 - sub;
+      if (sbLeft > 0) {
+        sbText.innerHTML = "You're <b>$" + sbLeft + "</b> away from <b>free shipping</b>";
+        sbFill.style.width = Math.max(4, Math.min(100, Math.round(sub / 250 * 100))) + "%";
+      } else {
+        sbText.innerHTML = "&#127881; You've unlocked <b>free shipping</b>";
+        sbFill.style.width = "100%";
+      }
+    }
     if (discRow) discRow.style.display = discount > 0 ? "flex" : "none";
     if (discAmt) discAmt.textContent = "-$" + discount;
     var discLabel = document.getElementById("discountLabel");
@@ -1789,7 +1836,9 @@
         gaPurchase(ref, total);
         sessionRef = "";
         try { fetch(STOCK_URL, {method: "POST", mode: "no-cors", keepalive: true, headers: {"Content-Type": "text/plain"}, body: JSON.stringify({items: stockItems})}); } catch (e) {}
-        var succ = el("orderSuccess"); if (succ) succ.style.display = "block";
+        var osr = el("osRef"); if (osr) osr.textContent = ref;
+        var osa = el("osAmt"); if (osa) osa.textContent = total;
+        var succ = el("orderSuccess"); if (succ) { succ.style.display = "block"; try { succ.scrollIntoView({behavior: "smooth", block: "center"}); } catch (e2) {} }
       } else {
         btn.textContent = "Submit Order"; btn.disabled = false;
         alert("Something went wrong. Please email orders@5starpeps.com directly.");
@@ -1916,6 +1965,36 @@
     } catch (e) {}
   }
 
+  var notifyProd = null;
+  function openNotify(prod) {
+    notifyProd = prod;
+    var m = document.getElementById("notifyModal"); if (!m) return;
+    document.getElementById("notifyTitle").textContent = prod.name + " " + prod.dose;
+    document.getElementById("notifyMsg").textContent = "";
+    var sendBtn = document.getElementById("notifySend"); sendBtn.disabled = false; sendBtn.textContent = "Notify me";
+    var inp = document.getElementById("notifyEmail"); inp.value = "";
+    m.style.display = "flex";
+    setTimeout(function() { try { inp.focus(); } catch (e) {} }, 50);
+  }
+  function closeNotify() { var m = document.getElementById("notifyModal"); if (m) m.style.display = "none"; }
+  function sendNotify() {
+    var msg = document.getElementById("notifyMsg");
+    var email = (document.getElementById("notifyEmail").value || "").trim();
+    if (!notifyProd) return;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.style.color = "#ff8a8a"; msg.textContent = "Please enter a valid email."; return; }
+    var sendBtn = document.getElementById("notifySend"); sendBtn.disabled = true; sendBtn.textContent = "Saving...";
+    try {
+      fetch(STOCK_URL, {method: "POST", mode: "no-cors", keepalive: true, headers: {"Content-Type": "text/plain"}, body: JSON.stringify({notify: {email: email, product: notifyProd.name + " " + notifyProd.dose, id: notifyProd.id, hp: document.getElementById("notifyHp").value}})});
+      try { gtag("event", "notify_signup", {item_id: notifyProd.id}); } catch (e) {}
+      msg.style.color = "#6ee7b7"; msg.textContent = "You're on the list. We'll email you when it's back.";
+      sendBtn.textContent = "Done";
+      setTimeout(closeNotify, 2200);
+    } catch (e) {
+      sendBtn.disabled = false; sendBtn.textContent = "Notify me";
+      msg.style.color = "#ff8a8a"; msg.textContent = "Something went wrong. Please try again.";
+    }
+  }
+
   function atCap(id) { var base = PACK_STOCK[id] || id; var bp = getProduct(base); if (!bp) return false; if (bp.outOfStock) return true; if (!bp.maxQty) return false; var used = 0; for (var k in cart) { if ((PACK_STOCK[k] || k) === base) used += cart[k] || 0; } return used >= bp.maxQty; }
 function applyStock(data) {
     for (var i = 0; i < PRODUCTS.length; i++) {
@@ -1976,6 +2055,21 @@ renderProducts();
       card.appendChild(st); card.appendChild(tx); card.appendChild(nm);
       box.appendChild(card);
     }
+    // 4+ reviews: turn the grid into a slow, endless scrolling strip
+    if (list.length >= 4) {
+      var track = document.createElement("div");
+      track.className = "rv-track";
+      var cards = [].slice.call(box.children);
+      for (var c = 0; c < cards.length; c++) track.appendChild(cards[c]);
+      for (var d = 0; d < cards.length; d++) {
+        var cl = cards[d].cloneNode(true);
+        cl.setAttribute("aria-hidden", "true");
+        track.appendChild(cl);
+      }
+      track.style.setProperty("--rv-dur", Math.max(30, list.length * 9) + "s");
+      box.appendChild(track);
+      box.classList.add("rv-marquee");
+    }
   }
 
   (function() {
@@ -2034,8 +2128,29 @@ renderProducts();
   </button>
 </div>
 
+<div id="notifyModal" style="display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.72);align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#141414;border:1px solid rgba(255,255,255,0.18);border-radius:8px;max-width:380px;width:100%;padding:22px;position:relative;">
+    <button id="notifyClose" type="button" aria-label="Close" style="position:absolute;top:8px;right:12px;background:none;border:none;color:#fff;font-size:26px;line-height:1;cursor:pointer;">&times;</button>
+    <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:6px;">Back in stock alert</div>
+    <div id="notifyTitle" style="font-weight:700;font-size:19px;color:#fff;margin-bottom:6px;"></div>
+    <div style="font-size:13px;color:rgba(255,255,255,0.65);margin-bottom:14px;line-height:1.5;">Leave your email and we'll let you know as soon as this is available again.</div>
+    <input id="notifyEmail" type="email" inputmode="email" placeholder="your@email.com" autocomplete="email" style="width:100%;background:#0a0a0a;border:1px solid rgba(255,255,255,0.25);border-radius:4px;padding:12px;color:#fff;font-size:15px;font-family:var(--body);">
+    <input id="notifyHp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+    <button id="notifySend" type="button" style="width:100%;margin-top:10px;background:#fff;color:#0A0A0A;border:none;padding:13px;border-radius:4px;font-weight:700;font-size:14.5px;cursor:pointer;">Notify me</button>
+    <div id="notifyMsg" style="font-size:12.5px;margin-top:10px;min-height:16px;"></div>
+  </div>
+</div>
 <script>
 (function () {
+  // Back-in-stock modal wiring
+  var nm = document.getElementById("notifyModal");
+  if (nm) {
+    document.getElementById("notifyClose").addEventListener("click", closeNotify);
+    document.getElementById("notifySend").addEventListener("click", sendNotify);
+    document.getElementById("notifyEmail").addEventListener("keydown", function (e) { if (e.key === "Enter") sendNotify(); });
+    nm.addEventListener("click", function (e) { if (e.target === nm) closeNotify(); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeNotify(); });
+  }
   // Soft spotlight that follows the mouse over product cards
   document.addEventListener("mousemove", function (e) {
     var card = e.target && e.target.closest ? e.target.closest(".product-card") : null;
