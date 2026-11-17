@@ -827,6 +827,103 @@
     .sf-chip{flex:none; padding:10px 15px;}
   }
 
+  /* ===== Round 4: motion (dotted surface, metal text, shimmer, glow borders) ===== */
+  #heroSurface{position:absolute; inset:0; width:100%; height:100%; z-index:-1; pointer-events:none; opacity:0; transition:opacity 1.4s ease;
+    -webkit-mask-image:linear-gradient(90deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.55) 40%, #000 75%);
+    mask-image:linear-gradient(90deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.55) 40%, #000 75%);}
+  .hero.has-surface #heroSurface{opacity:1;}
+  .hero.has-surface::before{display:none;}
+  .hero h1 span{
+    background:linear-gradient(100deg, #fff 0%, #b4b4b4 18%, #fff 36%, #dcdcdc 54%, #a2a2a2 68%, #fff 84%, #fff 100%);
+    background-size:240% 100%;
+    -webkit-background-clip:text; background-clip:text;
+    color:transparent; -webkit-text-fill-color:transparent;
+    text-shadow:none; filter:drop-shadow(0 0 26px rgba(255,255,255,0.22));
+    animation:metalSweep 11s linear infinite;
+  }
+  @keyframes metalSweep{from{background-position:0% 0;} to{background-position:-240% 0;}}
+  .hero .btn-primary{position:relative; overflow:hidden; border-radius:999px;
+    box-shadow:0 0 0 1px rgba(255,255,255,0.25), 0 10px 34px rgba(255,255,255,0.14);
+    transition:transform 0.2s ease, box-shadow 0.2s ease;}
+  .hero .btn-primary::before{content:""; position:absolute; top:-20%; bottom:-20%; left:-70%; width:42%; pointer-events:none;
+    background:linear-gradient(100deg, transparent, rgba(0,0,0,0.16) 45%, rgba(0,0,0,0.16) 55%, transparent);
+    transform:skewX(-20deg); animation:btnShimmer 3.4s ease-in-out infinite;}
+  .hero .btn-primary::after{content:"\2192"; display:inline-block; transition:transform 0.2s ease;}
+  .hero .btn-primary:hover{transform:translateY(-1px) scale(1.03); box-shadow:0 0 0 1px rgba(255,255,255,0.4), 0 14px 44px rgba(255,255,255,0.22);}
+  .hero .btn-primary:hover::after{transform:translateX(4px);}
+  @keyframes btnShimmer{0%{left:-70%;} 60%,100%{left:140%;}}
+  @property --ringAng{syntax:"<angle>"; initial-value:0deg; inherits:false;}
+  .hero-steps{position:relative;}
+  .hero-steps::before{content:""; position:absolute; inset:-1px; border-radius:inherit; padding:1px; pointer-events:none;
+    background:conic-gradient(from var(--ringAng), transparent 0deg, transparent 250deg, rgba(255,255,255,0.85) 320deg, transparent 360deg);
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor;
+    mask:linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    animation:ringSpin 7s linear infinite;}
+  @keyframes ringSpin{to{--ringAng:360deg;}}
+  .hs-n{background:rgba(255,255,255,0.06); box-shadow:inset 0 0 12px rgba(255,255,255,0.08);}
+  .product-card::after{content:""; position:absolute; inset:-1px; border-radius:inherit; padding:1px; pointer-events:none;
+    background:radial-gradient(240px circle at var(--mx,50%) var(--my,0%), rgba(255,255,255,0.7), transparent 62%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor;
+    mask:linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    opacity:0; transition:opacity 0.25s;}
+  @media (hover:hover){
+    .product-card:hover::after{opacity:1;}
+    .product-card:hover{box-shadow:0 18px 40px -10px rgba(0,0,0,0.6);}
+  }
+  .navlinks a{position:relative; padding:6px 2px;}
+  .navlinks a::after{content:""; position:absolute; left:50%; bottom:-4px; width:0; height:2px; border-radius:2px; background:#fff;
+    box-shadow:0 0 14px 3px rgba(255,255,255,0.5); transform:translateX(-50%); opacity:0; transition:width 0.25s ease, opacity 0.25s ease;}
+  .navlinks a:hover::after{width:100%; opacity:1;}
+  .pc-add{transition:transform 0.15s ease, background 0.2s, box-shadow 0.2s;}
+  @media (hover:hover){ .pc-add:hover{transform:translateY(-1px); box-shadow:0 6px 20px rgba(255,255,255,0.18);} }
+  .pc-add:active{transform:scale(0.97);}
+  .sf-chip.on{box-shadow:0 0 18px rgba(255,255,255,0.22);}
+  @media (max-width:600px){
+    #heroSurface{opacity:0; -webkit-mask-image:linear-gradient(180deg, transparent 0%, #000 55%); mask-image:linear-gradient(180deg, transparent 0%, #000 55%);}
+    .hero.has-surface #heroSurface{opacity:0.55;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero h1 span, .hero .btn-primary::before, .hero-steps::before{animation:none;}
+  }
+
+  /* ===== Premium trust strip + announcement bar ===== */
+  #referralBanner{background:#0d0d0d !important; color:rgba(255,255,255,0.78) !important; border-bottom:1px solid rgba(255,255,255,0.08);
+    font-size:11px !important; font-weight:600 !important; letter-spacing:0.12em !important; text-transform:uppercase; padding:9px 16px !important;}
+  .trust-grid{display:grid; grid-template-columns:repeat(4, 1fr);}
+  .tg-item{display:flex; gap:12px; align-items:flex-start; padding:4px 22px; border-left:1px solid rgba(255,255,255,0.08);}
+  .tg-item:first-child{border-left:none; padding-left:0;}
+  .tg-item svg{width:22px; height:22px; flex:none; stroke:#fff; fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; opacity:0.9; margin-top:1px;}
+  .tg-item b{display:block; font-size:13.5px; font-weight:700; color:#fff;}
+  .tg-item span{display:block; font-size:12px; font-weight:400; color:rgba(255,255,255,0.55); line-height:1.4; margin-top:2px;}
+  .trust-note{margin-top:16px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.07); font-size:11.5px; color:rgba(255,255,255,0.5);
+    display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap;}
+  @media (max-width:900px){
+    .trust-grid{grid-template-columns:1fr 1fr; gap:16px 14px;}
+    .tg-item{border-left:none; padding:0;}
+    .tg-item b{font-size:12.5px;}
+    .tg-item span{font-size:11.5px;}
+  }
+  @media (max-width:600px){ #referralBanner{font-size:10px !important; letter-spacing:0.08em !important;} }
+
+  /* ===== Product badges ===== */
+  .pc-tag{display:inline-flex; align-items:center; gap:6px; font-family:var(--mono); font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
+    line-height:1; white-space:nowrap; padding:6px 11px 6px 9px; border-radius:999px; border:1px solid rgba(255,255,255,0.3); color:#fff;
+    background:#121212; box-shadow:0 4px 14px rgba(0,0,0,0.45);}
+  .pc-tag::before{content:""; width:5px; height:5px; border-radius:50%; background:currentColor; box-shadow:0 0 8px currentColor; flex:none;}
+  .pc-tag-gold{color:#e9c877 !important; border-color:rgba(233,200,119,0.5); background:linear-gradient(180deg, rgba(233,200,119,0.2), rgba(233,200,119,0.06)), #121212;}
+  .pc-tag-new{color:#8fd6ff !important; border-color:rgba(143,214,255,0.45); background:linear-gradient(180deg, rgba(143,214,255,0.18), rgba(143,214,255,0.05)), #121212;}
+  .pc-tag-low{color:#ffb56b !important; border-color:rgba(255,181,107,0.5); background:linear-gradient(180deg, rgba(255,181,107,0.18), rgba(255,181,107,0.05)), #121212;}
+  .pc-tag-low::before{animation:tagPulse 1.6s ease-in-out infinite;}
+  .pc-tag-out{color:#ff8f8f !important; border-color:rgba(255,143,143,0.4); background:linear-gradient(180deg, rgba(255,143,143,0.14), rgba(255,143,143,0.04)), #121212;}
+  .pc-tag-out::before{box-shadow:none; opacity:0.7;}
+  .pc-tag-soon{color:#cfcfcf !important; border-color:rgba(255,255,255,0.28); background:linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03)), #121212;}
+  .pc-tag-pre{color:#bcabff !important; border-color:rgba(188,171,255,0.45); background:linear-gradient(180deg, rgba(188,171,255,0.18), rgba(188,171,255,0.05)), #121212;}
+  .tg-item span{color:rgba(255,255,255,0.55) !important;}
+  .hero-steps li em{color:rgba(255,255,255,0.62) !important;}
+  .hs-title, .trust-note{color:rgba(255,255,255,0.5) !important;}
+  @keyframes tagPulse{0%,100%{opacity:1;} 50%{opacity:0.35;}}
+  @media (prefers-reduced-motion: reduce){ .pc-tag-low::before{animation:none;} }
+
 </style>
 </head>
 <body>
@@ -837,13 +934,13 @@
 </div>
 
 <div id="referralBanner" style="background:#fff;color:#000;padding:12px 16px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:700;letter-spacing:0.03em;line-height:1.5;">
-  &#11088; Refer someone new and get a discount on your next order
+  Refer someone new and get a discount on your next order
 </div>
 
 <header>
   <div class="nav">
     <div class="logo">
-      <svg viewBox="0 0 24 24" fill="none" style="animation:spin 2.5s linear infinite; width:32px; height:32px;"><path d="M12 2l2.6 6.6L21 9l-5 4.5L17.4 21 12 17l-5.4 4 1.4-7.5L3 9l6.4-0.4L12 2z" fill="#FFFFFF"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" style="animation:spin 16s linear infinite; width:32px; height:32px;"><path d="M12 2l2.6 6.6L21 9l-5 4.5L17.4 21 12 17l-5.4 4 1.4-7.5L3 9l6.4-0.4L12 2z" fill="#FFFFFF"/></svg>
       5 STAR PEPS
     </div>
     <nav class="navlinks">
@@ -894,19 +991,13 @@
 
   <div class="trust-strip">
     <div class="wrap">
-      <div class="trust-row">
-        <div><span class="star-rate">
-          <svg viewBox="0 0 20 20" class="star-fill"><polygon points="10,1 12.6,7 19,7.5 14,12 15.5,18.5 10,15 4.5,18.5 6,12 1,7.5 7.4,7"/></svg>
-          <svg viewBox="0 0 20 20" class="star-fill"><polygon points="10,1 12.6,7 19,7.5 14,12 15.5,18.5 10,15 4.5,18.5 6,12 1,7.5 7.4,7"/></svg>
-          <svg viewBox="0 0 20 20" class="star-fill"><polygon points="10,1 12.6,7 19,7.5 14,12 15.5,18.5 10,15 4.5,18.5 6,12 1,7.5 7.4,7"/></svg>
-          <svg viewBox="0 0 20 20" class="star-fill"><polygon points="10,1 12.6,7 19,7.5 14,12 15.5,18.5 10,15 4.5,18.5 6,12 1,7.5 7.4,7"/></svg>
-          <svg viewBox="0 0 20 20" class="star-fill"><polygon points="10,1 12.6,7 19,7.5 14,12 15.5,18.5 10,15 4.5,18.5 6,12 1,7.5 7.4,7"/></svg>
-        </span> = independently tested, not a review score</div>
-        <div>📦 Free shipping on orders $250+ &middot; 805 local delivery $5 (Mon &amp; Thu)</div>
-        <div>🇺🇸 USA Based &amp; Operated</div>
-        <div>⚡ Same or next business day shipping</div>
-        <div>Direct from manufacturer, no middlemen</div>
+      <div class="trust-grid">
+        <div class="tg-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg><div><b>Third-party tested</b><span>Identity and purity verified on every batch</span></div></div>
+        <div class="tg-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.5l9-4.5 9 4.5v9l-9 4.5-9-4.5v-9z"/><path d="M3 7.5l9 4.5 9-4.5M12 12v9"/></svg><div><b>Free shipping on $250+</b><span>805 local delivery $5 (Mon &amp; Thu)</span></div></div>
+        <div class="tg-item"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b>Ships same or next business day</b><span>Tracking sent when your order ships</span></div></div>
+        <div class="tg-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><div><b>USA based &amp; operated</b><span>Direct from manufacturer, no middlemen</span></div></div>
       </div>
+      <p class="trust-note"><span class="star-rate"><svg viewBox="0 0 20 20" class="star-fill"><polygon points="10,1 12.6,7 19,7.5 14,12 15.5,18.5 10,15 4.5,18.5 6,12 1,7.5 7.4,7"/></svg><svg viewBox="0 0 20 20" class="star-fill"><polygon points="10,1 12.6,7 19,7.5 14,12 15.5,18.5 10,15 4.5,18.5 6,12 1,7.5 7.4,7"/></svg><svg viewBox="0 0 20 20" class="star-fill"><polygon points="10,1 12.6,7 19,7.5 14,12 15.5,18.5 10,15 4.5,18.5 6,12 1,7.5 7.4,7"/></svg><svg viewBox="0 0 20 20" class="star-fill"><polygon points="10,1 12.6,7 19,7.5 14,12 15.5,18.5 10,15 4.5,18.5 6,12 1,7.5 7.4,7"/></svg><svg viewBox="0 0 20 20" class="star-fill"><polygon points="10,1 12.6,7 19,7.5 14,12 15.5,18.5 10,15 4.5,18.5 6,12 1,7.5 7.4,7"/></svg></span> = independently tested, not a review score</p>
     </div>
   </div>
 
@@ -1073,6 +1164,7 @@
         <h5>Help</h5>
         <a href="#faq">FAQ</a>
         <a href="mailto:support@5starpeps.com" class="js-email-us">Email us</a>
+        <a href="sms:+18059013730">Text (805) 901-3730</a>
       </div>
     </div>
 
@@ -1532,12 +1624,13 @@
             var tag = document.createElement("span");
             tag.className = "pc-tag";
             tag.textContent = prod.tag;
-            if (prod.outOfStock) tag.style.cssText = "background:#cc0000;color:#fff;";
-            if (prod.tag === "LOW STOCK" || /^\d+ LEFT$/.test(prod.tag)) tag.style.cssText = "background:#cc6600;color:#fff;font-weight:700;";
-            if (prod.tag === "TOP SELLER" || prod.tag === "BEST SELLER" || prod.tag === "BEST VALUE" || prod.tag === "NEW") tag.style.cssText = "background:#A8842C;color:#fff;font-weight:700;";
-            if (prod.comingSoon) tag.style.cssText = "background:#444;color:#fff;";
-            if (prod.preOrder) tag.style.cssText = "background:#1e5f8a;color:#fff;font-weight:700;";
-            if (prod.outOfStock && !prod.comingSoon) { tag.textContent = "SOLD OUT"; tag.style.cssText = "background:#cc0000;color:#fff;font-weight:700;"; }
+            var tk = "gold";
+            if (prod.tag === "NEW") tk = "new";
+            if (prod.tag === "LOW STOCK" || /^\d+ LEFT$/.test(prod.tag)) tk = "low";
+            if (prod.comingSoon) tk = "soon";
+            if (prod.preOrder) tk = "pre";
+            if (prod.outOfStock && !prod.comingSoon) { tag.textContent = "SOLD OUT"; tk = "out"; }
+            tag.className = "pc-tag pc-tag-" + tk;
             tagWrap.appendChild(tag);
           }
 
@@ -2220,6 +2313,61 @@ renderProducts();
     View Cart
   </button>
 </div>
+
+<script>
+(function () {
+  // Animated dotted surface behind the hero
+  var hero = document.querySelector(".hero");
+  if (!hero || !window.requestAnimationFrame) return;
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var c = document.createElement("canvas");
+  c.id = "heroSurface"; c.setAttribute("aria-hidden", "true");
+  var ctx = c.getContext && c.getContext("2d");
+  if (!ctx) return;
+  hero.insertBefore(c, hero.firstChild);
+  var W = 0, H = 0, t = 0, last = 0, inView = true, raf = 0;
+  var ZMIN = 1.6, ZMAX = 10, DX = 0.13;
+  function size() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = hero.clientWidth; H = hero.clientHeight;
+    c.width = Math.round(W * dpr); c.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function draw(now) {
+    raf = 0;
+    if (!inView || document.hidden) return;
+    raf = requestAnimationFrame(draw);
+    if (now - last < 32) return;
+    t += Math.min(now - last, 80) * 0.001; last = now;
+    ctx.clearRect(0, 0, W, H);
+    var dx = W < 700 ? 0.2 : DX;
+    var horizon = H * 0.5, ky = (H - horizon + 24) * ZMIN, kx = Math.max(W, 600) * 0.5 * ZMIN;
+    ctx.fillStyle = "#fff";
+    for (var z = ZMIN; z <= ZMAX; z += dx) {
+      var inv = 1 / z;
+      var lim = (W * 0.5 + 10) / (kx * inv);
+      var r = Math.max(0.45, 1.9 * inv);
+      ctx.globalAlpha = Math.min(0.55, 0.08 + 0.75 * inv) * Math.min(1, (ZMAX - z) / 3);
+      var start = -Math.ceil(lim / dx) * dx;
+      for (var x = start; x <= lim; x += dx) {
+        var y = 0.2 * Math.sin(x * 1.1 + t * 0.7) + 0.16 * Math.sin(z * 1.2 - t * 0.55) + 0.07 * Math.sin((x + z) * 0.6 + t * 0.4);
+        var sx = W * 0.5 + x * kx * inv;
+        var sy = horizon + (1 - y) * ky * inv;
+        ctx.fillRect(sx - r, sy - r, r * 2, r * 2);
+      }
+    }
+  }
+  function kick() { if (!raf && inView && !document.hidden) { last = performance.now(); raf = requestAnimationFrame(draw); } }
+  size();
+  hero.classList.add("has-surface");
+  window.addEventListener("resize", size);
+  document.addEventListener("visibilitychange", kick);
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (en) { inView = en[0].isIntersecting; kick(); }).observe(hero);
+  }
+  kick();
+})();
+</script>
 
 <div id="emailModal" style="display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.72);align-items:center;justify-content:center;padding:20px;">
   <div style="background:#141414;border:1px solid rgba(255,255,255,0.18);border-radius:8px;max-width:420px;width:100%;padding:22px;position:relative;">
