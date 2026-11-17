@@ -924,6 +924,11 @@
   @keyframes tagPulse{0%,100%{opacity:1;} 50%{opacity:0.35;}}
   @media (prefers-reduced-motion: reduce){ .pc-tag-low::before{animation:none;} }
 
+  /* ===== Local delivery day picker ===== */
+  .dd-opt{flex:1; padding:11px 10px; border-radius:4px; border:1px solid rgba(255,255,255,0.25); background:#111; color:#fff; font-family:var(--body); font-weight:600; font-size:14px; cursor:pointer; transition:background 0.15s, color 0.15s, border-color 0.15s;}
+  .dd-opt:hover{border-color:#fff;}
+  .dd-opt.on{background:#fff; color:#0A0A0A; border-color:#fff;}
+
 </style>
 </head>
 <body>
@@ -1289,6 +1294,14 @@
           <label style="font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,255,255,0.45);display:block;margin-bottom:5px;">Zip Code</label>
           <input id="orderZip" type="text" placeholder="e.g. 93030" maxlength="5" style="width:100%;background:#111;border:1px solid rgba(255,255,255,0.2);border-radius:4px;padding:10px 12px;color:#fff;font-size:14px;font-family:var(--body);" oninput="checkZip(this.value)">
           <div id="zipMsg" style="font-size:12px;margin-top:5px;"></div>
+          <div id="deliveryDayWrap" style="display:none;margin-top:12px;">
+            <label style="font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,255,255,0.45);display:block;margin-bottom:6px;">Local delivery day</label>
+            <div style="display:flex;gap:8px;">
+              <button type="button" class="dd-opt" data-day="Monday">Monday</button>
+              <button type="button" class="dd-opt" data-day="Thursday">Thursday</button>
+            </div>
+            <div id="deliveryDayMsg" style="font-size:12px;margin-top:6px;color:rgba(255,255,255,0.5);">Pick the day you want your order delivered.</div>
+          </div>
         </div>
         <div style="margin-bottom:10px;">
           <label style="font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,255,255,0.45);display:block;margin-bottom:5px;">Street Address</label>
@@ -1448,6 +1461,7 @@
   function setCurrentZip(z) {
     z = (z || "").trim();
     currentZip = z.length === 5 ? z : "";
+    syncDeliveryDay(z);
     var cz = document.getElementById("cartZip");
     if (cz && cz.value !== z) cz.value = z;
     var oz = document.getElementById("orderZip");
@@ -1908,6 +1922,7 @@
     var zipInput = document.getElementById("orderZip");
     if (zipInput && !zipInput.value.trim() && currentZip) zipInput.value = currentZip;
     var zipVal = zipInput ? zipInput.value.trim() : "";
+    syncDeliveryDay(zipVal);
     var zt = calcTotals(zipVal.length === 5 ? zipVal : "");
     var amtEl = document.getElementById("zelleAmount");
     if (amtEl) amtEl.textContent = "$" + zt.total;
@@ -1936,6 +1951,29 @@
     if (main) main.style.display = "none";
     if (zelle) zelle.classList.add("active");
   }
+
+  var deliveryDay = "";
+  function isLocalZip(zip) { return !!zip && zip.length === 5 && AREA_805.indexOf(zip) !== -1; }
+  function syncDeliveryDay(zip) {
+    var w = document.getElementById("deliveryDayWrap");
+    if (!w) return;
+    var local = isLocalZip((zip || "").trim());
+    w.style.display = local ? "block" : "none";
+    if (!local) deliveryDay = "";
+    var opts = w.querySelectorAll(".dd-opt");
+    for (var i = 0; i < opts.length; i++) opts[i].classList.toggle("on", opts[i].getAttribute("data-day") === deliveryDay);
+    var m = document.getElementById("deliveryDayMsg");
+    if (m) {
+      m.style.color = deliveryDay ? "#6ee7b7" : "rgba(255,255,255,0.5)";
+      m.textContent = deliveryDay ? "We'll deliver your order on a " + deliveryDay + "." : "Pick the day you want your order delivered.";
+    }
+  }
+  document.addEventListener("click", function (e) {
+    var o = e.target && e.target.closest ? e.target.closest(".dd-opt") : null;
+    if (!o) return;
+    deliveryDay = o.getAttribute("data-day") || "";
+    syncDeliveryDay((document.getElementById("orderZip") || {}).value || "");
+  });
 
   function checkZip(zip) {
     var msg = document.getElementById("zipMsg");
@@ -1995,6 +2033,13 @@
     name = name.trim(); email = email.trim(); zip = zip.trim(); address = address.trim();
     if (ref.indexOf(".") !== -1) { ref = "5SP-" + Math.floor(1000 + Math.random() * 9000); sessionRef = ref; var re2 = el("orderRef"); if (re2) re2.textContent = ref; }
     if (!name || !email || !address || !city || !state) { alert("Please fill in your name, email, street address, city, and state."); return; }
+    if (isLocalZip(zip) && !deliveryDay) {
+      var ddm = el("deliveryDayMsg");
+      if (ddm) { ddm.style.color = "#ff8f8f"; ddm.textContent = "Please pick a delivery day: Monday or Thursday."; }
+      var ddw = el("deliveryDayWrap");
+      if (ddw) { ddw.style.display = "block"; try { ddw.scrollIntoView({behavior: "smooth", block: "center"}); } catch (e3) {} }
+      return;
+    }
     var fullAddress = address + ", " + city + ", " + state + " " + zip;
     var itemParts = [];
     var stockItems = {};
@@ -2012,7 +2057,7 @@
     btn.textContent = "Sending...";
     btn.disabled = true;
     var needsLabel = !(zip.length === 5 && AREA_805.indexOf(zip) !== -1);
-    var payload = JSON.stringify({delivery_method: needsLabel ? "SHIP - LABEL NEEDED" : "LOCAL DELIVERY - NO LABEL", name:name, email:email, phone:phone, address:address, city:city, state:state, zip:zip, full_address:fullAddress, order_reference:ref, referred_by: referredBy || "None", total:total, items:items, shipping: shippingFee(zip.length === 5 ? zip : "")===0?"Free":"$" + shippingFee(zip.length === 5 ? zip : ""), mixing_service: mixingService ? "Yes +$5" : "No", prefill_needles: prefillService ? "Yes +$10" : "No", message:"New order from 5starpeps.com"});
+    var payload = JSON.stringify({delivery_method: needsLabel ? "SHIP - LABEL NEEDED" : "LOCAL DELIVERY - NO LABEL", delivery_day: needsLabel ? "N/A - shipped" : deliveryDay, name:name, email:email, phone:phone, address:address, city:city, state:state, zip:zip, full_address:fullAddress, order_reference:ref, referred_by: referredBy || "None", total:total, items:items, shipping: shippingFee(zip.length === 5 ? zip : "")===0?"Free":"$" + shippingFee(zip.length === 5 ? zip : ""), mixing_service: mixingService ? "Yes +$5" : "No", prefill_needles: prefillService ? "Yes +$10" : "No", message:"New order from 5starpeps.com"});
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "https://formspree.io/f/xdavkqbe", true);
     xhr.setRequestHeader("Content-Type", "application/json");
@@ -2423,7 +2468,7 @@ renderProducts();
         say("rgba(255,90,90,0.9)", "Something went wrong. Please email support@5starpeps.com directly.");
       }
     };
-    xhr.send(JSON.stringify({email: f, message: b, _subject: "Website message from " + f}));
+    xhr.send(JSON.stringify({contact_email: f, message: b, _subject: "Website message from " + f}));
   }
   var links = document.querySelectorAll(".js-email-us");
   for (var i = 0; i < links.length; i++) links[i].addEventListener("click", openEmail);
