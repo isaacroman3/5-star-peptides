@@ -929,6 +929,65 @@
   .dd-opt:hover{border-color:#fff;}
   .dd-opt.on{background:#fff; color:#0A0A0A; border-color:#fff;}
 
+  /* ===== Product images ===== */
+  .pc-shot{display:block; line-height:0;}
+  .pc-shot svg{display:block; overflow:visible;}
+  .pc-shot text{text-anchor:middle; font-family:'Sora','Inter',Arial,sans-serif;}
+  .pc-shot .vl-brand{font-weight:700; letter-spacing:1.3px;}
+  .pc-shot .vl-name{font-weight:700; fill:#141414;}
+  .pc-shot .vl-dose{font-weight:800; fill:#141414;}
+  .pc-shot .vl-fine{font-family:'IBM Plex Mono',monospace; font-weight:600; letter-spacing:1px; fill:#555;}
+  .pc-shot > svg, .pc-kit > svg{transition:transform 0.35s ease;}
+  .pc-shot-out{opacity:0.45; filter:grayscale(1);}
+  .pc-kit{position:relative; display:block;}
+  .pc-kit-bac{position:absolute; right:-46%; bottom:0; width:64%; z-index:-1;}
+  .pc-kit-syr{position:absolute; left:-58%; bottom:5%; width:96%; transform:rotate(-24deg); transform-origin:center; filter:drop-shadow(0 4px 6px rgba(0,0,0,0.6));}
+  @media (min-width:601px){
+    .pc-top{position:relative; display:flex; justify-content:center; align-items:flex-end; height:214px; margin:-22px -22px 18px; padding:16px 0 12px;
+      border-radius:6px 6px 0 0; overflow:hidden; isolation:isolate;
+      background:radial-gradient(90% 80% at 50% 0%, rgba(255,255,255,0.13), transparent 62%), linear-gradient(180deg, #1d1d1d 0%, #0d0d0d 100%);
+      border-bottom:1px solid rgba(255,255,255,0.07);}
+    .pc-top::after{content:""; position:absolute; left:12%; right:12%; bottom:0; height:1px; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);}
+    .pc-top > span:not(.pc-shot){position:absolute; top:14px; right:14px; z-index:2;}
+    .pc-shot{height:186px;}
+    .pc-shot > svg, .pc-kit, .pc-kit > svg{height:100%; width:auto;}
+    .pc-kit{transform:translateX(-12%);}
+    .pc-kit-bac svg, .pc-kit-syr svg{width:100%; height:auto;}
+    .product-card:hover .pc-shot > svg, .product-card:hover .pc-kit > svg{transform:translateY(-3px) scale(1.035);}
+  }
+  @media (max-width:600px){
+    .product-card{grid-template-columns:86px 1fr;}
+    .pc-shot{width:86px; padding:10px 12px 8px; border-radius:8px; border:1px solid rgba(255,255,255,0.07);
+      background:radial-gradient(100% 70% at 50% 0%, rgba(255,255,255,0.12), transparent 65%), #141414;}
+    .pc-shot svg{width:100%; height:auto;}
+    .pc-kit-bac, .pc-kit-syr{display:none;}
+  }
+
+  /* ===== Privacy / Terms window ===== */
+  #legalModal{display:none; position:fixed; inset:0; z-index:320; background:rgba(0,0,0,0.8); align-items:center; justify-content:center; padding:20px;}
+  .legal-box{background:#121212; border:1px solid rgba(255,255,255,0.16); border-radius:10px; max-width:720px; width:100%; max-height:86vh; display:flex; flex-direction:column;}
+  .legal-head{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px 14px 18px; border-bottom:1px solid rgba(255,255,255,0.1);}
+  .legal-tabs{display:flex; gap:8px; flex-wrap:wrap;}
+  .legal-tabs button{font-family:var(--mono); font-size:11.5px; font-weight:600; letter-spacing:0.04em; padding:8px 14px; border-radius:999px; border:1px solid rgba(255,255,255,0.22); background:transparent; color:rgba(255,255,255,0.75); cursor:pointer;}
+  .legal-tabs button.on{background:#fff; color:#000; border-color:#fff;}
+  #legalClose{background:none; border:none; color:#fff; font-size:28px; line-height:1; cursor:pointer; padding:0 6px;}
+  .legal-body{overflow-y:auto; -webkit-overflow-scrolling:touch; padding:4px 22px 26px;}
+  .legal-doc{display:none;}
+  .legal-doc h3{font-family:var(--display); font-size:22px; font-weight:700; color:#fff; margin:20px 0 4px;}
+  .legal-doc h4{font-size:14.5px; font-weight:700; color:#fff; margin:22px 0 6px;}
+  .legal-doc p, .legal-doc li{font-size:13.5px; line-height:1.65; color:rgba(255,255,255,0.72);}
+  .legal-doc p{margin:0 0 10px;}
+  .legal-doc ul{padding-left:18px; margin:6px 0 10px; list-style:disc;}
+  .legal-doc li{margin-bottom:6px;}
+  .legal-doc b{color:rgba(255,255,255,0.92);}
+  .legal-doc a{color:#fff; text-decoration:underline;}
+  .legal-doc .legal-date{font-family:var(--mono); font-size:11px; color:rgba(255,255,255,0.45);}
+  .legal-note{font-size:11.5px; line-height:1.5; color:rgba(255,255,255,0.5); margin-top:14px; text-align:center;}
+  .legal-note a{color:rgba(255,255,255,0.85); text-decoration:underline;}
+  .footer-bottom a{color:rgba(255,255,255,0.7); text-decoration:underline; text-underline-offset:3px;}
+  .footer-bottom a:hover{color:#fff;}
+  @media (max-width:600px){ #legalModal{padding:10px;} .legal-box{max-height:92vh;} .legal-body{padding:2px 16px 22px;} }
+
 </style>
 </head>
 <body>
@@ -1185,7 +1244,7 @@
 
     <div class="footer-bottom">
       <span>© 2026 5 Star Peps. All rights reserved.</span>
-      <span>5starpeps.com</span>
+      <span><a href="#privacy" class="js-legal" data-doc="privacy">Privacy Policy</a> &nbsp;&middot;&nbsp; <a href="#terms" class="js-legal" data-doc="terms">Terms of Sale</a> &nbsp;&middot;&nbsp; 5starpeps.com</span>
     </div>
   </div>
 </footer>
@@ -1330,6 +1389,7 @@
       </ol>
 
       <div class="zelle-note">Orders are confirmed manually once Zelle payment is received. Keep your order reference until you get a shipping confirmation.</div>
+      <div class="legal-note">By placing an order you agree to our <a href="#terms" class="js-legal" data-doc="terms">Terms of Sale</a> and <a href="#privacy" class="js-legal" data-doc="privacy">Privacy Policy</a>.</div>
       <button id="submitOrderBtn" style="width:100%;margin-top:16px;background:#fff;color:#0A0A0A;border:none;padding:15px;border-radius:4px;font-weight:700;font-size:15px;letter-spacing:0.02em;cursor:pointer;">Submit Order &rarr;</button>
       <div id="orderSuccess" style="display:none;background:#1a1a1a;border:1px solid rgba(255,255,255,0.15);border-radius:4px;padding:16px;margin-top:14px;text-align:center;">
         <div style="width:46px;height:46px;border-radius:50%;background:#fff;color:#0A0A0A;font-size:24px;font-weight:700;line-height:46px;margin:2px auto 12px;">&#10003;</div>
@@ -1541,6 +1601,108 @@
     }
   });
 
+  var CAP_COLORS = {"Retatrutide":"#2f6fed","Tirzepatide":"#7a4de0","GHK-Cu":"#c27a3e","Glutathione":"#e0b93a","KPV":"#c0392b","MOTS-c":"#2fb36b","Tesamorelin":"#d94f8a","Wolverine Blend":"#e25822","HGH":"#39b6e8","Semax":"#5e60ce","The Big T":"#9a7b2f","Bacteriostatic Water":"#dfe4ea"};
+  var shotSeq = 0;
+  function shotShade(hex, amt) {
+    var n = parseInt(hex.slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255;
+    var t = amt < 0 ? 0 : 255, p = Math.abs(amt);
+    return "rgb(" + Math.round(r + (t - r) * p) + "," + Math.round(g + (t - g) * p) + "," + Math.round(b + (t - b) * p) + ")";
+  }
+  function shotEsc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function shotFit(text, max, width) { return Math.min(max, width / (Math.max(text.length, 1) * 0.6)).toFixed(1); }
+  function vialSVG(name, dose, liquid) {
+    var u = "v" + (++shotSeq);
+    var cap = CAP_COLORS[name] || "#8a8f98";
+    var n = parseInt(cap.slice(1), 16);
+    var lightCap = ((n >> 16) * 0.299 + ((n >> 8) & 255) * 0.587 + (n & 255) * 0.114) > 170;
+    var bandInk = lightCap ? "#1a1a1a" : "#ffffff";
+    var lines = [name];
+    if (name.length > 12 && name.indexOf(" ") !== -1) {
+      var words = name.split(" "), best = 1, bestDiff = 1e9;
+      for (var i = 1; i < words.length; i++) {
+        var d = Math.abs(words.slice(0, i).join(" ").length - words.slice(i).join(" ").length);
+        if (d < bestDiff) { bestDiff = d; best = i; }
+      }
+      lines = [words.slice(0, best).join(" "), words.slice(best).join(" ")];
+    }
+    var longest = lines[0].length > (lines[1] || "").length ? lines[0] : lines[1];
+    var nameFs = shotFit(longest, lines.length > 1 ? 14.5 : 17, 104);
+    var nameSvg = lines.length > 1
+      ? "<text x='100' y='179' font-size='" + nameFs + "' class='vl-name'>" + shotEsc(lines[0]) + "</text><text x='100' y='195' font-size='" + nameFs + "' class='vl-name'>" + shotEsc(lines[1]) + "</text>"
+      : "<text x='100' y='188' font-size='" + nameFs + "' class='vl-name'>" + shotEsc(lines[0]) + "</text>";
+    var body = "M40,114 Q40,98 58,93 L74,87 L74,70 L126,70 L126,87 L142,93 Q160,98 160,114 L160,290 Q160,306 144,306 L56,306 Q40,306 40,290 Z";
+    var contents = liquid
+      ? "<rect x='42' y='112' width='116' height='192' rx='12' fill='rgba(170,215,255,0.20)'/><ellipse cx='100' cy='113' rx='57' ry='4.5' fill='rgba(255,255,255,0.28)'/><ellipse cx='100' cy='113' rx='57' ry='4.5' fill='none' stroke='rgba(255,255,255,0.35)' stroke-width='0.8'/>"
+      : "<path d='M42,266 q14,-7 30,-4 t28,-2 t30,3 t28,-3 L158,306 L42,306 Z' fill='url(#" + u + "k)'/><path d='M42,266 q14,-7 30,-4 t28,-2 t30,3 t28,-3' fill='none' stroke='rgba(255,255,255,0.9)' stroke-width='1'/><g fill='rgba(0,0,0,0.10)'><circle cx='66' cy='280' r='1.6'/><circle cx='92' cy='290' r='1.3'/><circle cx='118' cy='278' r='1.5'/><circle cx='138' cy='292' r='1.2'/><circle cx='80' cy='296' r='1'/></g>";
+    return "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 326' role='img' aria-label='" + shotEsc(name) + " vial'>" +
+      "<defs>" +
+      "<linearGradient id='" + u + "b' x1='0' x2='1'><stop offset='0' stop-color='#3a3f45'/><stop offset='0.5' stop-color='#1d2024'/><stop offset='1' stop-color='#30343a'/></linearGradient>" +
+      "<linearGradient id='" + u + "g' x1='0' x2='1'><stop offset='0' stop-color='#fff' stop-opacity='0.42'/><stop offset='0.07' stop-color='#fff' stop-opacity='0.12'/><stop offset='0.22' stop-color='#fff' stop-opacity='0.03'/><stop offset='0.6' stop-color='#fff' stop-opacity='0.02'/><stop offset='0.86' stop-color='#fff' stop-opacity='0.07'/><stop offset='0.95' stop-color='#fff' stop-opacity='0.2'/><stop offset='1' stop-color='#fff' stop-opacity='0.34'/></linearGradient>" +
+      "<linearGradient id='" + u + "c' x1='0' x2='1'><stop offset='0' stop-color='" + shotShade(cap, -0.3) + "'/><stop offset='0.16' stop-color='" + shotShade(cap, 0.38) + "'/><stop offset='0.34' stop-color='" + cap + "'/><stop offset='0.78' stop-color='" + shotShade(cap, -0.18) + "'/><stop offset='1' stop-color='" + shotShade(cap, -0.5) + "'/></linearGradient>" +
+      "<linearGradient id='" + u + "a' x1='0' x2='1'><stop offset='0' stop-color='#7b8087'/><stop offset='0.14' stop-color='#f5f6f7'/><stop offset='0.32' stop-color='#b9bdc3'/><stop offset='0.55' stop-color='#e6e8eb'/><stop offset='0.8' stop-color='#989da4'/><stop offset='1' stop-color='#5d6168'/></linearGradient>" +
+      "<linearGradient id='" + u + "l' x1='0' x2='1'><stop offset='0' stop-color='#000' stop-opacity='0.34'/><stop offset='0.14' stop-color='#000' stop-opacity='0.04'/><stop offset='0.45' stop-color='#fff' stop-opacity='0.10'/><stop offset='0.8' stop-color='#000' stop-opacity='0.05'/><stop offset='1' stop-color='#000' stop-opacity='0.38'/></linearGradient>" +
+      "<linearGradient id='" + u + "k' x1='0' x2='0' y1='0' y2='1'><stop offset='0' stop-color='#ffffff'/><stop offset='1' stop-color='#d5d5d0'/></linearGradient>" +
+      "<filter id='" + u + "s' x='-30%' y='-200%' width='160%' height='500%'><feGaussianBlur stdDeviation='5'/></filter>" +
+      "<filter id='" + u + "h' x='-200%' y='-5%' width='500%' height='110%'><feGaussianBlur stdDeviation='1.2'/></filter>" +
+      "<clipPath id='" + u + "p'><path d='" + body + "'/></clipPath>" +
+      "</defs>" +
+      "<ellipse cx='100' cy='310' rx='66' ry='8' fill='#000' opacity='0.6' filter='url(#" + u + "s)'/>" +
+      "<path d='" + body + "' fill='url(#" + u + "b)' fill-opacity='0.82'/>" +
+      "<g clip-path='url(#" + u + "p)'>" + contents +
+        "<rect x='40' y='138' width='120' height='110' fill='#f7f6f2'/>" +
+        "<rect x='40' y='138' width='120' height='22' fill='" + cap + "'/>" +
+        "<text x='100' y='153' font-size='8.6' class='vl-brand' fill='" + bandInk + "'>&#9733; 5 STAR PEPS</text>" +
+        nameSvg +
+        "<text x='100' y='219' font-size='" + shotFit(dose, 21, 90) + "' class='vl-dose'>" + shotEsc(dose) + "</text>" +
+        "<line x1='54' y1='227' x2='146' y2='227' stroke='#1a1a1a' stroke-opacity='0.22' stroke-width='0.7'/>" +
+        "<text x='100' y='239' font-size='6.1' class='vl-fine'>RESEARCH USE ONLY</text>" +
+        "<rect x='40' y='138' width='120' height='110' fill='url(#" + u + "l)'/>" +
+        "<rect x='40' y='137.4' width='120' height='1.2' fill='#000' opacity='0.25'/><rect x='40' y='247.4' width='120' height='1.4' fill='#000' opacity='0.3'/>" +
+      "</g>" +
+      "<path d='" + body + "' fill='url(#" + u + "g)'/>" +
+      "<path d='" + body + "' fill='none' stroke='rgba(255,255,255,0.34)' stroke-width='1.1'/>" +
+      "<rect x='48.5' y='106' width='7' height='190' rx='3.5' fill='#fff' opacity='0.34' filter='url(#" + u + "h)'/>" +
+      "<rect x='59' y='110' width='2.4' height='180' rx='1.2' fill='#fff' opacity='0.14'/>" +
+      "<rect x='146.5' y='112' width='4' height='178' rx='2' fill='#fff' opacity='0.13'/>" +
+      "<path d='M46,300 Q100,309 154,300' fill='none' stroke='rgba(255,255,255,0.22)' stroke-width='1'/>" +
+      "<rect x='66' y='63' width='68' height='10' rx='4.5' fill='#2c3035' stroke='rgba(255,255,255,0.35)' stroke-width='0.9'/>" +
+      "<rect x='61' y='38' width='78' height='27' rx='3.5' fill='url(#" + u + "a)'/>" +
+      "<rect x='59.5' y='58' width='81' height='8.5' rx='4' fill='url(#" + u + "a)'/><rect x='59.5' y='58' width='81' height='8.5' rx='4' fill='#000' opacity='0.16'/>" +
+      "<rect x='61' y='43' width='78' height='1' fill='#000' opacity='0.14'/><rect x='61' y='52' width='78' height='0.8' fill='#fff' opacity='0.5'/>" +
+      "<rect x='57' y='13' width='86' height='28' rx='6.5' fill='url(#" + u + "c)'/>" +
+      "<rect x='57' y='36.5' width='86' height='4.5' rx='2' fill='#000' opacity='0.22'/>" +
+      "<ellipse cx='100' cy='15.6' rx='37' ry='2.6' fill='#fff' opacity='0.3'/>" +
+      "</svg>";
+  }
+  function syringeSVG() {
+    return "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 230 44' aria-hidden='true'>" +
+      "<rect x='4' y='8' width='7' height='28' rx='2.5' fill='#e9ebee'/><rect x='10' y='19' width='66' height='6' rx='1.5' fill='#d3d7dc'/>" +
+      "<rect x='62' y='5' width='6' height='34' rx='2.5' fill='#eef0f2'/>" +
+      "<rect x='68' y='12' width='112' height='20' rx='3.5' fill='rgba(255,255,255,0.16)' stroke='rgba(255,255,255,0.7)' stroke-width='1.1'/>" +
+      "<rect x='80' y='13.4' width='9' height='17.2' rx='1.5' fill='#23262a'/>" +
+      "<g stroke='rgba(255,255,255,0.75)' stroke-width='0.9'><line x1='98' y1='12' x2='98' y2='19'/><line x1='108' y1='12' x2='108' y2='16.5'/><line x1='118' y1='12' x2='118' y2='19'/><line x1='128' y1='12' x2='128' y2='16.5'/><line x1='138' y1='12' x2='138' y2='19'/><line x1='148' y1='12' x2='148' y2='16.5'/><line x1='158' y1='12' x2='158' y2='19'/><line x1='168' y1='12' x2='168' y2='16.5'/></g>" +
+      "<rect x='70' y='14' width='108' height='3' rx='1.5' fill='#fff' opacity='0.3'/>" +
+      "<rect x='180' y='15' width='12' height='14' rx='2' fill='#f08a24'/><rect x='191' y='16.5' width='35' height='11' rx='5.5' fill='#f39a3d'/><rect x='193' y='18' width='30' height='2.4' rx='1.2' fill='#fff' opacity='0.35'/>" +
+      "</svg>";
+  }
+  function productShot(name, prod) {
+    var id = prod.id || "";
+    if (id.indexOf("starter") === 0) {
+      var base = getProduct(PACK_STOCK[id]) || {dose: ""};
+      return "<span class='pc-kit'>" + vialSVG("Retatrutide", base.dose, false) +
+        "<span class='pc-kit-bac'>" + vialSVG("Bacteriostatic Water", "3mL", true) + "</span>" +
+        "<span class='pc-kit-syr'>" + syringeSVG() + "</span></span>";
+    }
+    return vialSVG(name, prod.dose || "", (prod.dose || "").indexOf("mL") !== -1);
+  }
+  function setShotDose(wrap, prod) {
+    if (!wrap) return;
+    wrap.classList.toggle("pc-shot-out", !!(prod.outOfStock && !prod.comingSoon));
+    if ((prod.id || "").indexOf("starter") === 0) return;
+    var t = wrap.querySelector(".vl-dose");
+    if (t) { t.textContent = prod.dose || ""; t.setAttribute("font-size", shotFit(prod.dose || "", 21, 90)); }
+  }
+
   function groupProducts() {
     var groups = [];
     var byName = {};
@@ -1578,9 +1740,8 @@
         top.className = "pc-top";
         var vialWrap = document.createElement("div");
         if (NO_VIAL.indexOf(variants[0].id) === -1) {
-          var vial = document.createElement("div");
-          vial.className = "pc-vial" + ((variants[0].dose || "").indexOf("mL") !== -1 ? " pc-vial-liquid" : "");
-          vialWrap.appendChild(vial);
+          vialWrap.className = "pc-shot";
+          vialWrap.innerHTML = productShot(group.name, variants[0]);
         }
         top.appendChild(vialWrap);
         var tagWrap = document.createElement("span");
@@ -1651,6 +1812,7 @@
           }
 
           ds.textContent = prod.dose + " - Research Use Only";
+          setShotDose(vialWrap, prod);
 
           // size pills
           if (variants.length > 1) {
@@ -2413,6 +2575,130 @@ renderProducts();
     new IntersectionObserver(function (en) { inView = en[0].isIntersecting; kick(); }).observe(hero);
   }
   kick();
+})();
+</script>
+
+<div id="legalModal" role="dialog" aria-modal="true" aria-label="Policies">
+  <div class="legal-box">
+    <div class="legal-head">
+      <div class="legal-tabs">
+        <button type="button" data-tab="privacy">Privacy Policy</button>
+        <button type="button" data-tab="terms">Terms of Sale</button>
+      </div>
+      <button id="legalClose" type="button" aria-label="Close">&times;</button>
+    </div>
+    <div class="legal-body">
+      <div class="legal-doc" id="privacy">
+        <h3>Privacy Policy</h3>
+        <p class="legal-date">Effective November 16, 2026</p>
+        <p>5 Star Peps ("we", "us") operates 5starpeps.com. This policy explains what information we collect when you use the site or place an order, how we use it, and the choices you have.</p>
+        <h4>1. Information we collect</h4>
+        <ul>
+          <li><b>Order details:</b> your name, email, phone number, shipping address, zip code, the items you order, your order total, your chosen local delivery day, and the name of anyone who referred you, if you enter one.</li>
+          <li><b>Messages:</b> the phone number or email address and message you send us through the contact forms.</li>
+          <li><b>Reviews:</b> the name, rating, and review text you submit. Approved reviews are shown publicly on the site.</li>
+          <li><b>Back-in-stock alerts:</b> your email address and the product you asked about.</li>
+          <li><b>Usage data:</b> we use Google Analytics, which uses cookies to collect information such as pages viewed, device and browser type, and approximate location.</li>
+        </ul>
+        <p>We do not collect or store card numbers or bank account details. Payment is made by Zelle through your own bank.</p>
+        <h4>2. How we use your information</h4>
+        <ul>
+          <li>To process, ship, and deliver your order, and to send order and shipping updates.</li>
+          <li>To answer your questions and requests.</li>
+          <li>To send a back-in-stock notice you asked for.</li>
+          <li>To apply referral discounts.</li>
+          <li>To understand how the site is used, improve it, and prevent fraud or misuse.</li>
+        </ul>
+        <h4>3. Sharing</h4>
+        <p>We do not sell your personal information. We share it only with service providers that help us run the business: our form and email processor (Formspree), Google (Analytics, and Google Sheets for stock, reviews, and alerts), our website host (GitHub Pages), and shipping carriers, who receive your name and address to deliver your order. We may also disclose information when the law requires it.</p>
+        <h4>4. Cookies and analytics</h4>
+        <p>Google Analytics sets cookies to measure site traffic. You can block cookies in your browser settings or use Google's Analytics opt-out browser add-on. The site still works without them.</p>
+        <h4>5. How long we keep it</h4>
+        <p>We keep order records for as long as we need them for business, tax, and legal purposes. Other information is kept only as long as it is needed for the purpose it was collected for.</p>
+        <h4>6. Your choices</h4>
+        <p>You can ask us to show you, correct, or delete the personal information we hold about you by emailing <a href="mailto:support@5starpeps.com">support@5starpeps.com</a>. We will honor the request unless we are required to keep the information. If you live in California, you may have additional rights under California law, and you can use the same email to exercise them.</p>
+        <h4>7. Security</h4>
+        <p>We take reasonable steps to protect your information, but no website or method of transmission is completely secure.</p>
+        <h4>8. Age</h4>
+        <p>This site is intended for adults 21 and older. We do not knowingly collect information from anyone under 21.</p>
+        <h4>9. Changes to this policy</h4>
+        <p>We may update this policy from time to time. The date at the top shows when it was last changed.</p>
+        <h4>10. Contact</h4>
+        <p>Email <a href="mailto:support@5starpeps.com">support@5starpeps.com</a> or text <a href="sms:+18059013730">(805) 901-3730</a>, Monday to Friday.</p>
+      </div>
+      <div class="legal-doc" id="terms">
+        <h3>Terms of Sale</h3>
+        <p class="legal-date">Effective November 16, 2026</p>
+        <p>These terms apply to every order placed with 5 Star Peps through 5starpeps.com. By placing an order you agree to them.</p>
+        <h4>1. Research use only</h4>
+        <p>All products are sold strictly for in-vitro laboratory and research use. They are not drugs, dietary supplements, or medical devices, have not been evaluated or approved by the FDA or any other regulatory agency, and are not intended to diagnose, treat, cure, or prevent any disease. They are not for human or veterinary use.</p>
+        <p>By ordering, you confirm that you are at least 21 years old, that you are buying these products solely for lawful research purposes, and that you are responsible for complying with all federal, state, and local laws that apply to you.</p>
+        <h4>2. No medical advice</h4>
+        <p>Nothing on this site, in our emails, or in our messages is medical advice. We do not give guidance on human use of any product.</p>
+        <h4>3. Orders and payment</h4>
+        <ul>
+          <li>Payment is by Zelle. An order is confirmed once we receive and verify your payment.</li>
+          <li>Prices and availability can change without notice. An item is not reserved until payment is received.</li>
+          <li>We may decline or cancel any order. If you have already paid for a cancelled order, we will refund that payment.</li>
+        </ul>
+        <h4>4. Shipping and local delivery</h4>
+        <ul>
+          <li>Most orders ship the same or next business day after payment is confirmed. Delivery usually takes 2 to 4 business days within the U.S. These are estimates, not guarantees.</li>
+          <li>Shipping is a flat $15, and orders of $250 or more ship free.</li>
+          <li>Local delivery in the 805 area is $5 and is made on Mondays and Thursdays.</li>
+          <li>You are responsible for giving us a correct and complete address. Once a package is handed to the carrier, the risk of loss passes to you.</li>
+        </ul>
+        <h4>5. Returns and refunds</h4>
+        <p>All sales are final. Once a vial has been opened, it cannot be returned, exchanged, or refunded. If an unopened item arrives damaged or incorrect, email <a href="mailto:support@5starpeps.com">support@5starpeps.com</a> within 7 days of delivery with your order number and photos, and we will make it right.</p>
+        <h4>6. Referral discounts</h4>
+        <p>When a new customer enters your name at checkout and their order goes through, you receive a discount on your next order. Discounts have no cash value, and we may change or end the referral program at any time.</p>
+        <h4>7. Reviews</h4>
+        <p>When you submit a review, you give us permission to display it on the site. We choose which reviews to publish.</p>
+        <h4>8. Product information</h4>
+        <p>We test every batch and provide a certificate of analysis. Apart from that, products are provided "as is", and we make no other warranties, express or implied, to the fullest extent the law allows.</p>
+        <h4>9. Limitation of liability</h4>
+        <p>You accept all risk for the handling, storage, and use of the products you buy. To the fullest extent the law allows, our total liability for any claim related to an order is limited to the amount you paid for that order.</p>
+        <h4>10. Governing law</h4>
+        <p>These terms are governed by the laws of the State of California.</p>
+        <h4>11. Changes and contact</h4>
+        <p>We may update these terms. The version posted when you place your order is the one that applies to it. Questions? Email <a href="mailto:support@5starpeps.com">support@5starpeps.com</a> or text <a href="sms:+18059013730">(805) 901-3730</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  // Privacy Policy / Terms of Sale window
+  var m = document.getElementById("legalModal");
+  if (!m) return;
+  var docs = ["privacy", "terms"];
+  function showLegal(doc) {
+    if (docs.indexOf(doc) === -1) doc = "privacy";
+    for (var i = 0; i < docs.length; i++) {
+      document.getElementById(docs[i]).style.display = docs[i] === doc ? "block" : "none";
+      var t = m.querySelector('[data-tab="' + docs[i] + '"]');
+      if (t) t.classList.toggle("on", docs[i] === doc);
+    }
+    m.style.display = "flex";
+    m.querySelector(".legal-body").scrollTop = 0;
+  }
+  function hideLegal() {
+    m.style.display = "none";
+    if (location.hash === "#privacy" || location.hash === "#terms") {
+      try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
+    }
+  }
+  document.addEventListener("click", function (e) {
+    var a = e.target && e.target.closest ? e.target.closest(".js-legal, #legalModal [data-tab]") : null;
+    if (!a) return;
+    e.preventDefault();
+    showLegal(a.getAttribute("data-doc") || a.getAttribute("data-tab"));
+  });
+  document.getElementById("legalClose").addEventListener("click", hideLegal);
+  m.addEventListener("click", function (e) { if (e.target === m) hideLegal(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") hideLegal(); });
+  if (location.hash === "#privacy") showLegal("privacy");
+  if (location.hash === "#terms") showLegal("terms");
 })();
 </script>
 
