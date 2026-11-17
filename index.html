@@ -796,6 +796,37 @@
     .pc-add{padding:10px 16px;}
   }
 
+  .footer-policy{border:1px solid rgba(255,255,255,0.12); border-radius:10px; padding:14px 20px; font-size:12.5px; line-height:1.6; color:rgba(255,255,255,0.75); margin-bottom:14px;}
+  .footer-policy strong{color:#fff;}
+  /* ===== Round 3: hero steps, shop filters, FAQ grid ===== */
+  .hero-steps{margin-top:26px; border:1px solid rgba(255,255,255,0.12); border-radius:12px; background:rgba(17,17,17,0.72); padding:22px 24px; -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);}
+  .hs-title{font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-bottom:16px;}
+  .hero-steps ol{list-style:none; margin:0; padding:0; display:grid; gap:16px;}
+  .hero-steps li{display:flex; gap:14px; align-items:flex-start;}
+  .hs-n{width:28px; height:28px; border-radius:50%; border:1px solid rgba(255,255,255,0.3); display:grid; place-items:center; font-family:var(--mono); font-size:12px; font-weight:700; color:#fff; flex:none;}
+  .hero-steps li b{display:block; font-size:15px; font-weight:700; color:#fff; margin-bottom:2px;}
+  .hero-steps li em{display:block; font-style:normal; font-size:13px; line-height:1.5; color:rgba(255,255,255,0.6);}
+  .hs-foot{margin-top:18px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.1); font-size:12.5px; font-weight:600; color:rgba(255,255,255,0.8);}
+  @media (min-width:881px){
+    .hero-grid{grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr); max-width:none; gap:64px; align-items:center;}
+    .hero-steps{margin-top:0; padding:28px 30px;}
+  }
+  @media (min-width:601px){ .trust-row{justify-content:center; gap:10px 34px;} }
+  .shop-filters{display:flex; gap:8px; flex-wrap:wrap; margin:-12px 0 26px;}
+  .sf-chip{font-family:var(--mono); font-size:12px; font-weight:600; letter-spacing:0.04em; padding:9px 16px; border-radius:999px; border:1px solid rgba(255,255,255,0.22); background:transparent; color:rgba(255,255,255,0.75); cursor:pointer; transition:all 0.2s;}
+  .sf-chip:hover{border-color:#fff; color:#fff;}
+  .sf-chip.on{background:#fff; color:#000; border-color:#fff;}
+  @media (min-width:881px){ .faq-list{max-width:none; display:grid; grid-template-columns:1fr 1fr; column-gap:48px; align-items:start;} }
+  @media (max-width:600px){
+    .hero-steps{margin-top:18px; padding:16px 16px 14px;}
+    .hero-steps ol{gap:12px;}
+    .hero-steps li em{font-size:12.5px;}
+    .hs-foot{margin-top:14px; padding-top:12px;}
+    .shop-filters{margin:-4px -16px 18px; padding:0 16px; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;}
+    .shop-filters::-webkit-scrollbar{display:none;}
+    .sf-chip{flex:none; padding:10px 15px;}
+  }
+
 </style>
 </head>
 <body>
@@ -818,6 +849,7 @@
     <nav class="navlinks">
       <a href="#shop">Shop</a>
       <a href="#testing">Testing</a>
+      <a href="#reviews">Reviews</a>
       <a href="#faq">FAQ</a>
     </nav>
     <div class="navright">
@@ -844,6 +876,16 @@
             <div class="hero-badge"><span class="dot"></span>Fast shipping — same or next business day</div>
           </div>
           <a href="#shop" class="btn btn-primary" style="margin-top:14px;">Shop the catalog</a>
+        </div>
+
+        <div class="hero-steps">
+          <p class="hs-title">How ordering works</p>
+          <ol>
+            <li><span class="hs-n">1</span><div><b>Add to cart</b><em>Pick your items and check out. No account needed.</em></div></li>
+            <li><span class="hs-n">2</span><div><b>Pay with Zelle</b><em>Send the total and text us a screenshot. No card fees.</em></div></li>
+            <li><span class="hs-n">3</span><div><b>Ships fast</b><em>Same or next business day, with tracking.</em></div></li>
+          </ol>
+          <p class="hs-foot">Free shipping on orders $250+</p>
         </div>
 
         </div>
@@ -877,6 +919,13 @@
           <h2>Peptides &amp; reconstitution supplies</h2>
         </div>
         <p>All compounds are for laboratory research use only. Every order includes a batch-specific certificate of analysis confirming identity and purity.</p>
+      </div>
+
+      <div class="shop-filters" id="shopFilters" role="group" aria-label="Filter products">
+        <button type="button" class="sf-chip on" data-cat="all" aria-pressed="true">All</button>
+        <button type="button" class="sf-chip" data-cat="vial" aria-pressed="false">Single vials</button>
+        <button type="button" class="sf-chip" data-cat="bundle" aria-pressed="false">Bundles</button>
+        <button type="button" class="sf-chip" data-cat="supply" aria-pressed="false">Supplies</button>
       </div>
 
       <div class="product-grid" id="productGrid"></div>
@@ -986,6 +1035,22 @@
           <summary>Can I get a certificate of analysis?</summary>
           <p>Yes — every order ships with a batch-specific COA confirming identity and purity. If you need additional documentation, contact us at (805) 901-3730.</p>
         </details>
+        <details class="faq-item">
+          <summary>How much is shipping?</summary>
+          <p>Shipping is a flat $15, and orders of $250 or more ship free. If you're in the 805 area, local delivery is $5 on Mondays and Thursdays. Enter your zip code at checkout to see your rate.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is your return and refund policy?</summary>
+          <p>All sales are final. Once a vial has been opened, it cannot be returned, exchanged, or refunded. If an unopened item arrives damaged or incorrect, email support@5starpeps.com within 7 days of delivery and we'll make it right.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What if the item I want is sold out?</summary>
+          <p>Tap "Notify me" on any sold-out product and leave your email. We'll let you know as soon as it's back in stock.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does the referral discount work?</summary>
+          <p>Have a new customer enter your name in the "Referred by" box at checkout. Once their order goes through, you get a discount on your next order.</p>
+        </details>
       </div>
     </div>
   </section>
@@ -1007,8 +1072,12 @@
       <div>
         <h5>Help</h5>
         <a href="#faq">FAQ</a>
-        <a href="mailto:orders@5starpeps.com">Email us</a>
+        <a href="mailto:support@5starpeps.com" class="js-email-us">Email us</a>
       </div>
+    </div>
+
+    <div class="footer-policy">
+      <strong>No Refunds / No Returns on Opened Vials.</strong> All sales are final. Once a vial has been opened, it cannot be returned, exchanged, or refunded. If an unopened item arrives damaged or incorrect, email support@5starpeps.com within 7 days of delivery.
     </div>
 
     <div class="footer-disclaimer">
@@ -1174,7 +1243,7 @@
           <div><b style="color:#fff;">2.</b> Leave the memo/note blank.</div>
           <div><b style="color:#fff;">3.</b> We confirm your payment, then ship within 1 business day.</div>
         </div>
-        <div style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:12px;">Save your order number. Questions? orders@5starpeps.com</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:12px;">Save your order number. Questions? support@5starpeps.com</div>
       </div>
     </div>
   </div>
@@ -1342,6 +1411,28 @@
     }
   }
 
+  var shopFilter = "all";
+  function shopCat(id) {
+    if (id.indexOf("starter") === 0) return "bundle";
+    if (id.indexOf("bac") === 0) return "supply";
+    return "vial";
+  }
+  document.addEventListener("click", function (e) {
+    var chip = e.target && e.target.closest ? e.target.closest(".sf-chip") : null;
+    if (!chip) return;
+    shopFilter = chip.getAttribute("data-cat") || "all";
+    var chips = document.querySelectorAll(".sf-chip");
+    for (var i = 0; i < chips.length; i++) {
+      var on = chips[i] === chip;
+      chips[i].classList.toggle("on", on);
+      chips[i].setAttribute("aria-pressed", on ? "true" : "false");
+    }
+    var cards = document.querySelectorAll("#productGrid .product-card");
+    for (var j = 0; j < cards.length; j++) {
+      cards[j].style.display = (shopFilter === "all" || cards[j].getAttribute("data-cat") === shopFilter) ? "" : "none";
+    }
+  });
+
   function groupProducts() {
     var groups = [];
     var byName = {};
@@ -1400,7 +1491,7 @@
         // Size selector (only if more than one variant)
         var sizeRow = document.createElement("div");
         if (variants.length > 1) {
-          sizeRow.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 2px;";
+          sizeRow.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;";
           card.appendChild(sizeRow);
         }
 
@@ -1534,6 +1625,8 @@
         }
 
         renderVariant();
+        card.setAttribute("data-cat", shopCat(variants[0].id));
+        if (shopFilter !== "all" && shopCat(variants[0].id) !== shopFilter) card.style.display = "none";
         grid.appendChild(card);
       })(groups[gi]);
     }
@@ -1841,7 +1934,7 @@
         var succ = el("orderSuccess"); if (succ) { succ.style.display = "block"; try { succ.scrollIntoView({behavior: "smooth", block: "center"}); } catch (e2) {} }
       } else {
         btn.textContent = "Submit Order"; btn.disabled = false;
-        alert("Something went wrong. Please email orders@5starpeps.com directly.");
+        alert("Something went wrong. Please email support@5starpeps.com directly.");
       }
     };
     xhr.send(payload);
@@ -2127,6 +2220,69 @@ renderProducts();
     View Cart
   </button>
 </div>
+
+<div id="emailModal" style="display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.72);align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#141414;border:1px solid rgba(255,255,255,0.18);border-radius:8px;max-width:420px;width:100%;padding:22px;position:relative;">
+    <button id="emailClose" type="button" aria-label="Close" style="position:absolute;top:8px;right:12px;background:none;border:none;color:#fff;font-size:26px;line-height:1;cursor:pointer;">&times;</button>
+    <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:6px;">Contact</div>
+    <div style="font-weight:700;font-size:19px;color:#fff;margin-bottom:6px;">Send us a message</div>
+    <div style="font-size:13px;color:rgba(255,255,255,0.65);margin-bottom:14px;line-height:1.5;">We'll reply to the email address you enter below.</div>
+    <input id="emailFrom" type="email" inputmode="email" placeholder="your@email.com" autocomplete="email" style="width:100%;background:#0a0a0a;border:1px solid rgba(255,255,255,0.25);border-radius:4px;padding:12px;color:#fff;font-size:16px;font-family:var(--body);">
+    <textarea id="emailBody" rows="4" placeholder="How can we help?" style="width:100%;margin-top:10px;background:#0a0a0a;border:1px solid rgba(255,255,255,0.25);border-radius:4px;padding:12px;color:#fff;font-size:16px;font-family:var(--body);resize:vertical;"></textarea>
+    <input id="emailHp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+    <button id="emailSend" type="button" style="width:100%;margin-top:10px;background:#fff;color:#0A0A0A;border:none;padding:13px;border-radius:4px;font-weight:700;font-size:14.5px;cursor:pointer;">Send message</button>
+    <div id="emailMsg" style="font-size:12.5px;margin-top:10px;min-height:16px;"></div>
+    <div style="font-size:12.5px;color:rgba(255,255,255,0.5);margin-top:8px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.1);">Or email us directly: <a href="mailto:support@5starpeps.com" style="color:#fff;text-decoration:underline;">support@5starpeps.com</a></div>
+  </div>
+</div>
+<script>
+(function () {
+  // "Email us" contact form
+  var m = document.getElementById("emailModal");
+  if (!m) return;
+  var from = document.getElementById("emailFrom");
+  var body = document.getElementById("emailBody");
+  var msg = document.getElementById("emailMsg");
+  var btn = document.getElementById("emailSend");
+  function openEmail(e) {
+    if (e) e.preventDefault();
+    msg.innerHTML = "";
+    m.style.display = "flex";
+    try { from.focus(); } catch (x) {}
+  }
+  function closeEmail() { m.style.display = "none"; }
+  function say(color, text) { msg.innerHTML = ""; var s = document.createElement("span"); s.style.color = color; s.textContent = text; msg.appendChild(s); }
+  function sendEmail() {
+    var f = (from.value || "").trim();
+    var b = (body.value || "").trim();
+    if (document.getElementById("emailHp").value) { closeEmail(); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f)) { say("rgba(255,90,90,0.9)", "Please enter a valid email address."); return; }
+    if (!b) { say("rgba(255,90,90,0.9)", "Please write a message."); return; }
+    btn.textContent = "Sending..."; btn.disabled = true;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://formspree.io/f/xdavkqbe", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState !== 4) return;
+      btn.textContent = "Send message"; btn.disabled = false;
+      if (xhr.status === 200) {
+        say("#6ee7b7", "Message sent. We'll get back to you by email.");
+        body.value = "";
+      } else {
+        say("rgba(255,90,90,0.9)", "Something went wrong. Please email support@5starpeps.com directly.");
+      }
+    };
+    xhr.send(JSON.stringify({email: f, message: b, _subject: "Website message from " + f}));
+  }
+  var links = document.querySelectorAll(".js-email-us");
+  for (var i = 0; i < links.length; i++) links[i].addEventListener("click", openEmail);
+  document.getElementById("emailClose").addEventListener("click", closeEmail);
+  btn.addEventListener("click", sendEmail);
+  m.addEventListener("click", function (e) { if (e.target === m) closeEmail(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeEmail(); });
+})();
+</script>
 
 <div id="notifyModal" style="display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.72);align-items:center;justify-content:center;padding:20px;">
   <div style="background:#141414;border:1px solid rgba(255,255,255,0.18);border-radius:8px;max-width:380px;width:100%;padding:22px;position:relative;">
