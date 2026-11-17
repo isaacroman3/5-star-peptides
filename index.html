@@ -940,16 +940,17 @@
   .pc-shot > svg, .pc-kit > svg{transition:transform 0.35s ease;}
   .pc-shot-out{opacity:0.45; filter:grayscale(1);}
   .pc-kit{position:relative; display:block;}
-  .pc-kit-bac{position:absolute; right:-46%; bottom:0; width:64%; z-index:-1;}
-  .pc-kit-syr{position:absolute; left:-58%; bottom:5%; width:96%; transform:rotate(-24deg); transform-origin:center; filter:drop-shadow(0 4px 6px rgba(0,0,0,0.6));}
+  .pc-kit-bac{position:absolute; right:-50%; bottom:0; width:66%; z-index:-1;}
+  .pc-kit-syr{position:absolute; left:-62%; bottom:7%; width:98%; z-index:1; transform:rotate(-24deg); transform-origin:center; filter:drop-shadow(0 4px 6px rgba(0,0,0,0.6));}
   @media (min-width:601px){
-    .pc-top{position:relative; display:flex; justify-content:center; align-items:flex-end; height:214px; margin:-22px -22px 18px; padding:16px 0 12px;
+    .pc-top{position:relative; display:flex; justify-content:center; align-items:flex-end; height:214px; margin:-22px -22px 18px; padding:16px 0 24px;
       border-radius:6px 6px 0 0; overflow:hidden; isolation:isolate;
       background:radial-gradient(90% 80% at 50% 0%, rgba(255,255,255,0.13), transparent 62%), linear-gradient(180deg, #1d1d1d 0%, #0d0d0d 100%);
       border-bottom:1px solid rgba(255,255,255,0.07);}
     .pc-top::after{content:""; position:absolute; left:12%; right:12%; bottom:0; height:1px; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);}
     .pc-top > span:not(.pc-shot){position:absolute; top:14px; right:14px; z-index:2;}
-    .pc-shot{height:186px;}
+    .pc-shot{height:174px;}
+    .pc-shot > svg, .pc-kit > svg, .pc-kit-bac svg{-webkit-box-reflect:below -20px linear-gradient(transparent 68%, rgba(0,0,0,0.22));}
     .pc-shot > svg, .pc-kit, .pc-kit > svg{height:100%; width:auto;}
     .pc-kit{transform:translateX(-12%);}
     .pc-kit-bac svg, .pc-kit-syr svg{width:100%; height:auto;}
@@ -963,7 +964,7 @@
     .pc-kit-bac, .pc-kit-syr{display:none;}
   }
 
-  /* ===== Privacy / Terms window ===== */
+/* ===== Privacy / Terms window ===== */
   #legalModal{display:none; position:fixed; inset:0; z-index:320; background:rgba(0,0,0,0.8); align-items:center; justify-content:center; padding:20px;}
   .legal-box{background:#121212; border:1px solid rgba(255,255,255,0.16); border-radius:10px; max-width:720px; width:100%; max-height:86vh; display:flex; flex-direction:column;}
   .legal-head{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px 14px 18px; border-bottom:1px solid rgba(255,255,255,0.1);}
@@ -1658,21 +1659,11 @@
     }
   });
 
-  var CAP_COLORS = {"Retatrutide":"#2f6fed","Tirzepatide":"#7a4de0","GHK-Cu":"#c27a3e","Glutathione":"#e0b93a","KPV":"#c0392b","MOTS-c":"#2fb36b","Tesamorelin":"#d94f8a","Wolverine Blend":"#e25822","HGH":"#39b6e8","Semax":"#5e60ce","The Big T":"#9a7b2f","Bacteriostatic Water":"#dfe4ea"};
   var shotSeq = 0;
-  function shotShade(hex, amt) {
-    var n = parseInt(hex.slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255;
-    var t = amt < 0 ? 0 : 255, p = Math.abs(amt);
-    return "rgb(" + Math.round(r + (t - r) * p) + "," + Math.round(g + (t - g) * p) + "," + Math.round(b + (t - b) * p) + ")";
-  }
   function shotEsc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
   function shotFit(text, max, width) { return Math.min(max, width / (Math.max(text.length, 1) * 0.6)).toFixed(1); }
   function vialSVG(name, dose, liquid) {
     var u = "v" + (++shotSeq);
-    var cap = CAP_COLORS[name] || "#8a8f98";
-    var n = parseInt(cap.slice(1), 16);
-    var lightCap = ((n >> 16) * 0.299 + ((n >> 8) & 255) * 0.587 + (n & 255) * 0.114) > 170;
-    var bandInk = lightCap ? "#1a1a1a" : "#ffffff";
     var lines = [name];
     if (name.length > 12 && name.indexOf(" ") !== -1) {
       var words = name.split(" "), best = 1, bestDiff = 1e9;
@@ -1683,52 +1674,66 @@
       lines = [words.slice(0, best).join(" "), words.slice(best).join(" ")];
     }
     var longest = lines[0].length > (lines[1] || "").length ? lines[0] : lines[1];
-    var nameFs = shotFit(longest, lines.length > 1 ? 14.5 : 17, 104);
+    var nameFs = shotFit(longest, lines.length > 1 ? 14 : 16.5, 100);
     var nameSvg = lines.length > 1
-      ? "<text x='100' y='179' font-size='" + nameFs + "' class='vl-name'>" + shotEsc(lines[0]) + "</text><text x='100' y='195' font-size='" + nameFs + "' class='vl-name'>" + shotEsc(lines[1]) + "</text>"
-      : "<text x='100' y='188' font-size='" + nameFs + "' class='vl-name'>" + shotEsc(lines[0]) + "</text>";
-    var body = "M40,114 Q40,98 58,93 L74,87 L74,70 L126,70 L126,87 L142,93 Q160,98 160,114 L160,290 Q160,306 144,306 L56,306 Q40,306 40,290 Z";
+      ? "<text x='100' y='177' font-size='" + nameFs + "' class='vl-name'>" + shotEsc(lines[0]) + "</text><text x='100' y='192' font-size='" + nameFs + "' class='vl-name'>" + shotEsc(lines[1]) + "</text>"
+      : "<text x='100' y='185' font-size='" + nameFs + "' class='vl-name'>" + shotEsc(lines[0]) + "</text>";
+    var body = "M40,117 C40,102 56,98 72,94 L72,82 L128,82 L128,94 C144,98 160,102 160,117 L160,270 C160,278 133,282 100,282 C67,282 40,278 40,270 Z";
     var contents = liquid
-      ? "<rect x='42' y='112' width='116' height='192' rx='12' fill='rgba(170,215,255,0.20)'/><ellipse cx='100' cy='113' rx='57' ry='4.5' fill='rgba(255,255,255,0.28)'/><ellipse cx='100' cy='113' rx='57' ry='4.5' fill='none' stroke='rgba(255,255,255,0.35)' stroke-width='0.8'/>"
-      : "<path d='M42,266 q14,-7 30,-4 t28,-2 t30,3 t28,-3 L158,306 L42,306 Z' fill='url(#" + u + "k)'/><path d='M42,266 q14,-7 30,-4 t28,-2 t30,3 t28,-3' fill='none' stroke='rgba(255,255,255,0.9)' stroke-width='1'/><g fill='rgba(0,0,0,0.10)'><circle cx='66' cy='280' r='1.6'/><circle cx='92' cy='290' r='1.3'/><circle cx='118' cy='278' r='1.5'/><circle cx='138' cy='292' r='1.2'/><circle cx='80' cy='296' r='1'/></g>";
-    return "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 326' role='img' aria-label='" + shotEsc(name) + " vial'>" +
+      ? "<path d='M40,123 L40,270 C40,278 67,282 100,282 C133,282 160,278 160,270 L160,123 Z' fill='rgba(185,222,255,0.17)'/>" +
+        "<ellipse cx='100' cy='123' rx='59.5' ry='6.5' fill='rgba(255,255,255,0.16)' stroke='rgba(255,255,255,0.45)' stroke-width='0.9'/>"
+      : "<path d='M40,252 L40,270 C40,278 67,282 100,282 C133,282 160,278 160,270 L160,252 Z' fill='url(#" + u + "k)'/>" +
+        "<path d='M40,252 L40,270 C40,278 67,282 100,282 C133,282 160,278 160,270 L160,252 Z' fill='url(#" + u + "l)' opacity='0.75'/>" +
+        "<ellipse cx='100' cy='252' rx='60' ry='6.5' fill='#fdfdfb'/>" +
+        "<path d='M48,251 q10,-2.2 20,-0.6 t22,0.2 t20,-0.8 t22,0.9 t20,-0.5' fill='none' stroke='#d9d8d2' stroke-width='0.8'/>" +
+        "<g fill='#cfcec8'><circle cx='70' cy='254' r='0.9'/><circle cx='96' cy='255.5' r='0.8'/><circle cx='121' cy='254.4' r='1'/><circle cx='140' cy='252.6' r='0.7'/></g>";
+    return "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 22 200 276' role='img' aria-label='" + shotEsc(name) + " vial'>" +
       "<defs>" +
-      "<linearGradient id='" + u + "b' x1='0' x2='1'><stop offset='0' stop-color='#3a3f45'/><stop offset='0.5' stop-color='#1d2024'/><stop offset='1' stop-color='#30343a'/></linearGradient>" +
-      "<linearGradient id='" + u + "g' x1='0' x2='1'><stop offset='0' stop-color='#fff' stop-opacity='0.42'/><stop offset='0.07' stop-color='#fff' stop-opacity='0.12'/><stop offset='0.22' stop-color='#fff' stop-opacity='0.03'/><stop offset='0.6' stop-color='#fff' stop-opacity='0.02'/><stop offset='0.86' stop-color='#fff' stop-opacity='0.07'/><stop offset='0.95' stop-color='#fff' stop-opacity='0.2'/><stop offset='1' stop-color='#fff' stop-opacity='0.34'/></linearGradient>" +
-      "<linearGradient id='" + u + "c' x1='0' x2='1'><stop offset='0' stop-color='" + shotShade(cap, -0.3) + "'/><stop offset='0.16' stop-color='" + shotShade(cap, 0.38) + "'/><stop offset='0.34' stop-color='" + cap + "'/><stop offset='0.78' stop-color='" + shotShade(cap, -0.18) + "'/><stop offset='1' stop-color='" + shotShade(cap, -0.5) + "'/></linearGradient>" +
-      "<linearGradient id='" + u + "a' x1='0' x2='1'><stop offset='0' stop-color='#7b8087'/><stop offset='0.14' stop-color='#f5f6f7'/><stop offset='0.32' stop-color='#b9bdc3'/><stop offset='0.55' stop-color='#e6e8eb'/><stop offset='0.8' stop-color='#989da4'/><stop offset='1' stop-color='#5d6168'/></linearGradient>" +
-      "<linearGradient id='" + u + "l' x1='0' x2='1'><stop offset='0' stop-color='#000' stop-opacity='0.34'/><stop offset='0.14' stop-color='#000' stop-opacity='0.04'/><stop offset='0.45' stop-color='#fff' stop-opacity='0.10'/><stop offset='0.8' stop-color='#000' stop-opacity='0.05'/><stop offset='1' stop-color='#000' stop-opacity='0.38'/></linearGradient>" +
-      "<linearGradient id='" + u + "k' x1='0' x2='0' y1='0' y2='1'><stop offset='0' stop-color='#ffffff'/><stop offset='1' stop-color='#d5d5d0'/></linearGradient>" +
-      "<filter id='" + u + "s' x='-30%' y='-200%' width='160%' height='500%'><feGaussianBlur stdDeviation='5'/></filter>" +
-      "<filter id='" + u + "h' x='-200%' y='-5%' width='500%' height='110%'><feGaussianBlur stdDeviation='1.2'/></filter>" +
+      "<linearGradient id='" + u + "b' x1='0' x2='1'><stop offset='0' stop-color='#454a51'/><stop offset='0.18' stop-color='#22252a'/><stop offset='0.5' stop-color='#16181b'/><stop offset='0.82' stop-color='#202328'/><stop offset='1' stop-color='#3b4046'/></linearGradient>" +
+      "<linearGradient id='" + u + "g' x1='0' x2='1'><stop offset='0' stop-color='#fff' stop-opacity='0.5'/><stop offset='0.05' stop-color='#fff' stop-opacity='0.14'/><stop offset='0.2' stop-color='#fff' stop-opacity='0.03'/><stop offset='0.62' stop-color='#fff' stop-opacity='0.02'/><stop offset='0.88' stop-color='#fff' stop-opacity='0.08'/><stop offset='0.96' stop-color='#fff' stop-opacity='0.2'/><stop offset='1' stop-color='#fff' stop-opacity='0.4'/></linearGradient>" +
+      "<linearGradient id='" + u + "c' x1='0' x2='1'><stop offset='0' stop-color='#050506'/><stop offset='0.13' stop-color='#5d6168'/><stop offset='0.26' stop-color='#26282c'/><stop offset='0.62' stop-color='#131416'/><stop offset='0.86' stop-color='#2e3035'/><stop offset='1' stop-color='#020202'/></linearGradient>" +
+      "<radialGradient id='" + u + "t' cx='0.34' cy='0.3' r='0.9'><stop offset='0' stop-color='#6a6e75'/><stop offset='0.45' stop-color='#2c2e33'/><stop offset='1' stop-color='#141517'/></radialGradient>" +
+      "<linearGradient id='" + u + "a' x1='0' x2='1'><stop offset='0' stop-color='#6e737a'/><stop offset='0.1' stop-color='#f7f8f9'/><stop offset='0.24' stop-color='#b4b8be'/><stop offset='0.42' stop-color='#eceef0'/><stop offset='0.6' stop-color='#a9adb3'/><stop offset='0.82' stop-color='#d7dadd'/><stop offset='1' stop-color='#585c63'/></linearGradient>" +
+      "<linearGradient id='" + u + "l' x1='0' x2='1'><stop offset='0' stop-color='#000' stop-opacity='0.42'/><stop offset='0.12' stop-color='#000' stop-opacity='0.08'/><stop offset='0.4' stop-color='#fff' stop-opacity='0.12'/><stop offset='0.78' stop-color='#000' stop-opacity='0.06'/><stop offset='1' stop-color='#000' stop-opacity='0.46'/></linearGradient>" +
+      "<linearGradient id='" + u + "k' x1='0' x2='0' y1='0' y2='1'><stop offset='0' stop-color='#f4f3ef'/><stop offset='1' stop-color='#cfcec8'/></linearGradient>" +
+      "<linearGradient id='" + u + "v' x1='0' x2='0' y1='0' y2='1'><stop offset='0' stop-color='#fff' stop-opacity='0'/><stop offset='0.12' stop-color='#fff' stop-opacity='1'/><stop offset='0.8' stop-color='#fff' stop-opacity='0.85'/><stop offset='1' stop-color='#fff' stop-opacity='0'/></linearGradient>" +
+      "<filter id='" + u + "s' x='-40%' y='-300%' width='180%' height='700%'><feGaussianBlur stdDeviation='6'/></filter>" +
+      "<filter id='" + u + "s2' x='-40%' y='-300%' width='180%' height='700%'><feGaussianBlur stdDeviation='2'/></filter>" +
+      "<filter id='" + u + "h' x='-300%' y='-5%' width='700%' height='110%'><feGaussianBlur stdDeviation='1.3'/></filter>" +
       "<clipPath id='" + u + "p'><path d='" + body + "'/></clipPath>" +
       "</defs>" +
-      "<ellipse cx='100' cy='310' rx='66' ry='8' fill='#000' opacity='0.6' filter='url(#" + u + "s)'/>" +
-      "<path d='" + body + "' fill='url(#" + u + "b)' fill-opacity='0.82'/>" +
+      "<ellipse cx='100' cy='284' rx='70' ry='9' fill='#000' opacity='0.55' filter='url(#" + u + "s)'/>" +
+      "<ellipse cx='100' cy='281' rx='54' ry='4.5' fill='#000' opacity='0.8' filter='url(#" + u + "s2)'/>" +
+      "<path d='" + body + "' fill='url(#" + u + "b)' fill-opacity='0.86'/>" +
       "<g clip-path='url(#" + u + "p)'>" + contents +
-        "<rect x='40' y='138' width='120' height='110' fill='#f7f6f2'/>" +
-        "<rect x='40' y='138' width='120' height='22' fill='" + cap + "'/>" +
-        "<text x='100' y='153' font-size='8.6' class='vl-brand' fill='" + bandInk + "'>&#9733; 5 STAR PEPS</text>" +
+        "<path d='M40,133 Q100,141 160,133 L160,233 Q100,241 40,233 Z' fill='#f6f5f1'/>" +
+        "<path d='M40,133 Q100,141 160,133 L160,154 Q100,162 40,154 Z' fill='#0d0d0e'/>" +
+        "<text x='100' y='152.5' font-size='8.4' class='vl-brand' fill='#fff'>&#9733; 5 STAR PEPS</text>" +
         nameSvg +
-        "<text x='100' y='219' font-size='" + shotFit(dose, 21, 90) + "' class='vl-dose'>" + shotEsc(dose) + "</text>" +
-        "<line x1='54' y1='227' x2='146' y2='227' stroke='#1a1a1a' stroke-opacity='0.22' stroke-width='0.7'/>" +
-        "<text x='100' y='239' font-size='6.1' class='vl-fine'>RESEARCH USE ONLY</text>" +
-        "<rect x='40' y='138' width='120' height='110' fill='url(#" + u + "l)'/>" +
-        "<rect x='40' y='137.4' width='120' height='1.2' fill='#000' opacity='0.25'/><rect x='40' y='247.4' width='120' height='1.4' fill='#000' opacity='0.3'/>" +
+        "<text x='100' y='213' font-size='" + shotFit(dose, 20, 88) + "' class='vl-dose'>" + shotEsc(dose) + "</text>" +
+        "<path d='M56,219 Q100,224 144,219' fill='none' stroke='#1a1a1a' stroke-opacity='0.25' stroke-width='0.7'/>" +
+        "<text x='100' y='232' font-size='5.8' class='vl-fine'>RESEARCH USE ONLY</text>" +
+        "<path d='M40,133 Q100,141 160,133 L160,233 Q100,241 40,233 Z' fill='url(#" + u + "l)'/>" +
+        "<path d='M40,233 Q100,241 160,233' fill='none' stroke='#000' stroke-opacity='0.35' stroke-width='1.4'/>" +
+        "<path d='M40,133 Q100,141 160,133' fill='none' stroke='#000' stroke-opacity='0.3' stroke-width='1'/>" +
       "</g>" +
       "<path d='" + body + "' fill='url(#" + u + "g)'/>" +
-      "<path d='" + body + "' fill='none' stroke='rgba(255,255,255,0.34)' stroke-width='1.1'/>" +
-      "<rect x='48.5' y='106' width='7' height='190' rx='3.5' fill='#fff' opacity='0.34' filter='url(#" + u + "h)'/>" +
-      "<rect x='59' y='110' width='2.4' height='180' rx='1.2' fill='#fff' opacity='0.14'/>" +
-      "<rect x='146.5' y='112' width='4' height='178' rx='2' fill='#fff' opacity='0.13'/>" +
-      "<path d='M46,300 Q100,309 154,300' fill='none' stroke='rgba(255,255,255,0.22)' stroke-width='1'/>" +
-      "<rect x='66' y='63' width='68' height='10' rx='4.5' fill='#2c3035' stroke='rgba(255,255,255,0.35)' stroke-width='0.9'/>" +
-      "<rect x='61' y='38' width='78' height='27' rx='3.5' fill='url(#" + u + "a)'/>" +
-      "<rect x='59.5' y='58' width='81' height='8.5' rx='4' fill='url(#" + u + "a)'/><rect x='59.5' y='58' width='81' height='8.5' rx='4' fill='#000' opacity='0.16'/>" +
-      "<rect x='61' y='43' width='78' height='1' fill='#000' opacity='0.14'/><rect x='61' y='52' width='78' height='0.8' fill='#fff' opacity='0.5'/>" +
-      "<rect x='57' y='13' width='86' height='28' rx='6.5' fill='url(#" + u + "c)'/>" +
-      "<rect x='57' y='36.5' width='86' height='4.5' rx='2' fill='#000' opacity='0.22'/>" +
-      "<ellipse cx='100' cy='15.6' rx='37' ry='2.6' fill='#fff' opacity='0.3'/>" +
+      "<path d='" + body + "' fill='none' stroke='rgba(255,255,255,0.38)' stroke-width='1.1'/>" +
+      "<rect x='47' y='108' width='8' height='164' rx='4' fill='url(#" + u + "v)' opacity='0.42' filter='url(#" + u + "h)'/>" +
+      "<rect x='58.5' y='112' width='2.2' height='154' rx='1.1' fill='url(#" + u + "v)' opacity='0.16'/>" +
+      "<rect x='148' y='112' width='3.6' height='156' rx='1.8' fill='url(#" + u + "v)' opacity='0.16'/>" +
+      "<path d='M49,110 C52,103 61,100 70,97.5' fill='none' stroke='#fff' stroke-opacity='0.5' stroke-width='2' stroke-linecap='round' filter='url(#" + u + "h)'/>" +
+      "<path d='M44,268 C44,275 68,279 100,279 C132,279 156,275 156,268' fill='none' stroke='rgba(255,255,255,0.28)' stroke-width='1'/>" +
+      "<path d='M64,56 L64,82 C64,87 80,90 100,90 C120,90 136,87 136,82 L136,56 Z' fill='url(#" + u + "a)'/>" +
+      "<path d='M64,77 C64,82 80,85 100,85 C120,85 136,82 136,77 L136,82 C136,87 120,90 100,90 C80,90 64,87 64,82 Z' fill='#000' opacity='0.2'/>" +
+      "<path d='M64,76.5 C64,81.5 80,84.5 100,84.5 C120,84.5 136,81.5 136,76.5' fill='none' stroke='#fff' stroke-opacity='0.55' stroke-width='0.8'/>" +
+      "<path d='M64,66 C64,71 80,74 100,74 C120,74 136,71 136,66' fill='none' stroke='#000' stroke-opacity='0.12' stroke-width='0.8'/>" +
+      "<path d='M58,42 L58,54 C58,60 77,63.5 100,63.5 C123,63.5 142,60 142,54 L142,42 Z' fill='url(#" + u + "c)'/>" +
+      "<path d='M58,53 C58,59 77,62.5 100,62.5 C123,62.5 142,59 142,53' fill='none' stroke='#000' stroke-opacity='0.5' stroke-width='1.6'/>" +
+      "<ellipse cx='100' cy='42' rx='42' ry='7.5' fill='url(#" + u + "t)'/>" +
+      "<ellipse cx='100' cy='42' rx='42' ry='7.5' fill='none' stroke='#fff' stroke-opacity='0.3' stroke-width='0.9'/>" +
+      "<ellipse cx='100' cy='42.6' rx='30' ry='4.6' fill='none' stroke='#000' stroke-opacity='0.35' stroke-width='0.8'/>" +
+      "<ellipse cx='86' cy='40' rx='16' ry='2.2' fill='#fff' opacity='0.16'/>" +
       "</svg>";
   }
   function syringeSVG() {
@@ -1757,7 +1762,7 @@
     wrap.classList.toggle("pc-shot-out", !!(prod.outOfStock && !prod.comingSoon));
     if ((prod.id || "").indexOf("starter") === 0) return;
     var t = wrap.querySelector(".vl-dose");
-    if (t) { t.textContent = prod.dose || ""; t.setAttribute("font-size", shotFit(prod.dose || "", 21, 90)); }
+    if (t) { t.textContent = prod.dose || ""; t.setAttribute("font-size", shotFit(prod.dose || "", 20, 88)); }
   }
 
   function groupProducts() {
