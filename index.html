@@ -1110,7 +1110,7 @@
             <li><span class="hs-n">2</span><div><b>Pay with Zelle</b><em>Zelle the total to our business tag 5starpeps (or scan our QR code), then text us a screenshot. No card fees.</em></div></li>
             <li><span class="hs-n">3</span><div><b>Ships fast</b><em>Same or next business day, with tracking.</em></div></li>
           </ol>
-          <p class="hs-foot">Free shipping on orders $250+</p>
+          <p class="hs-foot">Free shipping on orders $200+</p>
         </div>
 
         </div>
@@ -1121,7 +1121,7 @@
     <div class="wrap">
       <div class="trust-grid">
         <div class="tg-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg><div><b>Third-party tested</b><span>Identity and purity verified on every batch</span></div></div>
-        <div class="tg-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.5l9-4.5 9 4.5v9l-9 4.5-9-4.5v-9z"/><path d="M3 7.5l9 4.5 9-4.5M12 12v9"/></svg><div><b>Free shipping on $250+</b><span>805 local delivery $5 (Mon &amp; Thu)</span></div></div>
+        <div class="tg-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.5l9-4.5 9 4.5v9l-9 4.5-9-4.5v-9z"/><path d="M3 7.5l9 4.5 9-4.5M12 12v9"/></svg><div><b>Free shipping on $200+</b><span>805 local delivery $5 (Mon &amp; Thu)</span></div></div>
         <div class="tg-item"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b>Ships same or next business day</b><span>Tracking sent when your order ships</span></div></div>
         <div class="tg-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><div><b>USA based &amp; operated</b><span>Direct from manufacturer, no middlemen</span></div></div>
       </div>
@@ -1256,7 +1256,7 @@
         </details>
         <details class="faq-item">
           <summary>How much is shipping?</summary>
-          <p>Shipping is a flat $15, and orders of $250 or more ship free. If you're in the 805 area, local delivery is $5 on Mondays and Thursdays. Enter your zip code at checkout to see your rate.</p>
+          <p>Shipping is a flat $15, and orders of $200 or more ship free. If you're in the 805 area, local delivery is $5 on Mondays and Thursdays. Enter your zip code at checkout to see your rate.</p>
         </details>
         <details class="faq-item">
           <summary>What is your return and refund policy?</summary>
@@ -1484,7 +1484,7 @@
 <script>
   var PRODUCTS = [
     {id:"reta10",     name:"Retatrutide",          dose:"10mg",    price:85,  tag:"BEST SELLER", maxQty:13, desc:"Lyophilized vial, single peptide. Purity: 99.93%."},
-    {id:"reta20",     name:"Retatrutide",           dose:"20mg",    price:115, tag:"TOP SELLER", maxQty:22, desc:"Lyophilized vial, single peptide. Purity: 99.93%."},
+    {id:"reta20",     name:"Retatrutide",           dose:"20mg",    price:115, tag:"BEST VALUE", maxQty:22, desc:"Lyophilized vial, single peptide. Purity: 99.93%."},
     {id:"tirz30",     name:"Tirzepatide",            dose:"30mg",    price:135, tag:null, maxQty:10, desc:"Lyophilized vial, single peptide. Purity: 99.96%."},
     {id:"reta30",     name:"Retatrutide",            dose:"30mg",    price:155, tag:"LOW STOCK", maxQty:1, desc:"Lyophilized vial, single peptide. Purity: 99.93%."},
     {id:"ghk50",      name:"GHK-Cu",                dose:"50mg",    price:40,  tag:"TOP SELLER", maxQty:17,          desc:"Copper peptide complex, lyophilized. Purity: 99.97%."},
@@ -1609,7 +1609,7 @@
 
   function shippingFee(zip) {
     var sub = cartTotal();
-    if (sub >= 250) return 0;
+    if (sub >= 200) return 0;
     if (zip && AREA_805.indexOf(zip) !== -1) return 5;
     return 15;
   }
@@ -2051,10 +2051,10 @@
     if (totEl) totEl.textContent = "$" + t.total;
     var sbText = document.getElementById("shipBarText"), sbFill = document.getElementById("shipBarFill");
     if (sbText && sbFill) {
-      var sbLeft = 250 - sub;
+      var sbLeft = 200 - sub;
       if (sbLeft > 0) {
         sbText.innerHTML = "You're <b>$" + sbLeft + "</b> away from <b>free shipping</b>";
-        sbFill.style.width = Math.max(4, Math.min(100, Math.round(sub / 250 * 100))) + "%";
+        sbFill.style.width = Math.max(4, Math.min(100, Math.round(sub / 200 * 100))) + "%";
       } else {
         sbText.innerHTML = "&#127881; You've unlocked <b>free shipping</b>";
         sbFill.style.width = "100%";
@@ -2182,15 +2182,15 @@
     if (!msg) return;
     var sub = cartTotal();
     if (zip.length === 5) {
-      if (sub >= 250) {
-        msg.innerHTML = "<span style='color:#6ee7b7;'>Free shipping - order over $250!</span>";
+      if (sub >= 200) {
+        msg.innerHTML = "<span style='color:#6ee7b7;'>Free shipping - order over $200!</span>";
       } else if (AREA_805.indexOf(zip) !== -1) {
         msg.innerHTML = "<span style='color:#6ee7b7;'>$5 local delivery - you are in the 805! Delivery is Mondays &amp; Thursdays only.</span>";
       } else {
         msg.innerHTML = "<span style='color:rgba(255,255,255,0.5);'>Outside 805 - $15 shipping applies.</span>";
       }
     } else {
-      msg.innerHTML = sub >= 250 ? "<span style='color:#6ee7b7;'>Free shipping - order over $250!</span>" : "";
+      msg.innerHTML = sub >= 200 ? "<span style='color:#6ee7b7;'>Free shipping - order over $200!</span>" : "";
     }
   }
 
@@ -2684,7 +2684,7 @@ renderProducts();
         <h4>4. Shipping and local delivery</h4>
         <ul>
           <li>Most orders ship the same or next business day after payment is confirmed. Delivery usually takes 2 to 4 business days within the U.S. These are estimates, not guarantees.</li>
-          <li>Shipping is a flat $15, and orders of $250 or more ship free.</li>
+          <li>Shipping is a flat $15, and orders of $200 or more ship free.</li>
           <li>Local delivery in the 805 area is $5 and is made on Mondays and Thursdays.</li>
           <li>You are responsible for giving us a correct and complete address. Once a package is handed to the carrier, the risk of loss passes to you.</li>
         </ul>
