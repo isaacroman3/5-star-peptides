@@ -1348,12 +1348,12 @@
         <div id="mixingRow" style="display:none;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.07);">
           <input type="checkbox" id="mixingService" style="width:18px;height:18px;cursor:pointer;accent-color:#fff;flex-shrink:0;" onclick="mixingService=this.checked;renderCart();">
           <label for="mixingService" style="font-size:13px;font-weight:600;color:#fff;cursor:pointer;flex:1;">Mixing service <span style="color:rgba(255,255,255,0.45);font-size:11.5px;">bac water or packs</span></label>
-          <span style="font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:13px;color:#fff;flex-shrink:0;">+$5</span>
+          <span id="mixingQtyWrap" style="display:none;align-items:center;gap:6px;flex-shrink:0;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#fff;"><button type="button" onclick="addonQty('mixing',-1)" aria-label="Decrease quantity" style="width:24px;height:24px;border:1px solid rgba(255,255,255,0.3);background:transparent;color:#fff;border-radius:3px;cursor:pointer;font-size:14px;line-height:1;">&minus;</button><span id="mixingQty" style="min-width:16px;text-align:center;">1</span><button type="button" onclick="addonQty('mixing',1)" aria-label="Increase quantity" style="width:24px;height:24px;border:1px solid rgba(255,255,255,0.3);background:transparent;color:#fff;border-radius:3px;cursor:pointer;font-size:14px;line-height:1;">+</button></span><span id="mixingPrice" style="font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:13px;color:#fff;flex-shrink:0;min-width:34px;text-align:right;">+$5</span>
         </div>
         <div id="prefillRow" style="display:none;align-items:center;gap:10px;padding:8px 0;margin-bottom:4px;">
           <input type="checkbox" id="prefillService" style="width:18px;height:18px;cursor:pointer;accent-color:#fff;flex-shrink:0;" onclick="prefillService=this.checked;renderCart();">
           <label for="prefillService" style="font-size:13px;font-weight:600;color:#fff;cursor:pointer;flex:1;">Pre-fill needles <span style="color:rgba(255,255,255,0.45);font-size:11.5px;">pack orders only</span></label>
-          <span style="font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:13px;color:#fff;flex-shrink:0;">+$10</span>
+          <span id="prefillQtyWrap" style="display:none;align-items:center;gap:6px;flex-shrink:0;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#fff;"><button type="button" onclick="addonQty('prefill',-1)" aria-label="Decrease quantity" style="width:24px;height:24px;border:1px solid rgba(255,255,255,0.3);background:transparent;color:#fff;border-radius:3px;cursor:pointer;font-size:14px;line-height:1;">&minus;</button><span id="prefillQty" style="min-width:16px;text-align:center;">1</span><button type="button" onclick="addonQty('prefill',1)" aria-label="Increase quantity" style="width:24px;height:24px;border:1px solid rgba(255,255,255,0.3);background:transparent;color:#fff;border-radius:3px;cursor:pointer;font-size:14px;line-height:1;">+</button></span><span id="prefillPrice" style="font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:13px;color:#fff;flex-shrink:0;min-width:34px;text-align:right;">+$10</span>
         </div>
       </div>
       <div style="display:flex;gap:6px;margin-bottom:6px;">
@@ -1497,11 +1497,11 @@
     {id:"wolverine10",name:"Wolverine Blend",       dose:"10mg",    price:60,  tag:null, desc:"Multi-peptide blend, lyophilized vial. Purity: 99.94%."},
     {id:"wolverine20",name:"Wolverine Blend",       dose:"20mg",    price:90,  tag:null, maxQty:8, desc:"Multi-peptide blend, lyophilized vial. Purity: 99.94%."},
     {id:"starter",    name:"Starter Pack",          dose:"Bundle",  price:110, tag:"TOP SELLER", desc:"Reta 10mg + Bac Water + needles + alcohol wipes. Everything to get started. Purity: 99.93%."},
-    {id:"starter20",   name:"Pro Pack",      dose:"Bundle",  price:140, tag:"NEW", desc:"Reta 20mg + Bac Water + needles + alcohol wipes. More bang for your buck. Purity: 99.93%."},
-    {id:"starter30",   name:"Max Pack",      dose:"Bundle",  price:180, tag:"NEW", desc:"Reta 30mg + Bac Water + needles + alcohol wipes. Our biggest bundle. Purity: 99.93%."},
-    {id:"hgh",        name:"HGH",                   dose:"36IU", price:50, tag:"NEW", desc:"Lyophilized vial. Purity: 99.94%."},
+    {id:"starter20",   name:"Pro Pack",      dose:"Bundle",  price:140, desc:"Reta 20mg + Bac Water + needles + alcohol wipes. More bang for your buck. Purity: 99.93%."},
+    {id:"starter30",   name:"Max Pack",      dose:"Bundle",  price:180, desc:"Reta 30mg + Bac Water + needles + alcohol wipes. Our biggest bundle. Purity: 99.93%."},
+    {id:"hgh",        name:"HGH",                   dose:"36IU", price:50, desc:"Lyophilized vial. Purity: 99.94%."},
     {id:"semax10",    name:"Semax",                  dose:"10mg",    price:40,  tag:null, maxQty:8, desc:"Lyophilized vial. Purity: 99.95%."},
-    {id:"bigt250",    name:"The Big T",             dose:"250mg/10mL", price:100, tag:"NEW", outOfStock:true, desc:"Multi-dose vial. Purity: 99.94%."},
+    {id:"bigt250",    name:"The Big T",             dose:"250mg/10mL", price:100, outOfStock:true, desc:"Multi-dose vial. Purity: 99.94%."},
     {id:"bac3",       name:"Bacteriostatic Water",  dose:"3mL",     price:10,  tag:null, maxQty:27,          desc:"Sterile, for reconstitution."},
     {id:"bac10",      name:"Bacteriostatic Water",  dose:"10mL",    price:15,  tag:null, maxQty:21, desc:"Sterile, for reconstitution."}
   ];
@@ -1596,7 +1596,7 @@
     var sub = cartTotal();
     var disc = discountAmount();
     var fee = shippingFee(zip || currentZip || "");
-    var addon = (mixingService ? 5 : 0) + (prefillService ? 10 : 0);
+    var addon = (mixingService ? 5 * mixingQty : 0) + (prefillService ? 10 * prefillQty : 0);
     return { sub: sub, disc: disc, total: sub - disc + fee + addon, fee: fee, addon: addon };
   }
 
@@ -1940,6 +1940,18 @@
       if (prefillBox) prefillBox.checked = false;
     }
     if (prefillRow) prefillRow.style.display = hasPack ? "flex" : "none";
+    var packCount = (cart["starter"] || 0) + (cart["starter20"] || 0) + (cart["starter30"] || 0);
+    if (!prefillService) prefillQty = 1;
+    if (prefillQty > Math.max(1, packCount)) prefillQty = Math.max(1, packCount);
+    if (!mixingService) mixingQty = 1;
+    var pqw = document.getElementById("prefillQtyWrap"), pqn = document.getElementById("prefillQty"), ppr = document.getElementById("prefillPrice");
+    if (pqw) pqw.style.display = prefillService ? "flex" : "none";
+    if (pqn) pqn.textContent = prefillQty;
+    if (ppr) ppr.textContent = "+$" + (10 * prefillQty);
+    var mqw = document.getElementById("mixingQtyWrap"), mqn = document.getElementById("mixingQty"), mpr = document.getElementById("mixingPrice");
+    if (mqw) mqw.style.display = mixingService ? "flex" : "none";
+    if (mqn) mqn.textContent = mixingQty;
+    if (mpr) mpr.textContent = "+$" + (5 * mixingQty);
 
     var hasBac = (cart["bac3"] > 0) || (cart["bac10"] > 0) || hasPack;
     var mixingRow = document.getElementById("mixingRow");
@@ -2238,7 +2250,7 @@
     btn.textContent = "Sending...";
     btn.disabled = true;
     var needsLabel = !(zip.length === 5 && AREA_805.indexOf(zip) !== -1);
-    var payload = JSON.stringify({delivery_method: needsLabel ? "SHIP - LABEL NEEDED" : "LOCAL DELIVERY - NO LABEL", delivery_day: needsLabel ? "N/A - shipped" : deliveryDay, name:name, email:email, phone:phone, address:address, city:city, state:state, zip:zip, full_address:fullAddress, order_reference:ref, referred_by: referredBy || "None", total:total, items:items, shipping: shippingFee(zip.length === 5 ? zip : "")===0?"Free":"$" + shippingFee(zip.length === 5 ? zip : ""), mixing_service: mixingService ? "Yes +$5" : "No", prefill_needles: prefillService ? "Yes +$10" : "No", message:"New order from 5starpeps.com"});
+    var payload = JSON.stringify({delivery_method: needsLabel ? "SHIP - LABEL NEEDED" : "LOCAL DELIVERY - NO LABEL", delivery_day: needsLabel ? "N/A - shipped" : deliveryDay, name:name, email:email, phone:phone, address:address, city:city, state:state, zip:zip, full_address:fullAddress, order_reference:ref, referred_by: referredBy || "None", total:total, items:items, shipping: shippingFee(zip.length === 5 ? zip : "")===0?"Free":"$" + shippingFee(zip.length === 5 ? zip : ""), mixing_service: mixingService ? "Yes x" + mixingQty + " +$" + (5 * mixingQty) : "No", prefill_needles: prefillService ? "Yes x" + prefillQty + " +$" + (10 * prefillQty) : "No", message:"New order from 5starpeps.com"});
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "https://formspree.io/f/xdavkqbe", true);
     xhr.setRequestHeader("Content-Type", "application/json");
@@ -2266,9 +2278,18 @@
 
   var mixingService = false;
   var prefillService = false;
+  var mixingQty = 1;
+  var prefillQty = 1;
 
   function addonFee() {
-    return (mixingService ? 5 : 0) + (prefillService ? 10 : 0);
+    return (mixingService ? 5 * mixingQty : 0) + (prefillService ? 10 * prefillQty : 0);
+  }
+
+  function addonQty(which, delta) {
+    var maxPre = (cart["starter"] || 0) + (cart["starter20"] || 0) + (cart["starter30"] || 0);
+    if (which === "mixing") mixingQty = Math.max(1, Math.min(20, mixingQty + delta));
+    else prefillQty = Math.max(1, Math.min(Math.max(1, maxPre), prefillQty + delta));
+    renderCart();
   }
 
   document.addEventListener("change", function(e) {
