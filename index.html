@@ -1061,6 +1061,11 @@
   &#11088; Starting in <span id="countTarget">15 days</span>, 805 area delivery will be <span style="color:#a3160f;">$5</span> &mdash; free delivery ends soon: <span id="countdownClock">--</span>
 </div>
 
+<div id="bfBanner" style="background:#000;color:#fff;border-bottom:1px solid rgba(255,255,255,0.25);padding:12px 16px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:700;letter-spacing:0.03em;line-height:1.5;">
+  BLACK FRIDAY: 10% off with code <span style="background:#fff;color:#000;padding:2px 6px;border-radius:3px;">BLACKFRIDAY</span> through Nov 30
+</div>
+<script>if (Date.now() >= new Date("2026-12-01T00:00:00-08:00").getTime()) { var bfb = document.getElementById("bfBanner"); if (bfb) bfb.style.display = "none"; }</script>
+
 <div id="referralBanner" style="background:#fff;color:#000;padding:12px 16px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:700;letter-spacing:0.03em;line-height:1.5;">
   Refer someone new and get a discount on your next order
 </div>
@@ -1546,7 +1551,7 @@
   var CODE_ONLY = { "AAA": ["reta10", "reta20", "reta30"] };
   var appliedCodeName = "";
   var RETA_IDS = ["reta10", "reta20", "reta30", "starter", "starter20", "starter30"];
-  var CODES_ON_RETA = ["MONI", "BECCA"];
+  var CODES_ON_RETA = ["MONI", "BECCA", "BLACKFRIDAY"];
 
   function itemRate(id) {
     var eligible = NO_DISCOUNT_IDS.indexOf(id) === -1;
@@ -2304,14 +2309,15 @@
   });
 
 
-  var DISCOUNT_CODES = { "MONI": 0.20, "AAA": 0.10, "BECCA": 0.15 };
+  var DISCOUNT_CODES = { "MONI": 0.20, "AAA": 0.10, "BECCA": 0.15, "BLACKFRIDAY": 0.10 };
+  var BF_END = new Date("2026-12-01T00:00:00-08:00");
   var appliedDiscount = 0;
 
   function applyDiscount() {
     var input = document.getElementById("discountInput");
     var msg = document.getElementById("discountMsg");
     var code = input.value.trim().toUpperCase();
-    if (DISCOUNT_CODES[code] !== undefined) {
+    if (DISCOUNT_CODES[code] !== undefined && !(code === "BLACKFRIDAY" && Date.now() >= BF_END.getTime())) {
       appliedDiscount = DISCOUNT_CODES[code];
       appliedCodeName = code;
       var scope = CODE_ONLY[code] ? " on Retatrutide only." : " off.";
