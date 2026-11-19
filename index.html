@@ -2119,6 +2119,7 @@
   }
 
   var sessionRef = "";
+  var refFromCounter = false;
 
   function showZellePanel() {
     var zipInput = document.getElementById("orderZip");
@@ -2137,12 +2138,12 @@
       var setRef = function(r) { sessionRef = r; var e2 = document.getElementById("orderRef"); if (e2) e2.textContent = r; };
       try {
         var cx = new XMLHttpRequest();
-        cx.open("GET", "https://abacus.jasoncameron.dev/hit/5starpeps/orders", true);
+        cx.open("GET", "https://abacus.jasoncameron.dev/get/5starpeps/orders", true);
         cx.timeout = 4000;
         cx.onload = function() {
           var n = 0;
           try { n = JSON.parse(cx.responseText).value; } catch (e) {}
-          setRef(n > 0 ? "5SP-" + (1000 + n) : fallbackRef());
+          if (n >= 0 && cx.status === 200) { refFromCounter = true; setRef("5SP-" + (1001 + n)); } else { setRef(fallbackRef()); }
         };
         cx.onerror = cx.ontimeout = function() { setRef(fallbackRef()); };
         cx.send();
@@ -2265,6 +2266,8 @@
       if (xhr.status === 200) {
         btn.style.display = "none";
         gaPurchase(ref, total);
+        if (refFromCounter) { try { fetch("https://abacus.jasoncameron.dev/hit/5starpeps/orders", {mode: "no-cors", keepalive: true}); } catch (e3) {} }
+        refFromCounter = false;
         sessionRef = "";
         try { fetch(STOCK_URL, {method: "POST", mode: "no-cors", keepalive: true, headers: {"Content-Type": "text/plain"}, body: JSON.stringify({items: stockItems})}); } catch (e) {}
         var osr = el("osRef"); if (osr) osr.textContent = ref;
