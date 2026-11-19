@@ -520,10 +520,6 @@
   }
   .zelle-detail span:first-child{color:rgba(255,255,255,0.55);}
   .zelle-detail .zd-val{font-family:var(--mono); font-weight:700;}
-  .zelle-qr{background:#fff; border-radius:6px; padding:14px 14px 12px; margin:0 0 14px; text-align:center;}
-  .zelle-qr .zq-title{font-family:var(--mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#555 !important; margin-bottom:8px;}
-  .zelle-qr img{display:block; width:200px; max-width:70%; height:auto; margin:0 auto; image-rendering:pixelated;}
-  .zelle-qr .zq-help{font-size:12.5px; line-height:1.5; color:#333 !important; margin-top:10px;}
   .zelle-copy{
     background:var(--card); border:1px dashed var(--line-strong);
     border-radius:10px; padding:16px; margin:18px 0;
@@ -1107,7 +1103,7 @@
           <p class="hs-title">How ordering works</p>
           <ol>
             <li><span class="hs-n">1</span><div><b>Add to cart</b><em>Pick your items and check out. No account needed.</em></div></li>
-            <li><span class="hs-n">2</span><div><b>Pay with Zelle</b><em>Zelle the total to our business tag 5starpeps (or scan our QR code), then text us a screenshot. No card fees.</em></div></li>
+            <li><span class="hs-n">2</span><div><b>Pay with Zelle</b><em>Send the total and text us a screenshot. No card fees.</em></div></li>
             <li><span class="hs-n">3</span><div><b>Ships fast</b><em>Same or next business day, with tracking.</em></div></li>
           </ol>
           <p class="hs-foot">Free shipping on orders $250+</p>
@@ -1244,7 +1240,7 @@
         </details>
         <details class="faq-item">
           <summary>How do I pay?</summary>
-          <p>We accept Zelle for fast, fee-free payments. Add items to your cart, proceed to checkout, scan our Zelle QR code or send to our Zelle business tag, 5starpeps, and send the exact total. Text us a screenshot at (805) 901-3730 and we'll confirm and ship your order promptly.</p>
+          <p>We accept Zelle for fast, fee-free payments. Add items to your cart, proceed to checkout, and send the exact total to our Zelle number. Text us a screenshot at (805) 901-3730 and we'll confirm and ship your order promptly.</p>
         </details>
         <details class="faq-item">
           <summary>How long does shipping take?</summary>
@@ -1252,7 +1248,7 @@
         </details>
         <details class="faq-item">
           <summary>Can I get a certificate of analysis?</summary>
-          <p>Yes — every order ships with a batch-specific COA confirming identity and purity. If you need additional documentation, email us at support@5starpeps.com.</p>
+          <p>Yes — every order ships with a batch-specific COA confirming identity and purity. If you need additional documentation, contact us at (805) 901-3730.</p>
         </details>
         <details class="faq-item">
           <summary>How much is shipping?</summary>
@@ -1292,6 +1288,7 @@
         <h5>Help</h5>
         <a href="#faq">FAQ</a>
         <a href="mailto:support@5starpeps.com" class="js-email-us">Email us</a>
+        <a href="sms:+18059013730">Text (805) 901-3730</a>
         <h5 style="margin-top:22px;">Hours</h5>
         <p style="font-size:13.5px; color:rgba(255,255,255,0.75); margin:0;">Monday &ndash; Friday</p>
       </div>
@@ -1378,10 +1375,9 @@
         <div class="za-amount" id="zelleAmount">$0</div>
       </div>
 
-      <div class="zelle-qr">
-        <div class="zq-title">Pay with Zelle</div>
-        <img src="data:image/png;base64,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" alt="5 Star Peps Zelle QR code" width="200" height="200">
-        <div class="zq-help">Open your banking app, tap Zelle, then Send, and scan this code. Or send to our Zelle business tag: <b>5starpeps</b>. On a phone, you can screenshot the code and upload it from your photos if your app allows.</div>
+      <div class="zelle-copy">
+        <div><span>Zelle Number</span><b>(805) 901-3730</b></div>
+        <button class="copy-btn" id="copyZelle">Copy</button>
       </div>
 
       <div class="zelle-copy">
@@ -1446,9 +1442,9 @@
         </div>
       </div>
       <ol class="zelle-steps-list">
-        <li><span class="zsl-num">1.</span> Scan the Zelle QR code above, or send to our Zelle business tag <b>5starpeps</b>, for the exact total.</li>
+        <li><span class="zsl-num">1.</span> Open Zelle in your banking app and send the exact total above to <b>(805) 901-3730</b>.</li>
         <li><span class="zsl-num">2.</span> Leave the memo/note field blank.</li>
-        <li><span class="zsl-num">3.</span> Text a screenshot of the payment to <b>(805) 901-3730</b>.</li>
+        <li><span class="zsl-num">3.</span> Send a screenshot of the payment to <b>(805) 901-3730</b> .</li>
         <li><span class="zsl-num">4.</span> We confirm and ship within 1 business day of receiving payment.</li>
       </ol>
 
@@ -1470,7 +1466,7 @@
           </div>
         </div>
         <div style="text-align:left;background:#111;border:1px solid rgba(255,255,255,0.12);border-radius:4px;padding:12px 14px;font-size:13px;line-height:1.6;color:rgba(255,255,255,0.8);">
-          <div><b style="color:#fff;">1.</b> Scan the Zelle QR code in your cart, or send to our Zelle business tag <b style="color:#fff;">5starpeps</b>, for the exact amount.</div>
+          <div><b style="color:#fff;">1.</b> Send the exact amount to <b style="color:#fff;">(805) 901-3730</b> on Zelle.</div>
           <div><b style="color:#fff;">2.</b> Leave the memo/note blank.</div>
           <div><b style="color:#fff;">3.</b> We confirm your payment, then ship within 1 business day.</div>
         </div>
@@ -2193,6 +2189,10 @@
   on("stickyCartBtn","click", openCart);
   on("checkoutBtn", "click", function() { if (cartTotal() > 0) showZellePanel(); });
 
+  on("copyZelle", "click", function() {
+    if (navigator.clipboard) navigator.clipboard.writeText("8059013730");
+    var b = el("copyZelle"); if(b){b.textContent="Copied"; setTimeout(function(){b.textContent="Copy";},1200);}
+  });
   on("copyRef", "click", function() {
     var ref = el("orderRef"); if (!ref) return;
     if (navigator.clipboard) navigator.clipboard.writeText(ref.textContent);
@@ -2356,7 +2356,7 @@
         document.getElementById("contactPhone").value = "";
       } else {
         btn.textContent = "Send"; btn.disabled = false;
-        document.getElementById("contactMsg").innerHTML = "<span style='color:rgba(255,0,0,0.7);'>Something went wrong. Email us at support@5starpeps.com.</span>";
+        document.getElementById("contactMsg").innerHTML = "<span style='color:rgba(255,0,0,0.7);'>Something went wrong. Text us at (805) 901-3730.</span>";
       }
     };
     xhr.send(JSON.stringify({phone:phone, message:"Contact request from 5starpeps.com"}));
@@ -2643,7 +2643,7 @@ renderProducts();
         <h4>9. Changes to this policy</h4>
         <p>We may update this policy from time to time. The date at the top shows when it was last changed.</p>
         <h4>10. Contact</h4>
-        <p>Email <a href="mailto:support@5starpeps.com">support@5starpeps.com</a>, Monday to Friday.</p>
+        <p>Email <a href="mailto:support@5starpeps.com">support@5starpeps.com</a> or text <a href="sms:+18059013730">(805) 901-3730</a>, Monday to Friday.</p>
       </div>
       <div class="legal-doc" id="terms">
         <h3>Terms of Sale</h3>
@@ -2680,7 +2680,7 @@ renderProducts();
         <h4>10. Governing law</h4>
         <p>These terms are governed by the laws of the State of California.</p>
         <h4>11. Changes and contact</h4>
-        <p>We may update these terms. The version posted when you place your order is the one that applies to it. Questions? Email <a href="mailto:support@5starpeps.com">support@5starpeps.com</a>.</p>
+        <p>We may update these terms. The version posted when you place your order is the one that applies to it. Questions? Email <a href="mailto:support@5starpeps.com">support@5starpeps.com</a> or text <a href="sms:+18059013730">(805) 901-3730</a>.</p>
       </div>
     </div>
   </div>
