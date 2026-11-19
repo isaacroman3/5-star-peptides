@@ -1064,7 +1064,7 @@
 <div id="bfBanner" style="background:#000;color:#fff;border-bottom:1px solid rgba(255,255,255,0.25);padding:12px 16px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:700;letter-spacing:0.03em;line-height:1.5;">
   BLACK FRIDAY: 10% off with code <span style="background:#fff;color:#000;padding:2px 6px;border-radius:3px;">BLACKFRIDAY</span> through Nov 30
 </div>
-<script>if (Date.now() < new Date("2026-11-20T00:00:00-08:00").getTime() || Date.now() >= new Date("2026-12-01T00:00:00-08:00").getTime()) { var bfb = document.getElementById("bfBanner"); if (bfb) bfb.style.display = "none"; }</script>
+<script>if (Date.now() >= new Date("2026-12-01T00:00:00-08:00").getTime()) { var bfb = document.getElementById("bfBanner"); if (bfb) bfb.style.display = "none"; }</script>
 
 <div id="referralBanner" style="background:#fff;color:#000;padding:12px 16px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:700;letter-spacing:0.03em;line-height:1.5;">
   Refer someone new and get a discount on your next order
@@ -2310,7 +2310,6 @@
 
 
   var DISCOUNT_CODES = { "MONI": 0.20, "AAA": 0.10, "BECCA": 0.15, "BLACKFRIDAY": 0.10 };
-  var BF_START = new Date("2026-11-20T00:00:00-08:00");
   var BF_END = new Date("2026-12-01T00:00:00-08:00");
   var appliedDiscount = 0;
 
@@ -2318,7 +2317,7 @@
     var input = document.getElementById("discountInput");
     var msg = document.getElementById("discountMsg");
     var code = input.value.trim().toUpperCase();
-    if (DISCOUNT_CODES[code] !== undefined && !(code === "BLACKFRIDAY" && (Date.now() >= BF_END.getTime() || Date.now() < BF_START.getTime()))) {
+    if (DISCOUNT_CODES[code] !== undefined && !(code === "BLACKFRIDAY" && Date.now() >= BF_END.getTime())) {
       appliedDiscount = DISCOUNT_CODES[code];
       appliedCodeName = code;
       var scope = CODE_ONLY[code] ? " on Retatrutide only." : " off.";
@@ -2327,7 +2326,7 @@
     } else {
       appliedDiscount = 0;
       appliedCodeName = "";
-      msg.innerHTML = "<span style='color:rgba(255,0,0,0.7);'>" + (code === "BLACKFRIDAY" && Date.now() < BF_START.getTime() ? "This code starts Nov 20." : "Invalid code.") + "</span>";
+      msg.innerHTML = "<span style='color:rgba(255,0,0,0.7);'>Invalid code.</span>";
       renderCart();
     }
   }
