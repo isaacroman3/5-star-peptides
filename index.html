@@ -1492,15 +1492,15 @@
     {id:"reta20",     name:"Retatrutide",           dose:"20mg",    price:115, tag:"BEST VALUE", maxQty:22, desc:"Lyophilized vial, single peptide. Purity: 99.93%."},
     {id:"tirz30",     name:"Tirzepatide",            dose:"30mg",    price:135, tag:null, maxQty:10, desc:"Lyophilized vial, single peptide. Purity: 99.96%."},
     {id:"reta30",     name:"Retatrutide",            dose:"30mg",    price:155, tag:"LOW STOCK", maxQty:1, desc:"Lyophilized vial, single peptide. Purity: 99.93%."},
-    {id:"ghk50",      name:"GHK-Cu",                dose:"50mg",    price:40,  tag:"TOP SELLER", maxQty:17,          desc:"Copper peptide complex, lyophilized. Purity: 99.97%."},
+    {id:"ghk50",      name:"GHK-Cu",                dose:"50mg",    price:40,  tag:(Date.now() < new Date("2026-12-01T00:00:00-08:00").getTime() ? "3RD 50% OFF" : "TOP SELLER"), maxQty:17,          desc:"Copper peptide complex, lyophilized. Purity: 99.97%."},
     {id:"gluta600",   name:"Glutathione",           dose:"600mg",   price:55,  tag:null, maxQty:7,                  desc:"Antioxidant peptide, lyophilized vial. Purity: 99.95%."},
     {id:"kpv10",      name:"KPV",                   dose:"10mg",    price:40,  tag:(Date.now() < new Date("2026-12-01T00:00:00-08:00").getTime() ? "3RD 50% OFF" : null), maxQty:24,          desc:"Tripeptide, lyophilized vial. Purity: 99.95%."},
     {id:"motsc10",    name:"MOTS-c",                dose:"10mg",    price:40,  tag:null, outOfStock:true, desc:"Mitochondrial-derived peptide, lyophilized. Purity: 99.96%."},
-    {id:"motsc40",    name:"MOTS-c",                dose:"40mg",    price:140, tag:null, maxQty:3,          desc:"Mitochondrial-derived peptide, lyophilized. Purity: 99.96%."},
-    {id:"tesa10",     name:"Tesamorelin",           dose:"10mg",    price:70,  tag:null, maxQty:7,          desc:"Lyophilized vial, single peptide. Purity: 99.98%."},
-    {id:"tesa20",     name:"Tesamorelin",           dose:"20mg",    price:120, tag:null, maxQty:6, desc:"Lyophilized vial, single peptide. Purity: 99.98%."},
+    {id:"motsc40",    name:"MOTS-c",                dose:"40mg",    price:140, tag:(Date.now() < new Date("2026-12-01T00:00:00-08:00").getTime() ? "2ND 25% OFF" : null), maxQty:3,          desc:"Mitochondrial-derived peptide, lyophilized. Purity: 99.96%."},
+    {id:"tesa10",     name:"Tesamorelin",           dose:"10mg",    price:70,  tag:(Date.now() < new Date("2026-12-01T00:00:00-08:00").getTime() ? "3RD 50% OFF" : null), maxQty:7,          desc:"Lyophilized vial, single peptide. Purity: 99.98%."},
+    {id:"tesa20",     name:"Tesamorelin",           dose:"20mg",    price:120, tag:(Date.now() < new Date("2026-12-01T00:00:00-08:00").getTime() ? "3RD 50% OFF" : null), maxQty:6, desc:"Lyophilized vial, single peptide. Purity: 99.98%."},
     {id:"wolverine10",name:"Wolverine Blend",       dose:"10mg",    price:60,  tag:null, desc:"Multi-peptide blend, lyophilized vial. Purity: 99.94%."},
-    {id:"wolverine20",name:"Wolverine Blend",       dose:"20mg",    price:90,  tag:null, maxQty:8, desc:"Multi-peptide blend, lyophilized vial. Purity: 99.94%."},
+    {id:"wolverine20",name:"Wolverine Blend",       dose:"20mg",    price:(Date.now() < new Date("2026-12-01T00:00:00-08:00").getTime() ? 70 : 90),  tag:(Date.now() < new Date("2026-12-01T00:00:00-08:00").getTime() ? "SALE" : null), maxQty:8, desc:"Multi-peptide blend, lyophilized vial. Purity: 99.94%."},
     {id:"starter",    name:"Starter Pack",          dose:"Bundle",  price:110, tag:"TOP SELLER", desc:"Reta 10mg + Bac Water + needles + alcohol wipes. Everything to get started. Purity: 99.93%."},
     {id:"starter20",   name:"Pro Pack",      dose:"Bundle",  price:140, desc:"Reta 20mg + Bac Water + needles + alcohol wipes. More bang for your buck. Purity: 99.93%."},
     {id:"starter30",   name:"Max Pack",      dose:"Bundle",  price:180, desc:"Reta 30mg + Bac Water + needles + alcohol wipes. Our biggest bundle. Purity: 99.93%."},
@@ -1567,10 +1567,18 @@
 
   function kpvActive() { return Date.now() < new Date("2026-12-01T00:00:00-08:00").getTime(); }
 
+  var PROMO_RULES = { kpv10: {n: 3, off: 0.5}, ghk50: {n: 3, off: 0.5}, tesa10: {n: 3, off: 0.5}, tesa20: {n: 3, off: 0.5}, motsc40: {n: 2, off: 0.25} };
+
+  function dealFor(id) {
+    var r = PROMO_RULES[id], p = getProduct(id);
+    if (!r || !p || !kpvActive()) return 0;
+    return Math.floor((cart[id] || 0) / r.n) * p.price * r.off;
+  }
+
   function kpvPromo() {
-    var p = getProduct("kpv10");
-    if (!p || !kpvActive()) return 0;
-    return Math.floor((cart["kpv10"] || 0) / 3) * (p.price / 2);
+    var sum = 0;
+    for (var id in PROMO_RULES) sum += dealFor(id);
+    return sum;
   }
 
   function discountAmount() {
@@ -1580,7 +1588,7 @@
       var p = getProduct(ids[i]);
       if (p) {
         var base = p.price * (cart[ids[i]] || 0);
-        if (ids[i] === "kpv10") base -= kpvPromo();
+        base -= dealFor(ids[i]);
         sum += base * itemRate(ids[i]);
       }
     }
@@ -2016,10 +2024,11 @@
         var info = document.createElement("div");
         var nm = document.createElement("div"); nm.className = "cl-name"; nm.textContent = p.name; info.appendChild(nm);
         var ds = document.createElement("div"); ds.className = "cl-dose"; ds.textContent = p.dose; info.appendChild(ds);
-        if (id === "kpv10" && kpvActive()) {
+        if (PROMO_RULES[id] && kpvActive()) {
           var kn = document.createElement("div"); kn.className = "cl-dose";
           kn.style.setProperty("color", "#6ee7b7", "important");
-          kn.textContent = qty >= 3 ? "Buy 2 get 1 half off applied" : (qty === 2 ? "Add 1 more KPV for 50% off" : "Buy 2, get 1 half off");
+          if (PROMO_RULES[id].n === 3) kn.textContent = qty % 3 === 2 ? "Add 1 more for 50% off" : (qty >= 3 ? "Buy 2 get 1 half off applied" : "Buy 2, get 1 half off");
+          else kn.textContent = qty === 1 ? "Add 1 more for 25% off the second" : (qty >= 2 ? "Buy 1 get 1 25% off applied" : "Buy 1, get 1 25% off");
           info.appendChild(kn);
         }
         line.appendChild(info);
@@ -2087,7 +2096,7 @@
     if (discRow) discRow.style.display = discount > 0 ? "flex" : "none";
     if (discAmt) discAmt.textContent = "-$" + discount;
     var discLabel = document.getElementById("discountLabel");
-    if (discLabel) discLabel.textContent = appliedCodeName ? "Discount (" + appliedCodeName + (kpvPromo() > 0 ? " + KPV deal" : "") + ")" : (kpvPromo() > 0 && sitewideRate() === 0 ? "Discount (KPV deal)" : "Discount (10% off)");
+    if (discLabel) discLabel.textContent = appliedCodeName ? "Discount (" + appliedCodeName + (kpvPromo() > 0 ? " + deals" : "") + ")" : (kpvPromo() > 0 && sitewideRate() === 0 ? "Discount (Deals)" : "Discount (10% off)");
     var bulkMsg = document.getElementById("bulkMsg");
     if (bulkMsg) bulkMsg.textContent = "";
 
