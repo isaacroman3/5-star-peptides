@@ -1062,7 +1062,7 @@
 </div>
 
 <div id="bfBanner" style="background:#000;color:#fff;border-bottom:1px solid rgba(255,255,255,0.25);padding:12px 16px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:700;letter-spacing:0.03em;line-height:1.5;">
-  BLACK FRIDAY: 10% off with code <span style="background:#fff;color:#000;padding:2px 6px;border-radius:3px;">BLACKFRIDAY</span> through Nov 30
+  BLACK FRIDAY: 10% off everything, prices already marked down. Through Nov 30
 </div>
 <script>if (Date.now() >= new Date("2026-12-01T00:00:00-08:00").getTime()) { var bfb = document.getElementById("bfBanner"); if (bfb) bfb.style.display = "none"; }</script>
 
@@ -1545,8 +1545,8 @@
     return sum;
   }
 
-  var NO_DISCOUNT_IDS = ["bac3", "bac10", "reta10", "reta20", "reta30", "starter", "starter20", "starter30", "bigt250"];
-  var SITEWIDE_END = new Date("2026-10-17T00:00:00-07:00");
+  var NO_DISCOUNT_IDS = ["bac3", "bac10", "bigt250"];
+  var SITEWIDE_END = new Date("2026-12-01T00:00:00-08:00");
   function sitewideRate() { return Date.now() < SITEWIDE_END.getTime() ? 0.10 : 0; }
   var CODE_ONLY = { "AAA": ["reta10", "reta20", "reta30"] };
   var appliedCodeName = "";
