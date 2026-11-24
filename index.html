@@ -2053,7 +2053,9 @@
         qtyDiv.appendChild(minus); qtyDiv.appendChild(qtySpan); qtyDiv.appendChild(plus);
         line.appendChild(qtyDiv);
 
-        var clPrice = document.createElement("div"); clPrice.className = "cl-price"; clPrice.textContent = "$" + (p.price * qty);
+        var clPrice = document.createElement("div"); clPrice.className = "cl-price"; var gross = p.price * qty, net = Math.round((gross - dealFor(id)) * (1 - itemRate(id)) * 100) / 100;
+        if (net < gross) { clPrice.innerHTML = "<span style='text-decoration:line-through;opacity:0.45;font-weight:500;font-size:12px;margin-right:6px;'>$" + gross + "</span><span>$" + net + "</span>"; }
+        else { clPrice.textContent = "$" + gross; }
         line.appendChild(clPrice);
 
         var remBtn = document.createElement("button"); remBtn.className = "cl-remove"; remBtn.textContent = "Remove";
