@@ -1493,7 +1493,7 @@
     {id:"tirz30",     name:"Tirzepatide",            dose:"30mg",    price:135, tag:null, maxQty:10, desc:"Lyophilized vial, single peptide. Purity: 99.96%."},
     {id:"reta30",     name:"Retatrutide",            dose:"30mg",    price:155, tag:"LOW STOCK", maxQty:1, desc:"Lyophilized vial, single peptide. Purity: 99.93%."},
     {id:"ghk50",      name:"GHK-Cu",                dose:"50mg",    price:40,  tag:(Date.now() < new Date("2026-12-01T00:00:00-08:00").getTime() ? "3RD 50% OFF" : "TOP SELLER"), maxQty:17,          desc:"Copper peptide complex, lyophilized. Purity: 99.97%."},
-    {id:"ghklotion",  name:"GHK-Cu Lotion",         dose:"2oz",     price:0,   tag:"COMING SOON", comingSoon:true, desc:"Copper peptide lotion, 2oz bottle. Coming soon."},
+    {id:"ghklotion",  name:"GHK-Cu Lotion",         dose:"2oz",     price:0,   tag:"COMING SOON", comingSoon:true, desc:"Copper peptide lotion, 2oz jar. Coming soon."},
     {id:"gluta600",   name:"Glutathione",           dose:"600mg",   price:55,  tag:null, maxQty:7,                  desc:"Antioxidant peptide, lyophilized vial. Purity: 99.95%."},
     {id:"kpv10",      name:"KPV",                   dose:"10mg",    price:40,  tag:(Date.now() < new Date("2026-12-01T00:00:00-08:00").getTime() ? "3RD 50% OFF" : null), maxQty:24,          desc:"Tripeptide, lyophilized vial. Purity: 99.95%."},
     {id:"motsc10",    name:"MOTS-c",                dose:"10mg",    price:40,  tag:null, outOfStock:true, desc:"Mitochondrial-derived peptide, lyophilized. Purity: 99.96%."},
@@ -1737,25 +1737,23 @@
   }
   function lotionSVG(name, dose) {
     var u = "v" + (++shotSeq);
-    var lines = ["GHK-Cu", "Lotion"];
-    return "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 330' role='img' aria-label='" + shotEsc(name) + " bottle'>" +
+    return "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 330' role='img' aria-label='" + shotEsc(name) + " jar'>" +
       "<defs><linearGradient id='" + u + "b' x1='0' x2='1'><stop offset='0' stop-color='#d8dadd'/><stop offset='0.35' stop-color='#ffffff'/><stop offset='1' stop-color='#c4c7cb'/></linearGradient>" +
-      "<linearGradient id='" + u + "p' x1='0' x2='1'><stop offset='0' stop-color='#b9bcc0'/><stop offset='0.4' stop-color='#f2f3f4'/><stop offset='1' stop-color='#a6a9ae'/></linearGradient>" +
+      "<linearGradient id='" + u + "p' x1='0' x2='1'><stop offset='0' stop-color='#2a2c2f'/><stop offset='0.35' stop-color='#55595e'/><stop offset='1' stop-color='#1b1d1f'/></linearGradient>" +
       "<filter id='" + u + "s' x='-40%' y='-300%' width='180%' height='700%'><feGaussianBlur stdDeviation='5'/></filter></defs>" +
-      "<ellipse cx='80' cy='312' rx='58' ry='7' fill='#000' opacity='0.6' filter='url(#" + u + "s)'/>" +
-      "<rect x='70' y='60' width='20' height='36' rx='3' fill='url(#" + u + "p)'/>" +
-      "<path d='M70 62 L52 62 Q46 62 46 56 L46 52 Q46 48 52 48 L74 48 L74 40 L86 40 L86 62' fill='none'/>" +
-      "<rect x='48' y='34' width='56' height='14' rx='5' fill='url(#" + u + "p)'/>" +
-      "<rect x='74' y='46' width='12' height='16' fill='url(#" + u + "p)'/>" +
-      "<rect x='62' y='92' width='36' height='16' rx='3' fill='url(#" + u + "p)'/>" +
-      "<rect x='30' y='106' width='100' height='200' rx='22' fill='url(#" + u + "b)'/>" +
-      "<rect x='38' y='112' width='9' height='186' rx='4.5' fill='#fff' opacity='0.45'/>" +
+      "<ellipse cx='80' cy='310' rx='64' ry='7' fill='#000' opacity='0.6' filter='url(#" + u + "s)'/>" +
+      "<g transform='translate(80 304) scale(1.3) translate(-80 -304)'>" +
+      "<rect x='24' y='176' width='112' height='38' rx='9' fill='url(#" + u + "p)'/>" +
+      "<g stroke='#000' stroke-opacity='0.35' stroke-width='1.2'><line x1='38' y1='182' x2='38' y2='208'/><line x1='50' y1='182' x2='50' y2='208'/><line x1='62' y1='182' x2='62' y2='208'/><line x1='74' y1='182' x2='74' y2='208'/><line x1='86' y1='182' x2='86' y2='208'/><line x1='98' y1='182' x2='98' y2='208'/><line x1='110' y1='182' x2='110' y2='208'/><line x1='122' y1='182' x2='122' y2='208'/></g>" +
+      "<rect x='32' y='179' width='96' height='4' rx='2' fill='#fff' opacity='0.18'/>" +
+      "<rect x='28' y='212' width='104' height='92' rx='16' fill='url(#" + u + "b)'/>" +
+      "<rect x='35' y='220' width='7' height='76' rx='3.5' fill='#fff' opacity='0.45'/>" +
       "<g class='vl-ink'>" +
-        "<text x='80' y='158' font-size='8.6' class='vl-brand'>&#9733; 5 STAR PEPS</text>" +
-        "<text x='80' y='190' font-size='15' class='vl-name'>" + lines[0] + "</text><text x='80' y='207' font-size='15' class='vl-name'>" + lines[1] + "</text>" +
-        "<text x='80' y='240' font-size='" + shotFit(dose, 20, 70) + "' class='vl-dose'>" + shotEsc(dose) + "</text>" +
-        "<text x='80' y='272' font-size='6' class='vl-fine'>RESEARCH USE ONLY</text>" +
-      "</g></svg>";
+        "<text x='80' y='233' font-size='7' class='vl-brand'>&#9733; 5 STAR PEPS</text>" +
+        "<text x='80' y='253' font-size='13' class='vl-name'>GHK-Cu Lotion</text>" +
+        "<text x='80' y='273' font-size='" + shotFit(dose, 17, 70) + "' class='vl-dose'>" + shotEsc(dose) + "</text>" +
+        "<text x='80' y='290' font-size='5.2' class='vl-fine'>RESEARCH USE ONLY</text>" +
+      "</g></g></svg>";
   }
   function productShot(name, prod) {
     var id = prod.id || "";
