@@ -1493,6 +1493,7 @@
     {id:"tirz30",     name:"Tirzepatide",            dose:"30mg",    price:135, tag:null, maxQty:10, desc:"Lyophilized vial, single peptide. Purity: 99.96%."},
     {id:"reta30",     name:"Retatrutide",            dose:"30mg",    price:155, tag:"LOW STOCK", maxQty:1, desc:"Lyophilized vial, single peptide. Purity: 99.93%."},
     {id:"ghk50",      name:"GHK-Cu",                dose:"50mg",    price:40,  tag:(Date.now() < new Date("2026-12-01T00:00:00-08:00").getTime() ? "3RD 50% OFF" : "TOP SELLER"), maxQty:17,          desc:"Copper peptide complex, lyophilized. Purity: 99.97%."},
+    {id:"ghklotion",  name:"GHK-Cu Lotion",         dose:"2oz",     price:0,   tag:"COMING SOON", comingSoon:true, desc:"Copper peptide lotion, 2oz bottle. Coming soon."},
     {id:"gluta600",   name:"Glutathione",           dose:"600mg",   price:55,  tag:null, maxQty:7,                  desc:"Antioxidant peptide, lyophilized vial. Purity: 99.95%."},
     {id:"kpv10",      name:"KPV",                   dose:"10mg",    price:40,  tag:(Date.now() < new Date("2026-12-01T00:00:00-08:00").getTime() ? "3RD 50% OFF" : null), maxQty:24,          desc:"Tripeptide, lyophilized vial. Purity: 99.95%."},
     {id:"motsc10",    name:"MOTS-c",                dose:"10mg",    price:40,  tag:null, outOfStock:true, desc:"Mitochondrial-derived peptide, lyophilized. Purity: 99.96%."},
@@ -1734,8 +1735,31 @@
       "<rect x='180' y='15' width='12' height='14' rx='2' fill='#f08a24'/><rect x='191' y='16.5' width='35' height='11' rx='5.5' fill='#f39a3d'/><rect x='193' y='18' width='30' height='2.4' rx='1.2' fill='#fff' opacity='0.35'/>" +
       "</svg>";
   }
+  function lotionSVG(name, dose) {
+    var u = "v" + (++shotSeq);
+    var lines = ["GHK-Cu", "Lotion"];
+    return "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 330' role='img' aria-label='" + shotEsc(name) + " bottle'>" +
+      "<defs><linearGradient id='" + u + "b' x1='0' x2='1'><stop offset='0' stop-color='#d8dadd'/><stop offset='0.35' stop-color='#ffffff'/><stop offset='1' stop-color='#c4c7cb'/></linearGradient>" +
+      "<linearGradient id='" + u + "p' x1='0' x2='1'><stop offset='0' stop-color='#b9bcc0'/><stop offset='0.4' stop-color='#f2f3f4'/><stop offset='1' stop-color='#a6a9ae'/></linearGradient>" +
+      "<filter id='" + u + "s' x='-40%' y='-300%' width='180%' height='700%'><feGaussianBlur stdDeviation='5'/></filter></defs>" +
+      "<ellipse cx='80' cy='312' rx='58' ry='7' fill='#000' opacity='0.6' filter='url(#" + u + "s)'/>" +
+      "<rect x='70' y='60' width='20' height='36' rx='3' fill='url(#" + u + "p)'/>" +
+      "<path d='M70 62 L52 62 Q46 62 46 56 L46 52 Q46 48 52 48 L74 48 L74 40 L86 40 L86 62' fill='none'/>" +
+      "<rect x='48' y='34' width='56' height='14' rx='5' fill='url(#" + u + "p)'/>" +
+      "<rect x='74' y='46' width='12' height='16' fill='url(#" + u + "p)'/>" +
+      "<rect x='62' y='92' width='36' height='16' rx='3' fill='url(#" + u + "p)'/>" +
+      "<rect x='30' y='106' width='100' height='200' rx='22' fill='url(#" + u + "b)'/>" +
+      "<rect x='38' y='112' width='9' height='186' rx='4.5' fill='#fff' opacity='0.45'/>" +
+      "<g class='vl-ink'>" +
+        "<text x='80' y='158' font-size='8.6' class='vl-brand'>&#9733; 5 STAR PEPS</text>" +
+        "<text x='80' y='190' font-size='15' class='vl-name'>" + lines[0] + "</text><text x='80' y='207' font-size='15' class='vl-name'>" + lines[1] + "</text>" +
+        "<text x='80' y='240' font-size='" + shotFit(dose, 20, 70) + "' class='vl-dose'>" + shotEsc(dose) + "</text>" +
+        "<text x='80' y='272' font-size='6' class='vl-fine'>RESEARCH USE ONLY</text>" +
+      "</g></svg>";
+  }
   function productShot(name, prod) {
     var id = prod.id || "";
+    if (id === "ghklotion") return lotionSVG(name, prod.dose || "");
     if (id.indexOf("starter") === 0) {
       var base = getProduct(PACK_STOCK[id]) || {dose: ""};
       return "<span class='pc-kit'>" + vialSVG("Retatrutide", base.dose, false) +
@@ -1885,7 +1909,8 @@
 
           // 3rd party tested badge
           testedWrap.innerHTML = "";
-          if (prod.id !== "needle25") {
+          stars.style.display = prod.comingSoon ? "none" : "";
+          if (prod.id !== "needle25" && !prod.comingSoon) {
             var tested = document.createElement("div");
             tested.style.cssText = "display:inline-flex;align-items:center;gap:6px;margin-top:7px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:4px;padding:4px 9px;";
             tested.innerHTML = "<span style='font-size:11px;'>&#9679;</span><span style='font-family:IBM Plex Mono,monospace;font-size:10.5px;font-weight:600;letter-spacing:0.05em;color:rgba(255,255,255,0.85);text-transform:uppercase;'>3rd Party Tested</span>";
